@@ -994,7 +994,7 @@
 const CFG = {
   SUPABASE_URL:      'https://sybbmwncglqzwnruzyuf.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
-  ADMIN_PASSWORD:    'MaFoi@2025!',
+  ADMIN_PASSWORD:    'TMF@2026',
   TABLE:             'student_interest',
   PAGE_SIZE:         20,
 };
@@ -1054,14 +1054,37 @@ function tBadge(t) {
 /* ── AUTH ── */
 const isLoggedIn = () => sessionStorage.getItem('mafoi_admin') === '1';
 
+// Clear session when tab/window closes
+window.addEventListener('beforeunload', () => {
+  sessionStorage.removeItem('mafoi_admin');
+});
+
+// Re-check auth when user comes back to the tab
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && !isLoggedIn()) {
+    if ($('dashScreen').style.display !== 'none') {
+      $('dashScreen').style.display = 'none';
+      $('loginScreen').style.display = 'block';
+      $('adminUser').value = '';
+      $('adminPass').value = '';
+    }
+  }
+});
+
 $('loginForm').addEventListener('submit', e => {
   e.preventDefault();
   const user = $('adminUser').value.trim();
   const pass = $('adminPass').value;
   const err  = $('loginError');
   if (!user || !pass) { err.textContent = 'Please enter username and password.'; err.classList.add('show'); return; }
-  if (user !== 'admin' || pass !== CFG.ADMIN_PASSWORD) { err.textContent = 'Invalid username or password.'; err.classList.add('show'); return; }
+  if (user !== 'admin' || pass !== CFG.ADMIN_PASSWORD) {
+    err.textContent = 'Invalid username or password.';
+    err.classList.add('show');
+    $('adminPass').value = '';
+    return;
+  }
   err.classList.remove('show');
+  sessionStorage.clear();
   sessionStorage.setItem('mafoi_admin', '1');
   startDash();
 });
@@ -1076,10 +1099,14 @@ $('togglePw').addEventListener('click', function() {
 });
 
 $('logoutBtn').addEventListener('click', () => {
-  sessionStorage.removeItem('mafoi_admin');
+  sessionStorage.clear();
+  localStorage.removeItem('mafoi_admin');
   $('dashScreen').style.display = 'none';
   $('loginScreen').style.display = 'block';
-  toast('Logged out.', 'success');
+  $('adminUser').value = '';
+  $('adminPass').value = '';
+  $('loginError').classList.remove('show');
+  toast('Logged out successfully.', 'success');
 });
 
 /* ── SIDEBAR & MOBILE ── */
@@ -1276,8 +1303,10 @@ $('exportBtnDash').addEventListener('click', function() { doExport(this); });
 $('exportBtnRegs').addEventListener('click', function() { doExport(this); });
 
 /* ── INIT ── */
-if (isLoggedIn()) startDash();
-else { $('loginScreen').style.display = 'block'; $('dashScreen').style.display = 'none'; }
+// Always clear session on fresh page load — forces login every time
+sessionStorage.removeItem('mafoi_admin');
+$('loginScreen').style.display = 'block';
+$('dashScreen').style.display = 'none';
 </script>
 </body>
 </html>

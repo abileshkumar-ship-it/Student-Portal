@@ -7,7 +7,7 @@
 const CFG = {
   SUPABASE_URL:      'https://sybbmwncglqzwnruzyuf.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
-  ADMIN_PASSWORD:    'MaFoi@2025!',
+  ADMIN_PASSWORD:    'TMF@2026',
   TABLE:             'student_interest',
 };
 

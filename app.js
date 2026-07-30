@@ -229,7 +229,7 @@ $('registrationForm')?.addEventListener('submit', async function (e) {
     email:             $('email').value.trim().toLowerCase(),
     current_education: $('currentEducation').value,
     current_year:      $('currentYear').value || '',
-    higher_studies:    $('higherStudies').value,
+    preference:        $('higherStudies').value,
     training:          $('training').value,
     whatsapp_number:   $('whatsappNumber').value.trim(),
   };
@@ -332,12 +332,16 @@ async function loadStats() {
     const micro       = all.filter(r => r.training === 'Micro Finance').length;
     const data        = all.filter(r => r.training === 'Data Analytics').length;
     const bfsi        = all.filter(r => r.training === 'BFSI').length;
+    const ai          = all.filter(r => r.training === 'Artificial Intelligence').length;
+const cyber       = all.filter(r => r.training === 'Cyber Security').length;
 
     $('statTotal').textContent = total;
     $('statGold').textContent  = goldLoan;
     $('statMicro').textContent = micro;
     $('statData').textContent  = data;
     $('statBfsi').textContent  = bfsi;
+    $('statAi').textContent    = ai;
+$('statCyber').textContent = cyber;
   } catch { /* silently ignore stats error */ }
 }
 
@@ -379,7 +383,7 @@ function renderTable(rows) {
       <td style="color:var(--primary);font-size:12px;">${r.email || '—'}</td>
       <td style="font-size:12px;">${r.current_education || '—'}</td>
       <td style="font-size:12px;">${r.current_year || '—'}</td>
-      <td><span class="badge ${r.higher_studies === 'Yes' ? 'b-yes' : 'b-no'}">${r.higher_studies || '—'}</span></td>
+      <td style="font-size:12px;max-width:160px;">${r.preference || '—'}</td>
       <td><span class="badge ${trainingBadge(r.training)}">${r.training || '—'}</span></td>
       <td style="font-family:monospace;font-size:12px;">${r.whatsapp_number || '—'}</td>
       <td style="font-size:11px;white-space:nowrap;color:var(--text-muted);">${formatDate(r.created_at)}</td>
@@ -457,21 +461,21 @@ $('exportExcelBtn')?.addEventListener('click', async function () {
 
     // Build worksheet data
     const headers = [
-      'Registration ID', 'Full Name', 'Email ID', 'Current Education',
-      'Year of Study', 'Higher Studies', 'Training', 'WhatsApp Number', 'Registered On'
-    ];
+  'Registration ID', 'Full Name', 'Email ID', 'Current Education',
+  'Year of Study', 'Preference', 'Training', 'WhatsApp Number', 'Registered On'
+];
 
-    const wsData = [headers, ...rows.map(r => [
-      r.id,
-      r.full_name        || '',
-      r.email            || '',
-      r.current_education|| '',
-      r.current_year     || '',
-      r.higher_studies   || '',
-      r.training         || '',
-      r.whatsapp_number  || '',
-      formatDate(r.created_at),
-    ])];
+const wsData = [headers, ...rows.map(r => [
+  r.id,
+  r.full_name         || '',
+  r.email             || '',
+  r.current_education || '',
+  r.current_year      || '',
+  r.preference        || '',
+  r.training          || '',
+  r.whatsapp_number   || '',
+  formatDate(r.created_at),
+])];
 
     // SheetJS
     const XLSX = window.XLSX;

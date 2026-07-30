@@ -177,26 +177,28 @@
           <span class="field-error" id="errYear">Please select your year of study.</span>
         </div>
 
-        <!-- Higher Studies -->
-        <div class="form-group">
-          <label class="form-label" for="higherStudies">Interested in Higher Studies? <span class="req">*</span></label>
-          <select id="higherStudies" class="form-select">
-            <option value="">-- Select --</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select>
-          <span class="field-error" id="errHigher">Please select an option.</span>
-        </div>
+        <!-- Preference -->
+<div class="form-group">
+  <label class="form-label" for="higherStudies">Your Preference <span class="req">*</span></label>
+  <select id="higherStudies" class="form-select">
+    <option value="">-- Select --</option>
+    <option value="I am planning for Higher Education">I am planning for Higher Education</option>
+    <option value="I am actively looking for a job">I am actively looking for a job</option>
+  </select>
+  <span class="field-error" id="errHigher">Please select your preference.</span>
+</div>
 
         <!-- Training -->
         <div class="form-group">
-          <label class="form-label" for="training">Training Interested In <span class="req">*</span></label>
+          <label class="form-label" for="training">Select Your Preferred Course <span class="req">*</span></label>
           <select id="training" class="form-select">
             <option value="">-- Select Training --</option>
             <option value="Gold Loan">Gold Loan</option>
             <option value="Micro Finance">Micro Finance</option>
             <option value="Data Analytics">Data Analytics</option>
             <option value="BFSI">BFSI</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+<option value="Cyber Security">Cyber Security</option>
           </select>
           <span class="field-error" id="errTraining">Please select the training you are interested in.</span>
         </div>
@@ -344,6 +346,16 @@
           <div class="stat-val" id="statBfsi">—</div>
           <div class="stat-lbl">BFSI</div>
         </div>
+        <div class="stat-card" style="--stat-c:#f43f5e">
+  <div class="stat-icon">🤖</div>
+  <div class="stat-val" id="statAi">—</div>
+  <div class="stat-lbl">Artificial Intelligence</div>
+</div>
+<div class="stat-card" style="--stat-c:#0ea5e9">
+  <div class="stat-icon">🔐</div>
+  <div class="stat-val" id="statCyber">—</div>
+  <div class="stat-lbl">Cyber Security</div>
+</div>
       </div>
 
       <!-- Search & Filters -->
@@ -358,6 +370,8 @@
           <option value="Micro Finance">Micro Finance</option>
           <option value="Data Analytics">Data Analytics</option>
           <option value="BFSI">BFSI</option>
+          <option value="Artificial Intelligence">Artificial Intelligence</option>
+<option value="Cyber Security">Cyber Security</option>
         </select>
         <select id="dashEducation" class="filter-sel">
           <option value="">All Education</option>

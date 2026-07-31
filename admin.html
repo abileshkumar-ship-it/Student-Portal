@@ -967,6 +967,8 @@
                   <th>Preference</th>
                   <th class="sortable" data-col="training">Training <span class="sort-icon">▲▼</span></th>
                   <th>WhatsApp</th>
+                  <th>Location</th>
+                  <th>Branch</th>
                   <th class="sortable sort-desc" data-col="created_at">Registered On <span class="sort-icon" style="color:var(--blue);opacity:1;">▼</span></th>
                 </tr>
               </thead>
@@ -1220,6 +1222,8 @@ function renderRegs(rows) {
       <td data-label="Preference"><span class="badge b-pref">${r.preference || '—'}</span></td>
       <td data-label="Training"><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
       <td data-label="WhatsApp" class="td-mono">${r.whatsapp_number || '—'}</td>
+      <td data-label="Location" style="font-size:12.5px;">${r.preferred_location || '—'}</td>
+      <td data-label="Branch" style="font-size:12.5px;">${r.preferred_branch || '—'}</td>
       <td data-label="Registered" class="td-date">${fmtDate(r.created_at)}</td>
     </tr>`).join('');
 }
@@ -1285,8 +1289,8 @@ async function doExport(btn) {
   try {
     const rows = await sbFetch({ search: state.search, training: state.training, education: state.education }, false);
     if (!rows.length) { toast('No data to export.', 'error'); return; }
-    const headers = ['ID','Full Name','Email','Education','Year','Preference','Training','WhatsApp','Registered On'];
-    const wsData  = [headers, ...rows.map(r => [r.id, r.full_name||'', r.email||'', r.current_education||'', r.current_year||'', r.preference||'', r.training||'', r.whatsapp_number||'', fmtDate(r.created_at)])];
+    const headers = ['ID','Full Name','Email','Education','Year','Preference','Training','WhatsApp','Location','Branch','Registered On'];
+    const wsData  = [headers, ...rows.map(r => [r.id, r.full_name||'', r.email||'', r.current_education||'', r.current_year||'', r.preference||'', r.training||'', r.whatsapp_number||'', r.preferred_location||'', r.preferred_branch||'', fmtDate(r.created_at)])];
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet(wsData);
     ws['!cols'] = [6,22,28,22,10,30,20,16,22].map(w=>({wch:w}));

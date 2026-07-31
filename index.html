@@ -163,6 +163,26 @@
           </select>
           <span class="field-error" id="errTraining">Please select the training you are interested in.</span>
         </div>
+        <!-- Preferred Location -->
+        <div class="form-group">
+          <label class="form-label" for="preferredLocation">Preferred Location <span class="req">*</span></label>
+          <select id="preferredLocation" class="form-select">
+            <option value="">-- Select Location --</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Chennai">Chennai</option>
+          </select>
+          <span class="field-error" id="errLocation">Please select a location.</span>
+        </div>
+
+        <!-- Preferred Branch (dynamic) -->
+        <div class="form-group hidden" id="branchGroup">
+          <label class="form-label" for="preferredBranch">Preferred Branch <span class="req">*</span></label>
+          <select id="preferredBranch" class="form-select">
+            <option value="">-- Select Branch --</option>
+          </select>
+          <span class="field-error" id="errBranch">Please select a branch.</span>
+        </div>
+
         <div class="form-group">
           <label class="form-label" for="whatsappNumber">WhatsApp Number <span class="req">*</span></label>
           <div class="phone-wrap">
@@ -191,7 +211,31 @@
       </div>
       <h2 class="success-title">Thank You!</h2>
       <p class="success-msg">The Ma Foi Foundation will reach out to you!!</p>
-      <p class="success-sub">Our team will contact you within 2–3 working days with more information about your selected program.</p>
+      <p class="success-sub">You're all set! Our team will connect with you soon.</p>
+
+      <div class="success-summary">
+        <div class="success-summary-row">
+          <span class="success-summary-label">Name</span>
+          <span class="success-summary-value" id="summaryName">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Email</span>
+          <span class="success-summary-value" id="summaryEmail">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Course</span>
+          <span class="success-summary-value" id="summaryTraining">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Location</span>
+          <span class="success-summary-value" id="summaryLocation">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Branch</span>
+          <span class="success-summary-value" id="summaryBranch">—</span>
+        </div>
+      </div>
+
       <button class="btn-secondary" id="anotherResponseBtn">Submit Another Response</button>
     </div>
   </div>

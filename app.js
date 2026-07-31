@@ -66,6 +66,21 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 const UG_YEARS = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
 const PG_YEARS = ['1st Year', '2nd Year'];
 
+const BRANCHES = {
+  'Bengaluru': ['Chamrajpet', 'Yeshwanthpur'],
+  'Chennai':   ['Egmore', 'Kodambakkam', 'Anna Nagar'],
+};
+
+$('preferredLocation')?.addEventListener('change', function () {
+  const bg = $('branchGroup');
+  const bs = $('preferredBranch');
+  if (!this.value) { bg.classList.add('hidden'); bs.innerHTML = '<option value="">-- Select Branch --</option>'; return; }
+  const branches = BRANCHES[this.value] || [];
+  bs.innerHTML = '<option value="">-- Select Branch --</option>' +
+    branches.map(b => `<option value="${b}">${b}</option>`).join('');
+  bg.classList.remove('hidden');
+});
+
 $('currentEducation')?.addEventListener('change', function () {
   const yg = $('yearGroup');
   const ys = $('currentYear');
@@ -89,6 +104,9 @@ function clearAllErrors() {
   document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
   document.querySelectorAll('.form-input, .form-select').forEach(el => el.classList.remove('error'));
   document.querySelector('.phone-wrap')?.classList.remove('error');
+  $('branchGroup')?.classList.add('hidden');
+  if ($('preferredLocation')) $('preferredLocation').value = '';
+  if ($('preferredBranch'))   $('preferredBranch').innerHTML = '<option value="">-- Select Branch --</option>';
 }
 
 function validateForm() {
@@ -106,6 +124,9 @@ function validateForm() {
   if (!yg.classList.contains('hidden') && !$('currentYear').value) { showErr('currentYear', 'errYear'); ok = false; } else clearErr('currentYear', 'errYear');
 
   if (!$('higherStudies').value) { showErr('higherStudies', 'errHigher'); ok = false; } else clearErr('higherStudies', 'errHigher');
+  if (!$('preferredLocation').value) { showErr('preferredLocation', 'errLocation'); ok = false; } else clearErr('preferredLocation', 'errLocation');
+  const bg2 = $('branchGroup');
+  if (!bg2.classList.contains('hidden') && !$('preferredBranch').value) { showErr('preferredBranch', 'errBranch'); ok = false; } else clearErr('preferredBranch', 'errBranch');
   if (!$('training').value)      { showErr('training', 'errTraining'); ok = false; } else clearErr('training', 'errTraining');
 
   const wa = $('whatsappNumber').value.trim();
@@ -147,10 +168,17 @@ $('registrationForm')?.addEventListener('submit', async function (e) {
     preference:        $('higherStudies').value,
     training:          $('training').value,
     whatsapp_number:   $('whatsappNumber').value.trim(),
+    preferred_location: $('preferredLocation').value,
+    preferred_branch:   $('preferredBranch').value,
   };
 
   try {
     await sbInsert(payload);
+    $('summaryName').textContent     = payload.full_name;
+    $('summaryEmail').textContent    = payload.email;
+    $('summaryTraining').textContent = payload.training;
+    $('summaryLocation').textContent = payload.preferred_location;
+    $('summaryBranch').textContent   = payload.preferred_branch;
     $('formCard').classList.add('hidden');
     $('successCard').classList.remove('hidden');
     $('successCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -168,6 +196,7 @@ $('anotherResponseBtn')?.addEventListener('click', () => {
   $('registrationForm').reset();
   clearAllErrors();
   $('yearGroup').classList.add('hidden');
+  $('branchGroup').classList.add('hidden');
   $('successCard').classList.add('hidden');
   $('formCard').classList.remove('hidden');
   document.querySelector('#register')?.scrollIntoView({ behavior: 'smooth', block: 'start' });

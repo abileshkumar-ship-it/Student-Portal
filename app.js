@@ -174,6 +174,12 @@ $('registrationForm')?.addEventListener('submit', async function (e) {
 
   try {
     await sbInsert(payload);
+
+    // Facebook Lead Event — fires ONLY after successful registration
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead');
+    }
+
     $('summaryName').textContent     = payload.full_name;
     $('summaryEmail').textContent    = payload.email;
     $('summaryTraining').textContent = payload.training;

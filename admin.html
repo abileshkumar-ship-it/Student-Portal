@@ -719,12 +719,12 @@
         <form id="loginForm" novalidate>
 
           <div class="l-group">
-            <div class="l-input-label">Username</div>
+            <div class="l-input-label">Email</div>
             <div class="l-input-wrap">
               <div class="l-input-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               </div>
-              <input type="text" id="adminUser" class="l-input" placeholder="Enter your username" autocomplete="username" />
+              <input type="email" id="adminUser" class="l-input" placeholder="Enter your email address" autocomplete="email" />
             </div>
           </div>
 
@@ -1198,19 +1198,28 @@ document.addEventListener('visibilitychange', () => {
 
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
-  const user = $('adminUser').value.trim();
-  const pass = $('adminPass').value;
-  const err  = $('loginError');
-  if (!user || !pass) { err.textContent = 'Please enter username and password.'; err.classList.add('show'); return; }
-  // Authenticate via Supabase Auth — password never stored in code
+  const email = $('adminUser').value.trim();
+  const pass  = $('adminPass').value;
+  const err   = $('loginError');
+
+  if (!email || !pass) {
+    err.textContent = 'Please enter your email and password.';
+    err.classList.add('show');
+    return;
+  }
+
   $('signinBtn').disabled = true;
   $('signinTxt').textContent = 'Signing in…';
   $('signinSpin').style.display = 'block';
+  err.classList.remove('show');
 
   try {
     const res = await fetch(`${CFG.SUPABASE_URL}/auth/v1/token?grant_type=password`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': CFG.SUPABASE_ANON_KEY },
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': CFG.SUPABASE_ANON_KEY,
+      },
       body: JSON.stringify({ email: email, password: pass }),
     });
     const data = await res.json();

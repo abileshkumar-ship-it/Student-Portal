@@ -19,9 +19,9 @@ const sbHeaders = () => ({
 });
 
 async function sbInsert(row) {
-  const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/${CFG.TABLE}`, {
+  const res = await fetch('/api/register', {
     method: 'POST',
-    headers: sbHeaders(),
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(row),
   });
   if (!res.ok) {

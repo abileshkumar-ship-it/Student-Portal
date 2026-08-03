@@ -1080,7 +1080,6 @@
 const CFG = {
   SUPABASE_URL:      'https://sybbmwncglqzwnruzyuf.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
-  ADMIN_PASSWORD:    'TMF@2026',
   TABLE:             'student_interest',
   PAGE_SIZE:         20,
 };
@@ -1197,22 +1196,43 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-$('loginForm').addEventListener('submit', e => {
+$('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
   const user = $('adminUser').value.trim();
   const pass = $('adminPass').value;
   const err  = $('loginError');
   if (!user || !pass) { err.textContent = 'Please enter username and password.'; err.classList.add('show'); return; }
-  if (user !== 'admin' || pass !== CFG.ADMIN_PASSWORD) {
-    err.textContent = 'Invalid username or password.';
+  // Authenticate via Supabase Auth — password never stored in code
+  $('signinBtn').disabled = true;
+  $('signinTxt').textContent = 'Signing in…';
+  $('signinSpin').style.display = 'block';
+
+  try {
+    const res = await fetch(`${CFG.SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': CFG.SUPABASE_ANON_KEY },
+      body: JSON.stringify({ email: email, password: pass }),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.access_token) {
+      err.textContent = data.error_description || 'Invalid email or password.';
+      err.classList.add('show');
+      $('adminPass').value = '';
+      return;
+    }
+    sessionStorage.clear();
+    sessionStorage.setItem('mafoi_admin', '1');
+    sessionStorage.setItem('mafoi_token', data.access_token);
+    err.classList.remove('show');
+    startDash();
+  } catch {
+    err.textContent = 'Login failed. Please check your connection.';
     err.classList.add('show');
-    $('adminPass').value = '';
-    return;
+  } finally {
+    $('signinBtn').disabled = false;
+    $('signinTxt').textContent = 'Sign In';
+    $('signinSpin').style.display = 'none';
   }
-  err.classList.remove('show');
-  sessionStorage.clear();
-  sessionStorage.setItem('mafoi_admin', '1');
-  startDash();
 });
 
 $('togglePw').addEventListener('click', function() {

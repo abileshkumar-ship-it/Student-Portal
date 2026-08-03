@@ -219,18 +219,16 @@
           </select>
           <span class="field-error" id="errTraining">Please select the training you are interested in.</span>
         </div>
-        <!-- Preferred Location -->
-        <div class="form-group">
+        <!-- Preferred City (dynamic based on course) -->
+        <div class="form-group hidden" id="cityGroup">
           <label class="form-label" for="preferredLocation">Preferred Location <span class="req">*</span></label>
           <select id="preferredLocation" class="form-select">
-            <option value="">-- Select Location --</option>
-            <option value="Bengaluru">Bengaluru</option>
-            <option value="Chennai">Chennai</option>
+            <option value="">-- Select City --</option>
           </select>
-          <span class="field-error" id="errLocation">Please select a location.</span>
+          <span class="field-error" id="errLocation">Please select a city.</span>
         </div>
 
-        <!-- Preferred Branch (dynamic) -->
+        <!-- Preferred Branch (dynamic based on city) -->
         <div class="form-group hidden" id="branchGroup">
           <label class="form-label" for="preferredBranch">Preferred Branch <span class="req">*</span></label>
           <select id="preferredBranch" class="form-select">

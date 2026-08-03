@@ -329,27 +329,32 @@
     </div>
   </div>
 </footer>
-<!-- Secret admin access: Shift+M on desktop, tap logo 5 times on mobile -->
+<!-- Secret admin access -->
 <script>
-  // Desktop shortcut
+  // Desktop: Shift+M
   document.addEventListener('keydown', e => {
     if (e.shiftKey && e.key === 'M') {
       window.location.href = 'admin.html';
     }
   });
 
-  // Mobile: tap logo 5 times quickly
-  let tapCount = 0, tapTimer;
-  document.querySelector('.logo-wrap').addEventListener('click', e => {
-    e.preventDefault();
-    tapCount++;
-    clearTimeout(tapTimer);
-    if (tapCount >= 5) {
-      tapCount = 0;
-      window.location.href = 'admin.html';
-      return;
-    }
-    tapTimer = setTimeout(() => { tapCount = 0; }, 1500);
+  // Mobile + Desktop: tap/click logo 5 times
+  let _tc = 0, _tt;
+  document.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.logo-wrap');
+    if (!logo) return;
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      _tc++;
+      clearTimeout(_tt);
+      if (_tc >= 5) {
+        _tc = 0;
+        window.location.href = 'admin.html';
+        return;
+      }
+      _tt = setTimeout(() => { _tc = 0; }, 2000);
+    });
   });
 </script>
 <script src="app.js"></script>

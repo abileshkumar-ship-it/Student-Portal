@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Interest Registration | The Ma Foi Foundation</title>
   <meta name="description" content="Register your interest in industry-ready training programs with The Ma Foi Foundation." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230D6EFD'/><text x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='18' fill='white'>M</text></svg>" />
   <!-- Meta Pixel Code -->
   <script>
   !function(f,b,e,v,n,t,s)
@@ -111,6 +112,8 @@
 
 <section class="form-section" id="register">
   <div class="container form-container">
+
+    <!-- Left panel -->
     <div class="form-left">
       <div class="section-label">Step Towards Success</div>
       <h2 class="form-heading">Begin Your Career<br /><span class="text-accent">Journey Today</span></h2>
@@ -160,27 +163,33 @@
           No prior experience required to apply
         </div>
       </div>
-
     </div>
 
+    <!-- Form card -->
     <div class="form-card" id="formCard">
       <div class="form-card-header">
         <h3>Student Registration</h3>
         <p>All fields are required</p>
       </div>
       <form id="registrationForm" novalidate>
+
+        <!-- Full Name -->
         <div class="form-group">
           <label class="form-label" for="fullName">Full Name <span class="req">*</span></label>
           <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" autocomplete="name" />
           <span class="field-error" id="errName">Name is required.</span>
         </div>
+
+        <!-- Email -->
         <div class="form-group">
           <label class="form-label" for="email">Email ID <span class="req">*</span></label>
           <input type="email" id="email" class="form-input" placeholder="Enter your Email ID" autocomplete="email" />
           <span class="field-error" id="errEmail">Please enter a valid email address.</span>
         </div>
+
+        <!-- Education -->
         <div class="form-group">
-          <label class="form-label" for="currentEducation">Current Education <span class="req">*</span></label>
+          <label class="form-label" for="currentEducation">Education <span class="req">*</span></label>
           <select id="currentEducation" class="form-select">
             <option value="">-- Select Education --</option>
             <option value="UG - Arts &amp; Science">UG - Arts &amp; Science</option>
@@ -190,13 +199,19 @@
           </select>
           <span class="field-error" id="errEdu">Please select your education.</span>
         </div>
-        <div class="form-group hidden" id="yearGroup">
-          <label class="form-label" for="currentYear">Current Year of Study <span class="req">*</span></label>
+
+        <!-- Education Status -->
+        <div class="form-group">
+          <label class="form-label" for="currentYear">Education Status <span class="req">*</span></label>
           <select id="currentYear" class="form-select">
-            <option value="">-- Select Year --</option>
+            <option value="">-- Select Status --</option>
+            <option value="Pursuing">Pursuing</option>
+            <option value="Completed">Completed</option>
           </select>
-          <span class="field-error" id="errYear">Please select your year of study.</span>
+          <span class="field-error" id="errYear">Please select your education status.</span>
         </div>
+
+        <!-- Your Preference -->
         <div class="form-group">
           <label class="form-label" for="higherStudies">Your Preference <span class="req">*</span></label>
           <select id="higherStudies" class="form-select">
@@ -206,6 +221,8 @@
           </select>
           <span class="field-error" id="errHigher">Please select your preference.</span>
         </div>
+
+        <!-- Course -->
         <div class="form-group">
           <label class="form-label" for="training">Select Your Preferred Course <span class="req">*</span></label>
           <select id="training" class="form-select">
@@ -219,9 +236,10 @@
           </select>
           <span class="field-error" id="errTraining">Please select the training you are interested in.</span>
         </div>
+
         <!-- Preferred City (dynamic based on course) -->
         <div class="form-group hidden" id="cityGroup">
-          <label class="form-label" for="preferredLocation">Preferred Location <span class="req">*</span></label>
+          <label class="form-label" for="preferredLocation">Preferred City <span class="req">*</span></label>
           <select id="preferredLocation" class="form-select">
             <option value="">-- Select City --</option>
           </select>
@@ -237,6 +255,7 @@
           <span class="field-error" id="errBranch">Please select a branch.</span>
         </div>
 
+        <!-- WhatsApp -->
         <div class="form-group">
           <label class="form-label" for="whatsappNumber">WhatsApp Number <span class="req">*</span></label>
           <div class="phone-wrap">
@@ -245,6 +264,8 @@
           </div>
           <span class="field-error" id="errWa">Please enter a valid 10-digit WhatsApp number.</span>
         </div>
+
+        <!-- Submit -->
         <button type="submit" class="btn-submit" id="submitBtn">
           <span id="submitBtnText">Register</span>
           <div class="btn-spinner hidden" id="submitSpinner"></div>
@@ -256,6 +277,7 @@
       </form>
     </div>
 
+    <!-- Success card -->
     <div class="success-card hidden" id="successCard">
       <div class="check-wrap">
         <svg class="check-svg" viewBox="0 0 52 52">
@@ -265,8 +287,7 @@
       </div>
       <h2 class="success-title">Thank You!</h2>
       <p class="success-msg">The Ma Foi Foundation will reach out to you!!</p>
-      <p class="success-sub">You're all set! Our team will connect with you soon.</p>
-
+      <p class="success-sub">Our team will contact you within 2–3 working days with more information about your selected program.</p>
       <div class="success-summary">
         <div class="success-summary-row">
           <span class="success-summary-label">Name</span>
@@ -281,7 +302,7 @@
           <span class="success-summary-value" id="summaryTraining">—</span>
         </div>
         <div class="success-summary-row">
-          <span class="success-summary-label">Location</span>
+          <span class="success-summary-label">City</span>
           <span class="success-summary-value" id="summaryLocation">—</span>
         </div>
         <div class="success-summary-row">
@@ -289,9 +310,9 @@
           <span class="success-summary-value" id="summaryBranch">—</span>
         </div>
       </div>
-
       <button class="btn-secondary" id="anotherResponseBtn">Submit Another Response</button>
     </div>
+
   </div>
 </section>
 

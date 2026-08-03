@@ -1319,7 +1319,7 @@ async function loadStats() {
 /* ── DASHBOARD PREVIEW (last 5) ── */
 async function loadDashPreview() {
   try {
-    const { data } = await sbFetch({ page: 0 });
+    const { data } = await sbFetch({ page: 0, sortCol: 'id', sortDir: 'desc' });
     const rows = data.slice(0, 5);
     if (!rows.length) {
       $('dashTableBody').innerHTML = `<tr><td colspan="6"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations yet</h4></div></td></tr>`;

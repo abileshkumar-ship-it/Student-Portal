@@ -223,26 +223,28 @@
 
     /* Search + filters */
     .filter-bar {
-      padding: 14px 22px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      background: #FAFBFF;
+      padding: 12px 22px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+      background: #FAFBFF; overflow-x: auto;
     }
-    .search-wrap { position: relative; flex: 1; min-width: 200px; }
+    .filter-bar::-webkit-scrollbar { height: 0; }
+    .search-wrap { position: relative; flex: 1; min-width: 160px; max-width: 240px; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-wrap input {
-      width: 100%; padding: 9px 12px 9px 36px;
+      width: 100%; padding: 9px 12px 9px 34px;
       border: 1.5px solid var(--border); border-radius: 9px;
-      font-size: 13.5px; color: var(--text); outline: none; background: var(--white);
+      font-size: 12.5px; color: var(--text); outline: none; background: var(--white);
       transition: border-color 0.16s, box-shadow 0.16s;
     }
     .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
 
     .f-select {
-      padding: 9px 34px 9px 12px; border: 1.5px solid var(--border);
-      border-radius: 9px; font-size: 13px; color: var(--text);
-      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+      padding: 9px 28px 9px 10px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 12.5px; color: var(--text);
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
       -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
       transition: border-color 0.16s, box-shadow 0.16s;
+      white-space: nowrap; flex-shrink: 0;
     }
     .f-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
 
@@ -551,6 +553,29 @@
       0%, 100% { transform: translateY(0) rotate(-1deg); }
       50%       { transform: translateY(-12px) rotate(1deg); }
     }
+
+    .city-breakdown { margin-top: 28px; margin-bottom: 28px; }
+    .city-breakdown-title { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .city-cards-wrap { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .city-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+    .city-card-hdr { padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+    .city-card-hdr:hover { background: var(--blue-l); }
+    .city-card-left { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .city-card-right { display: flex; align-items: center; gap: 10px; }
+    .city-card-count { font-size: 20px; font-weight: 800; color: var(--blue); }
+    .city-chevron { transition: transform 0.2s; color: var(--muted); }
+    .city-card.open .city-chevron { transform: rotate(180deg); }
+    .city-branches-list { display: none; border-top: 1px solid var(--border); }
+    .city-card.open .city-branches-list { display: block; }
+    .branch-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; gap: 12px; }
+    .branch-item:last-child { border-bottom: none; }
+    .branch-item:hover { background: var(--blue-l); }
+    .branch-item-name { font-size: 13px; font-weight: 600; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
+    .branch-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+    .branch-item-right { display: flex; align-items: center; gap: 10px; }
+    .branch-bar-bg { width: 80px; height: 5px; background: #EEF2FF; border-radius: 10px; overflow: hidden; }
+    .branch-bar-fill { height: 100%; border-radius: 10px; background: var(--blue); }
+    .branch-item-count { font-size: 16px; font-weight: 800; color: var(--text); min-width: 28px; text-align: right; }
 
     .spin-btn {
       width: 16px; height: 16px; border-radius: 50%;
@@ -953,6 +978,17 @@
           </div>
         </div>
 
+        <!-- Location Breakdown -->
+        <div class="city-breakdown">
+          <div class="city-breakdown-title">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Registrations by Location
+          </div>
+          <div class="city-cards-wrap" id="cityCardsWrap">
+            <div style="color:var(--muted);font-size:13px;">Loading…</div>
+          </div>
+        </div>
+
         <!-- Quick Registrations Preview -->
         <div class="panel">
           <div class="panel-header">
@@ -1010,6 +1046,19 @@
               <option>UG - Arts &amp; Science</option><option>UG - Engineering</option>
               <option>PG - Arts &amp; Science</option><option>PG - Engineering</option>
             </select>
+            <select id="filterCity" class="f-select">
+              <option value="">All Locations</option>
+              <optgroup label="Chennai">
+                <option value="branch:Egmore">Egmore</option>
+                <option value="branch:Kodambakkam">Kodambakkam</option>
+                <option value="branch:Anna Nagar">Anna Nagar</option>
+              </optgroup>
+              <optgroup label="Bangalore">
+                <option value="branch:Chamrajpet">Chamrajpet</option>
+                <option value="branch:Yeshwanthpur">Yeshwanthpur</option>
+              </optgroup>
+            </select>
+            <input type="date" id="filterDateSingle" class="f-select" style="padding-right:10px;font-size:12.5px;" title="Registration Date" />
             <button class="btn-clear" id="clearBtn">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Clear
@@ -1134,8 +1183,15 @@ async function sbDelete(id) {
 async function sbFetch(params = {}, paginate = true) {
   const q = new URLSearchParams();
   if (params.search) q.set('or', `(full_name.ilike.*${params.search}*,email.ilike.*${params.search}*,whatsapp_number.ilike.*${params.search}*)`);
-  if (params.training)  q.set('training', `eq.${params.training}`);
+  if (params.training)  q.set('training',         `eq.${params.training}`);
   if (params.education) q.set('current_education', `eq.${params.education}`);
+  if (params.city) {
+    const [type, val] = params.city.split(':');
+    if (type === 'city')   q.set('preferred_city',   `eq.${val}`);
+    if (type === 'branch') q.set('preferred_branch', `eq.${val}`);
+  }
+  if (params.dateFrom) q.append('created_at', `gte.${params.dateFrom}T00:00:00+05:30`);
+  if (params.dateTo)   q.append('created_at', `lte.${params.dateTo}T23:59:59+05:30`);
   q.set('order', `${params.sortCol || 'id'}.${params.sortDir || 'asc'}`);
 
   const h = { ...hdrs(), 'Prefer': 'count=exact' };
@@ -1168,7 +1224,11 @@ function toast(msg, type = 'info') {
 
 function fmtDate(iso) {
   if (!iso) return '—';
-  return new Date(iso).toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true });
+  return new Date(iso).toLocaleString('en-IN', {
+    timeZone: 'Asia/Kolkata',
+    day:'2-digit', month:'short', year:'numeric',
+    hour:'2-digit', minute:'2-digit', hour12:true
+  });
 }
 
 function tBadge(t) {
@@ -1303,7 +1363,10 @@ function startDash() {
 async function loadStats() {
   try {
     const all = await sbFetch({}, false);
-    const count = k => all.filter(r => r.training === k).length;
+    const count  = k => all.filter(r => r.training === k).length;
+    const cCity  = c => all.filter(r => r.preferred_city === c).length;
+    const cBranch= b => all.filter(r => r.preferred_branch === b).length;
+
     $('s-total').textContent = all.length;
     $('s-gold').textContent  = count('Gold Loan');
     $('s-micro').textContent = count('Micro Finance');
@@ -1311,9 +1374,58 @@ async function loadStats() {
     $('s-bfsi').textContent  = count('BFSI');
     $('s-ai').textContent    = count('Artificial Intelligence');
     $('s-cyber').textContent = count('Cyber Security');
-    $('navBadge').textContent = all.length;
+    $('navBadge').textContent  = all.length;
     $('dashCount').textContent = all.length;
+
+    // Build city breakdown cards
+    const CITIES = [
+      { name: 'Chennai',   branches: ['Egmore','Kodambakkam','Anna Nagar'] },
+      { name: 'Bangalore', branches: ['Chamrajpet','Yeshwanthpur'] },
+    ];
+    const wrap = $('cityCardsWrap');
+    if (!wrap) return;
+    wrap.innerHTML = CITIES.map(city => {
+      const total = cCity(city.name);
+      const maxB  = Math.max(...city.branches.map(b => cBranch(b)), 1);
+      const rows  = city.branches.map(b => {
+        const n   = cBranch(b);
+        const pct = Math.round((n / maxB) * 100);
+        return `<div class="branch-item" onclick="filterByBranch('${b}')">
+          <div class="branch-item-name"><span class="branch-dot"></span>${b}</div>
+          <div class="branch-item-right">
+            <div class="branch-bar-bg"><div class="branch-bar-fill" style="width:${pct}%"></div></div>
+            <div class="branch-item-count">${n}</div>
+          </div>
+        </div>`;
+      }).join('');
+      return `<div class="city-card" id="cc-${city.name}">
+        <div class="city-card-hdr" onclick="toggleCityCard('${city.name}')">
+          <div class="city-card-left">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${city.name}
+          </div>
+          <div class="city-card-right">
+            <div class="city-card-count">${total}</div>
+            <svg class="city-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+        <div class="city-branches-list">${rows}</div>
+      </div>`;
+    }).join('');
   } catch(e) { console.warn('Stats error', e.message); }
+}
+
+function toggleCityCard(name) {
+  const card = document.getElementById('cc-' + name);
+  if (card) card.classList.toggle('open');
+}
+
+function filterByBranch(branch) {
+  showView('registrations');
+  state.city = 'branch:' + branch;
+  state.page = 0;
+  if ($('filterCity')) $('filterCity').value = 'branch:' + branch;
+  loadRegs();
 }
 
 /* ── DASHBOARD PREVIEW (last 5) ── */
@@ -1340,7 +1452,7 @@ async function loadDashPreview() {
 }
 
 /* ── REGISTRATIONS TABLE ── */
-let state = { page: 0, search: '', training: '', education: '', dateFrom: '', dateTo: '', sortCol: 'id', sortDir: 'asc', total: 0 };
+let state = { page: 0, search: '', training: '', education: '', city: '', dateFrom: '', dateTo: '', sortCol: 'id', sortDir: 'asc', total: 0 };
 
 async function loadRegs() {
   $('regsTableBody').innerHTML = `<tr><td colspan="9"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
@@ -1348,7 +1460,13 @@ async function loadRegs() {
   try {
     const { data, total } = await sbFetch({ ...state });
     state.total = total;
-    $('resultCount').textContent = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} found`;
+    let countLabel = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} found`;
+    const singleDate = $('filterDateSingle').value;
+    if (singleDate) {
+      const d = new Date(singleDate).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric', timeZone:'Asia/Kolkata' });
+      countLabel = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} on ${d}`;
+    }
+    $('resultCount').textContent = countLabel;
     renderRegs(data);
     renderPag(total);
   } catch(e) {
@@ -1434,9 +1552,21 @@ const debouncedSearch = dbc(() => { state.search = $('searchInput').value.trim()
 $('searchInput').addEventListener('input', debouncedSearch);
 $('filterTraining').addEventListener('change', () => { state.training = $('filterTraining').value; state.page = 0; loadRegs(); });
 $('filterEducation').addEventListener('change', () => { state.education = $('filterEducation').value; state.page = 0; loadRegs(); });
+$('filterCity').addEventListener('change',      () => { state.city      = $('filterCity').value;      state.page = 0; loadRegs(); });
+$('filterDateSingle').addEventListener('change', () => {
+  const d = $('filterDateSingle').value;
+  state.dateFrom = d;
+  state.dateTo   = d;
+  state.page = 0;
+  loadRegs();
+});
 $('clearBtn').addEventListener('click', () => {
-  $('searchInput').value = ''; $('filterTraining').value = ''; $('filterEducation').value = '';
-  Object.assign(state, { search:'', training:'', education:'', page:0 });
+  $('searchInput').value     = '';
+  $('filterTraining').value  = '';
+  $('filterEducation').value = '';
+  $('filterCity').value      = '';
+  $('filterDateSingle').value = '';
+  Object.assign(state, { search:'', training:'', education:'', city:'', dateFrom:'', dateTo:'', page:0 });
   loadRegs();
 });
 
@@ -1445,7 +1575,7 @@ async function doExport(btn) {
   btn.disabled = true;
   btn.innerHTML = `<div class="spin-btn" style="border-top-color:white;"></div> Exporting…`;
   try {
-    const rows = await sbFetch({ search: state.search, training: state.training, education: state.education }, false);
+    const rows = await sbFetch({ search: state.search, training: state.training, education: state.education, city: state.city, dateFrom: state.dateFrom, dateTo: state.dateTo }, false);
     if (!rows.length) { toast('No data to export.', 'error'); return; }
     const headers = ['ID','Full Name','Email','Education','Education Status','Preference','Training','WhatsApp','City','Branch','Registered On'];
     const wsData  = [headers, ...rows.map(r => [r.id, r.full_name||'', r.email||'', r.current_education||'', r.education_status||'', r.preference||'', r.training||'', r.whatsapp_number||'', r.preferred_city||'', r.preferred_branch||'', fmtDate(r.created_at)])];

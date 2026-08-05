@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard | The Ma Foi Foundation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231849D6'/><text x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='18' fill='white'>M</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -202,103 +203,130 @@
     /* ══════════════════════════════
        PANEL (filter + table)
     ══════════════════════════════ */
+    /* ── PANEL ── */
     .panel {
       background: var(--white); border-radius: var(--radius);
       border: 1px solid var(--border); box-shadow: var(--shadow);
       overflow: hidden;
     }
     .panel-header {
-      padding: 18px 22px;
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 12px;
-      background: #FAFBFF;
+      flex-wrap: wrap; gap: 12px; background: var(--white);
     }
-    .panel-title { font-size: 14.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .panel-title { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .panel-count {
       display: inline-flex; align-items: center;
       background: var(--blue-l); color: var(--blue);
-      font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
     }
 
-    /* Search + filters */
+    /* ── FILTER BAR ── */
     .filter-bar {
-      padding: 12px 22px; border-bottom: 1px solid var(--border);
+      padding: 10px 18px; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
       background: #FAFBFF; overflow-x: auto;
     }
     .filter-bar::-webkit-scrollbar { height: 0; }
-    .search-wrap { position: relative; flex: 1; min-width: 160px; max-width: 240px; }
+    .search-wrap { position: relative; flex: 1; min-width: 140px; max-width: 200px; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-wrap input {
-      width: 100%; padding: 9px 12px 9px 34px;
+      width: 100%; padding: 9px 10px 9px 32px;
       border: 1.5px solid var(--border); border-radius: 9px;
-      font-size: 12.5px; color: var(--text); outline: none; background: var(--white);
-      transition: border-color 0.16s, box-shadow 0.16s;
+      font-size: 12px; color: var(--text); outline: none; background: var(--white);
+      transition: all 0.16s;
     }
     .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
-
     .f-select {
-      padding: 9px 28px 9px 10px; border: 1.5px solid var(--border);
-      border-radius: 9px; font-size: 12.5px; color: var(--text);
-      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+      padding: 9px 26px 9px 10px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 12px; color: var(--text);
+      background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
       -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
-      transition: border-color 0.16s, box-shadow 0.16s;
-      white-space: nowrap; flex-shrink: 0;
+      transition: all 0.16s;
     }
     .f-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
-
     .btn-clear {
-      padding: 9px 15px; border-radius: 9px; font-size: 13px;
+      padding: 9px 12px; border-radius: 9px; font-size: 12px;
+      white-space: nowrap; flex-shrink: 0;
       font-weight: 600; color: var(--muted);
       background: var(--white); border: 1.5px solid var(--border);
       display: flex; align-items: center; gap: 6px; transition: all 0.16s;
     }
     .btn-clear:hover { border-color: var(--danger); color: var(--danger); background: #FEF2F2; }
 
-    /* Table */
-    .table-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    thead { background: #F8FAFF; position: sticky; top: 0; z-index: 5; }
-    th {
-      padding: 12px 16px; text-align: left;
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.6px; color: var(--muted);
-      border-bottom: 1.5px solid var(--border); white-space: nowrap;
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
+    .table-wrap::-webkit-scrollbar { height: 5px; }
+    .table-wrap::-webkit-scrollbar-track { background: #F1F5F9; }
+    .table-wrap::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+    .table-wrap::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
+    thead {
+      background: linear-gradient(to bottom, #F8FAFF, #F1F5FF);
+      position: sticky; top: 0; z-index: 5;
+    }
+    th {
+      padding: 11px 14px; text-align: left;
+      font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.7px; color: #6B7A99;
+      border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    th:first-child { padding-left: 20px; }
+    th:last-child  { padding-right: 20px; }
     th.sortable { cursor: pointer; user-select: none; }
-    th.sortable:hover { color: var(--blue); }
-    th .sort-icon { display: inline-flex; flex-direction: column; gap: 1px; margin-left: 5px; vertical-align: middle; opacity: 0.4; }
+    th.sortable:hover { color: var(--blue); background: #EEF3FF; }
+    th .sort-icon { display: inline-flex; flex-direction: column; gap: 1px; margin-left: 4px; vertical-align: middle; opacity: 0.35; font-size: 9px; }
     th.sort-asc .sort-icon, th.sort-desc .sort-icon { opacity: 1; color: var(--blue); }
+
     td {
-      padding: 13px 16px; border-bottom: 1px solid #F1F5F9;
+      padding: 12px 14px; border-bottom: 1px solid #EEF2FF;
       color: var(--text); vertical-align: middle;
     }
+    td:first-child { padding-left: 20px; }
+    td:last-child  { padding-right: 20px; }
+
+    tbody tr { transition: background 0.1s; }
     tbody tr:last-child td { border-bottom: none; }
-    tbody tr { transition: background 0.12s; }
     tbody tr:hover td { background: #F5F8FF; }
 
-    .td-name  { font-weight: 600; font-size: 13.5px; }
-    .td-email { color: var(--blue); font-size: 12.5px; }
-    .td-mono  { font-size: 12px; color: var(--muted); letter-spacing: 0.3px; }
-    .td-date  { font-size: 12px; color: var(--muted); white-space: nowrap; }
-    .td-num   { font-size: 12px; color: var(--muted); }
+    /* Zebra striping — subtle */
+    tbody tr:nth-child(even) td { background: #FAFBFF; }
+    tbody tr:nth-child(even):hover td { background: #F0F4FF; }
 
+    .td-num   { font-size: 12px; color: #94A3B8; font-weight: 500; width: 40px; }
+    .td-name  { font-weight: 700; font-size: 13.5px; color: var(--text); white-space: nowrap; }
+    .td-email { color: var(--blue); font-size: 12.5px; white-space: nowrap; }
+    .td-mono  { font-size: 12.5px; color: #475569; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .td-date  { font-size: 12px; color: #64748B; white-space: nowrap; }
+
+    /* ── BADGES ── */
     .badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      padding: 4px 10px; border-radius: 20px;
-      font-size: 11.5px; font-weight: 700; white-space: nowrap;
+      display: inline-flex; align-items: center;
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 12px; font-weight: 600; white-space: nowrap;
+      letter-spacing: 0.1px;
     }
-    .b-gold   { background: #FEF3C7; color: #92400E; }
-    .b-micro  { background: #CFFAFE; color: #155E75; }
-    .b-data   { background: #DCFCE7; color: #14532D; }
-    .b-bfsi   { background: #EEF3FF; color: #1849D6; }
-    .b-ai     { background: #FCE7F3; color: #831843; }
-    .b-cyber  { background: #E0E7FF; color: #3730A3; }
-    .b-pref   { background: #F1F5F9; color: #475569; font-weight: 500; font-size: 11px; max-width: 160px; overflow: hidden; text-overflow: ellipsis; }
+    .b-gold   { background: #FEF9EC; color: #92400E; border: 1px solid #FDE68A; }
+    .b-micro  { background: #ECFEFF; color: #155E75; border: 1px solid #A5F3FC; }
+    .b-data   { background: #ECFDF5; color: #065F46; border: 1px solid #6EE7B7; }
+    .b-bfsi   { background: #EEF3FF; color: #1849D6; border: 1px solid #C7D7FF; }
+    .b-ai     { background: #FDF4FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+    .b-cyber  { background: #EEF2FF; color: #3730A3; border: 1px solid #C7D2FE; }
+    .b-pref   {
+      background: #F8FAFC; color: #475569;
+      border: 1px solid #E2E8F0;
+      font-weight: 500; font-size: 11.5px;
+      max-width: 180px; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
 
-    /* Empty / loading */
-    .tbl-msg { text-align: center; padding: 60px 20px; color: var(--muted); }
+    /* ── EMPTY / LOADING ── */
+    .tbl-msg { text-align: center; padding: 64px 20px; color: var(--muted); }
     .tbl-spinner {
       width: 32px; height: 32px; border-radius: 50%;
       border: 3px solid var(--border); border-top-color: var(--blue);
@@ -308,17 +336,17 @@
       width: 56px; height: 56px; border-radius: 50%; background: var(--blue-l);
       display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;
     }
-    .tbl-msg h4 { font-size: 15px; color: var(--text); margin-bottom: 6px; }
+    .tbl-msg h4 { font-size: 15px; color: var(--text); margin-bottom: 6px; font-weight: 600; }
     .tbl-msg p  { font-size: 13px; }
 
-    /* Pagination */
+    /* ── PAGINATION ── */
     .pagination {
-      padding: 14px 22px; border-top: 1px solid var(--border);
+      padding: 14px 24px; border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 10px; background: #FAFBFF;
     }
-    .pag-info { font-size: 13px; color: var(--muted); }
-    .pag-btns { display: flex; gap: 5px; }
+    .pag-info { font-size: 13px; color: var(--muted); font-weight: 500; }
+    .pag-btns { display: flex; gap: 4px; }
     .pag-btn {
       min-width: 34px; height: 34px; padding: 0 8px; border-radius: 8px;
       border: 1.5px solid var(--border); background: var(--white);
@@ -327,7 +355,7 @@
       cursor: pointer; transition: all 0.15s ease;
     }
     .pag-btn:hover:not(:disabled) { border-color: var(--blue); color: var(--blue); background: var(--blue-l); }
-    .pag-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 2px 8px rgba(24,73,214,0.28); }
+    .pag-btn.active { background: var(--blue); border-color: var(--blue); color: #fff; box-shadow: 0 2px 8px rgba(24,73,214,0.25); }
     .pag-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
     /* ══════════════════════════════
@@ -335,280 +363,129 @@
     ══════════════════════════════ */
     .login-screen {
       min-height: 100vh;
-      display: flex;
-      background: #fff;
-    }
-
-    /* ── LEFT: form panel ── */
-    .login-left {
-      width: 48%;
-      display: flex;
-      flex-direction: column;
-      padding: 48px 56px;
-      background: #fff;
+      background: linear-gradient(135deg, #0F2D96 0%, #1849D6 55%, #2563EB 100%);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
       position: relative;
-      z-index: 1;
     }
-
-    .login-logo-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 56px;
+    .login-screen::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
+      background-size: 26px 26px;
     }
-    .login-logo-icon {
-      width: 36px; height: 36px; border-radius: 9px;
-      background: linear-gradient(135deg, #1849D6, #1338B0);
+    .login-card {
+      background: var(--white); border-radius: 18px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+      width: 100%; max-width: 420px; overflow: hidden;
+      position: relative; z-index: 1;
+      animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .login-top {
+      background: linear-gradient(135deg, #0F2D96, #1849D6 60%, #2563EB);
+      padding: 34px 28px 26px; text-align: center; color: #fff;
+    }
+    .login-icon {
+      width: 54px; height: 54px; border-radius: 14px;
+      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
       display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
     }
-    .login-logo-name {
-      font-size: 15px; font-weight: 700; color: var(--text);
-      letter-spacing: -0.2px;
-    }
-
-    .login-form-area { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 380px; }
-
-    .login-welcome { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -0.5px; margin-bottom: 8px; }
-    .login-sub     { font-size: 14px; color: var(--muted); margin-bottom: 36px; line-height: 1.5; }
-
+    .login-top h1 { font-size: 21px; font-weight: 700; margin-bottom: 4px; }
+    .login-top p  { font-size: 13px; opacity: 0.70; }
+    .login-body   { padding: 28px; }
     .login-error {
       background: #FEF2F2; border: 1px solid #FECACA;
-      border-radius: 10px; padding: 11px 14px;
+      border-radius: 9px; padding: 10px 14px;
       font-size: 13px; color: var(--danger); font-weight: 500;
-      margin-bottom: 20px; display: none; align-items: center; gap: 8px;
+      margin-bottom: 16px; display: none; align-items: center; gap: 8px;
     }
     .login-error.show { display: flex; }
-
-    .l-group { display: flex; flex-direction: column; gap: 0; margin-bottom: 16px; }
-
-    .l-input-wrap {
-      display: flex; align-items: center;
-      border: 1.5px solid #E8EDF5; border-radius: 12px;
-      background: #F7F9FC; overflow: hidden;
-      transition: all 0.16s ease;
-    }
-    .l-input-wrap:focus-within {
-      border-color: #1849D6;
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(24,73,214,0.09);
-    }
-    .l-input-icon {
-      width: 46px; display: flex; align-items: center; justify-content: center;
-      color: #BBC5D5; flex-shrink: 0;
-    }
+    .l-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .l-label { font-size: 13px; font-weight: 600; color: #374151; }
     .l-input {
-      flex: 1; padding: 14px 14px 14px 0;
-      border: none; background: transparent; outline: none;
-      font-size: 14px; color: var(--text);
+      padding: 11px 14px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 14px; color: var(--text);
+      background: #F9FAFB; outline: none;
+      transition: border-color 0.16s, box-shadow 0.16s, background 0.16s;
     }
-    .l-input::placeholder { color: #BBC5D5; }
-    .l-input-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.6px;
-      text-transform: uppercase; color: var(--muted);
-      margin-bottom: 7px;
-    }
-
-    .pw-wrap { display: flex; align-items: center; position: relative; }
-    .pw-wrap .l-input-wrap { flex: 1; }
-    .pw-toggle {
-      position: absolute; right: 14px; background: none; color: #BBC5D5;
-      padding: 2px; transition: color 0.15s;
-    }
-    .pw-toggle:hover { color: #1849D6; }
-
+    .l-input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(24,73,214,0.10); }
+    .pw-wrap { position: relative; }
+    .pw-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; color: var(--muted); padding: 2px; }
+    .pw-toggle:hover { color: var(--text); }
+    .l-input-pr { padding-right: 40px; }
     .btn-signin {
-      width: 100%; padding: 15px;
-      background: linear-gradient(135deg, #1849D6, #1338B0);
-      color: #fff; font-size: 15px; font-weight: 700;
-      border-radius: 12px; letter-spacing: 0.1px;
-      box-shadow: 0 4px 16px rgba(24,73,214,0.30); margin-top: 8px;
-      transition: all 0.18s ease;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-d));
+      color: #fff; font-size: 14px; font-weight: 700; border-radius: 9px;
+      box-shadow: 0 4px 14px rgba(24,73,214,0.30); margin-top: 4px;
+      transition: all 0.18s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .btn-signin:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(24,73,214,0.38); }
-    .btn-signin:active { transform: translateY(0); }
+    .btn-signin:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(24,73,214,0.38); }
+    /* ── LOCATION BREAKDOWN ── */
+    /* ── DASHBOARD LAYOUT ── */
+    .dash-top-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
+    .dash-mid-row { display: grid; grid-template-columns: 1fr 1.6fr; gap: 16px; margin-bottom: 20px; }
 
-    .login-bottom-note {
-      margin-top: auto; padding-top: 40px;
-      font-size: 12.5px; color: #C0C8D8; line-height: 1.7;
+    /* ── STAT CARDS ── */
+    .stat-card {
+      background: var(--white); border-radius: var(--radius);
+      padding: 18px 18px 14px; box-shadow: var(--shadow);
+      border: 1px solid var(--border); position: relative; overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s; cursor: default;
     }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .stat-card-accent { position: absolute; bottom:0; left:0; right:0; height:3px; }
+    .stat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+    .stat-icon-wrap { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .stat-trend { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; background: #EEF3FF; color: var(--blue); }
+    .stat-val { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.5px; }
+    .stat-lbl { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 5px; }
 
-    /* ── RIGHT: visual panel ── */
-    .login-right {
-      flex: 1;
-      background: linear-gradient(145deg, #EEF3FF 0%, #D6E4FF 50%, #C7D8FF 100%);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 48px 40px; position: relative; overflow: hidden;
-    }
-    .login-right::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(24,73,214,0.06) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-    .login-right-content { position: relative; z-index: 1; text-align: center; }
+    /* ── STAT GRID (course row) ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 14px; margin-bottom: 20px; }
 
-    .login-visual-card {
-      width: 260px; height: 260px; border-radius: 32px;
-      background: linear-gradient(145deg, #1849D6, #2563EB);
-      box-shadow: 0 32px 80px rgba(24,73,214,0.30), 0 8px 24px rgba(0,0,0,0.10);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 36px;
-      position: relative;
-      animation: floatCard 4s ease-in-out infinite;
-    }
-    .login-visual-card::before {
-      content: '';
-      position: absolute; inset: -1px;
-      border-radius: 33px;
-      background: linear-gradient(145deg, rgba(255,255,255,0.25), transparent);
-      pointer-events: none;
-    }
-    .login-visual-inner {
-      width: 110px; height: 110px; border-radius: 24px;
-      background: rgba(255,255,255,0.15);
-      border: 1.5px solid rgba(255,255,255,0.25);
-      display: flex; align-items: center; justify-content: center;
-    }
+    /* ── CITY PANEL ── */
+    .city-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
+    .city-panel-hdr { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .city-panel-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .city-item { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .city-item-hdr { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; cursor: pointer; transition: background 0.14s; user-select: none; }
+    .city-item-hdr:hover { background: var(--blue-l); }
+    .city-item-left { display: flex; align-items: center; gap: 10px; }
+    .city-item-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .city-item-name { font-size: 13.5px; font-weight: 700; color: var(--text); }
+    .city-item-right { display: flex; align-items: center; gap: 10px; }
+    .city-item-count { font-size: 22px; font-weight: 800; }
+    .city-item-chevron { color: var(--muted); transition: transform 0.2s; flex-shrink: 0; }
+    .city-item.open .city-item-chevron { transform: rotate(180deg); }
+    .city-item-branches { display: none; border-top: 1px solid var(--border); background: #FAFBFF; }
+    .city-item.open .city-item-branches { display: block; }
+    .branch-line { display: flex; align-items: center; gap: 10px; padding: 9px 14px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; }
+    .branch-line:last-child { border-bottom: none; }
+    .branch-line:hover { background: var(--blue-l); }
+    .branch-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .branch-lbl { font-size: 12.5px; font-weight: 600; color: var(--text-2); flex: 1; }
+    .branch-prog-bg { width: 72px; height: 5px; background: #E8EFFF; border-radius: 10px; overflow: hidden; }
+    .branch-prog { height: 100%; border-radius: 10px; }
+    .branch-num { font-size: 14px; font-weight: 800; color: var(--text); min-width: 24px; text-align: right; }
 
-    .login-right-title { font-size: 22px; font-weight: 800; color: #1338B0; letter-spacing: -0.3px; margin-bottom: 10px; }
-    .login-right-sub   { font-size: 14px; color: #5478C0; line-height: 1.6; max-width: 280px; }
+    /* ── BAR CHART ── */
+    .chart-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; }
+    .chart-hdr { padding: 14px 18px 10px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+    .chart-hdr-left { font-size: 13.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .chart-hdr-sub { font-size: 11.5px; color: var(--muted); }
+    .chart-body { padding: 16px 18px 12px; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
+    .bar-wrap { display: flex; align-items: flex-end; gap: 3px; height: 140px; overflow-x: auto; padding-bottom: 6px; }
+    .bar-wrap::-webkit-scrollbar { height: 4px; }
+    .bar-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; min-width: 26px; cursor: pointer; }
+    .bar-col:hover .bar-rect { opacity: 0.7; }
+    .bar-rect { width: 18px; border-radius: 4px 4px 0 0; background: var(--blue); min-height: 3px; transition: opacity 0.15s; }
+    .bar-rect.empty { background: #DDE5F4; }
+    .bar-day { font-size: 9px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .bar-num { font-size: 9.5px; font-weight: 700; color: var(--blue); line-height: 1; }
 
-    .login-right-pills { display: flex; gap: 10px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
-    .login-pill {
-      display: flex; align-items: center; gap: 7px;
-      background: white; border-radius: 50px;
-      padding: 8px 16px; font-size: 12.5px; font-weight: 600;
-      color: #1849D6; box-shadow: 0 2px 10px rgba(24,73,214,0.12);
-    }
-    .login-pill svg { color: #1849D6; }
-    /* ── DELETE BUTTON ── */
-    .btn-delete-row {
-      width: 32px; height: 32px; border-radius: 7px;
-      background: transparent; border: 1.5px solid var(--border);
-      color: var(--muted); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: all 0.16s ease;
-    }
-    .btn-delete-row:hover {
-      background: #FEF2F2; border-color: #FECACA;
-      color: var(--danger);
-    }
-
-    /* ── DELETE MODAL ── */
-    .del-overlay {
-      position: fixed; inset: 0; z-index: 9000;
-      background: rgba(0,0,0,0.50); backdrop-filter: blur(4px);
-      display: flex; align-items: center; justify-content: center; padding: 20px;
-      animation: fadeIn 0.2s ease;
-    }
-    .del-overlay.hidden { display: none; }
-    .del-modal {
-      background: white; border-radius: 16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.20);
-      width: 100%; max-width: 400px; padding: 36px 32px;
-      text-align: center; animation: slideUp 0.3s cubic-bezier(0.22,1,0.36,1);
-    }
-    .del-modal-icon {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: #FEF2F2; border: 2px solid #FECACA;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-    }
-    .del-modal-title {
-      font-size: 20px; font-weight: 800; color: var(--text);
-      margin-bottom: 8px; letter-spacing: -0.3px;
-    }
-    .del-modal-name {
-      font-size: 14px; font-weight: 700; color: var(--blue);
-      margin-bottom: 12px;
-    }
-    .del-modal-msg {
-      font-size: 14px; color: var(--muted); line-height: 1.6;
-      margin-bottom: 28px;
-    }
-    .del-modal-msg strong { color: var(--danger); font-weight: 600; }
-    .del-modal-btns {
-      display: flex; gap: 10px; justify-content: center;
-    }
-    .del-cancel {
-      flex: 1; padding: 12px; border-radius: 9px;
-      border: 1.5px solid var(--border); background: white;
-      font-size: 14px; font-weight: 600; color: var(--muted);
-      cursor: pointer; transition: all 0.16s;
-      font-family: inherit;
-    }
-    .del-cancel:hover { border-color: var(--muted); color: var(--text); }
-    .del-confirm {
-      flex: 1; padding: 12px; border-radius: 9px;
-      border: none; background: var(--danger); color: white;
-      font-size: 14px; font-weight: 700; cursor: pointer;
-      transition: all 0.16s; display: flex; align-items: center;
-      justify-content: center; gap: 7px; font-family: inherit;
-    }
-    .del-confirm:hover { background: #B91C1C; transform: translateY(-1px); }
-    .del-confirm:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0) rotate(-1deg); }
-      50%       { transform: translateY(-12px) rotate(1deg); }
-    }
-
-    .city-breakdown { margin-top: 28px; margin-bottom: 28px; }
-    .city-breakdown-title { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-    .city-cards-wrap { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .city-card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
-    .city-card-hdr { padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
-    .city-card-hdr:hover { background: var(--blue-l); }
-    .city-card-left { display: flex; align-items: center; gap: 10px; font-size: 13.5px; font-weight: 700; color: var(--text); }
-    .city-card-right { display: flex; align-items: center; gap: 10px; }
-    .city-card-count { font-size: 20px; font-weight: 800; color: var(--blue); }
-    .city-chevron { transition: transform 0.2s; color: var(--muted); }
-    .city-card.open .city-chevron { transform: rotate(180deg); }
-    .city-branches-list { display: none; border-top: 1px solid var(--border); }
-    .city-card.open .city-branches-list { display: block; }
-    .branch-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border-bottom: 1px solid #F1F5F9; cursor: pointer; transition: background 0.12s; gap: 12px; }
-    .branch-item:last-child { border-bottom: none; }
-    .branch-item:hover { background: var(--blue-l); }
-    .branch-item-name { font-size: 13px; font-weight: 600; color: var(--text-2); display: flex; align-items: center; gap: 8px; }
-    .branch-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
-    .branch-item-right { display: flex; align-items: center; gap: 10px; }
-    .branch-bar-bg { width: 80px; height: 5px; background: #EEF2FF; border-radius: 10px; overflow: hidden; }
-    .branch-bar-fill { height: 100%; border-radius: 10px; background: var(--blue); }
-    .branch-item-count { font-size: 16px; font-weight: 800; color: var(--text); min-width: 28px; text-align: right; }
-
-    .spin-btn {
-      width: 16px; height: 16px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.35);
-      border-top-color: #fff; animation: spin 0.8s linear infinite;
-    }
-
-    /* Mobile */
-    @media(max-width: 768px) {
-      .login-screen { flex-direction: column; }
-      .login-left { width: 100%; padding: 32px 24px; }
-      .login-right { display: none; }
-      .login-form-area { max-width: 100%; }
-      .login-welcome { font-size: 24px; }
-    }
-    .spin-btn {
-      width: 16px; height: 16px; border-radius: 50%;
-      border: 2px solid rgba(255,255,255,0.35);
-      border-top-color: #fff; animation: spin 0.8s linear infinite;
-    }
-    .login-footer-note {
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      margin-top: 20px; font-size: 12px; color: #BBC5D5;
-    }
-
-    /* Mobile: stack vertically */
-    @media(max-width: 700px) {
-      .login-screen::before, .login-screen::after { display: none; }
-      .login-left-content { display: none; }
-      .login-card { margin: 0 auto; max-width: 100%; }
-      .login-screen { background: linear-gradient(160deg, #1849D6, #2563EB); padding: 24px 16px; }
-      .login-card { box-shadow: 0 16px 48px rgba(0,0,0,0.20); }
-    }
+    /* ── SPIN BTN ── */
+    .spin-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; animation: spin 0.8s linear infinite; }
 
     /* Overlay */
     .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 199; }
@@ -633,76 +510,69 @@
     @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
 
     /* ── RESPONSIVE ── */
-    @media(max-width: 1024px) {
-      .stats-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    /* ── TABLET: 768px – 1024px — mini sidebar ── */
+    @media(min-width: 769px) and (max-width: 1024px) {
+      :root { --sidebar-w: 64px; }
+      .sidebar-logo-text, .sidebar-logo-sub,
+      .nav-item span:not(.nav-badge),
+      .sidebar-section-label,
+      .btn-logout span,
+      .nav-badge { display: none; }
+      .sidebar-logo { justify-content: center; padding: 18px 12px; }
+      .sidebar-logo-icon { margin: 0; }
+      .nav-item { justify-content: center; padding: 12px 0; }
+      .nav-item svg { width: 20px; height: 20px; opacity: 0.8; }
+      .nav-item:hover svg, .nav-item.active svg { opacity: 1; }
+      .btn-logout { justify-content: center; padding: 12px 0; }
+      .dash-top-row { grid-template-columns: repeat(2,1fr); }
+      .stats-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .dash-mid-row { grid-template-columns: 1fr; }
+      .page { padding: 20px; }
+      .filter-bar { flex-wrap: wrap; gap: 8px; }
     }
+
+    /* ── MOBILE: ≤ 768px ── */
     @media(max-width: 768px) {
       .sidebar { transform: translateX(-100%); }
-      .sidebar.open { transform: translateX(0); }
+      .sidebar.open { transform: translateX(0); width: var(--sidebar-w); }
       .main { margin-left: 0; }
       .mobile-menu-btn { display: flex; }
       .topbar { padding: 0 16px; }
       .page { padding: 16px; }
       .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .dash-top-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .dash-mid-row { grid-template-columns: 1fr; }
       .stat-val { font-size: 26px; }
       .page-header { flex-direction: column; align-items: flex-start; }
       .topbar-date, .topbar-divider, .topbar-username { display: none; }
       .filter-bar { gap: 8px; }
       .search-wrap { min-width: 0; width: 100%; }
       .f-select { width: 100%; }
-
-      /* ── MOBILE CARD VIEW ── */
+      /* Mobile card view for table */
       .table-wrap { overflow-x: unset; }
       table, thead, tbody, th, td, tr { display: block; }
       thead { display: none; }
-
       tbody tr {
-        background: var(--white);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        margin-bottom: 12px;
-        padding: 14px 16px;
-        box-shadow: var(--shadow);
-        display: flex;
-        flex-direction: column;
-        gap: 0;
+        background: var(--white); border: 1px solid var(--border);
+        border-radius: 12px; margin-bottom: 12px; padding: 14px 16px;
+        box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0;
       }
       tbody tr:hover td { background: transparent; }
-
       tbody td {
-        border: none;
-        padding: 5px 0;
-        font-size: 13px;
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        color: var(--text);
+        border: none; padding: 5px 0; font-size: 13px;
+        display: flex; align-items: flex-start; gap: 8px;
       }
       tbody td::before {
         content: attr(data-label);
-        font-size: 10.5px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--muted);
-        min-width: 90px;
-        flex-shrink: 0;
-        padding-top: 1px;
+        font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+        letter-spacing: 0.5px; color: var(--muted);
+        min-width: 90px; flex-shrink: 0; padding-top: 1px;
       }
       tbody td:first-child {
-        font-size: 11px;
-        color: var(--muted);
-        border-bottom: 1px solid var(--border);
-        padding-bottom: 10px;
-        margin-bottom: 6px;
+        font-size: 11px; color: var(--muted);
+        border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 6px;
       }
       tbody td:first-child::before { content: '#'; }
-
-      .td-name  { font-size: 14px !important; font-weight: 700 !important; }
-      .td-email { font-size: 13px !important; }
-      .td-mono  { font-size: 13px !important; }
-      .td-date  { white-space: normal !important; }
-
       /* Login responsive */
       .login-screen { flex-direction: column; }
       .login-left { width: 100%; padding: 32px 24px; min-height: 100vh; }
@@ -719,98 +589,46 @@
 <body>
 
 <!-- LOGIN SCREEN -->
-<!-- LOGIN SCREEN -->
 <div id="loginScreen">
   <div class="login-screen">
-
-    <!-- LEFT: Form -->
-    <div class="login-left">
-      <div class="login-logo-row">
-        <div class="login-logo-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    <div class="login-card">
+      <div class="login-top">
+        <div class="login-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <span class="login-logo-name">Ma Foi Foundation</span>
+        <h1>Admin Portal</h1>
+        <p>The Ma Foi Foundation</p>
       </div>
-
-      <div class="login-form-area">
-        <h2 class="login-welcome">Welcome Back</h2>
-        <p class="login-sub">Sign in to your admin account to continue managing student registrations.</p>
-
+      <div class="login-body">
         <div class="login-error" id="loginError">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           Invalid username or password.
         </div>
-
         <form id="loginForm" novalidate>
-
           <div class="l-group">
-            <div class="l-input-label">Email</div>
-            <div class="l-input-wrap">
-              <div class="l-input-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              </div>
-              <input type="email" id="adminUser" class="l-input" placeholder="Enter your email address" autocomplete="email" />
-            </div>
+            <label class="l-label">Username</label>
+            <input type="email" id="adminUser" class="l-input" placeholder="Enter your email address" autocomplete="email" />
           </div>
-
           <div class="l-group">
-            <div class="l-input-label">Password</div>
+            <label class="l-label">Password</label>
             <div class="pw-wrap">
-              <div class="l-input-wrap" style="width:100%;">
-                <div class="l-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                </div>
-                <input type="password" id="adminPass" class="l-input" style="padding-right:44px;" placeholder="Enter your password" autocomplete="current-password" />
-              </div>
+              <input type="password" id="adminPass" class="l-input l-input-pr" placeholder="Enter password" autocomplete="current-password" />
               <button type="button" id="togglePw" class="pw-toggle">
                 <svg id="eyeIco" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
-
           <button type="submit" class="btn-signin" id="signinBtn">
             <span id="signinTxt">Sign In</span>
             <div class="spin-btn" id="signinSpin" style="display:none;"></div>
           </button>
-
         </form>
-      </div>
-
-      <div class="login-bottom-note">
-        The Ma Foi Foundation Admin Portal is restricted to authorised personnel only.<br />
-        Unauthorised access attempts are monitored and logged.
-      </div>
-    </div>
-
-    <!-- RIGHT: Visual -->
-    <div class="login-right">
-      <div class="login-right-content">
-        <div class="login-visual-card">
-          <div class="login-visual-inner">
-            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          </div>
-        </div>
-
-        <div class="login-right-title">Secure Admin Portal</div>
-        <div class="login-right-sub">Manage student registrations, track program analytics, and download reports — all in one place.</div>
-
-        <div class="login-right-pills">
-          <div class="login-pill">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            Student Management
-          </div>
-          <div class="login-pill">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Analytics
-          </div>
-          <div class="login-pill">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Excel Export
-          </div>
-        </div>
+        <p style="text-align:center;margin-top:16px;font-size:12px;color:#94A3B8;display:flex;align-items:center;justify-content:center;gap:5px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Authorised access only
+        </p>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -897,8 +715,8 @@
           </button>
         </div>
 
-        <div class="stats-grid">
-          <!-- Total -->
+        <!-- Top KPI row: Total, Chennai, Bangalore, Today -->
+        <div class="dash-top-row">
           <div class="stat-card">
             <div class="stat-card-top">
               <div class="stat-icon-wrap" style="background:#EEF3FF;">
@@ -910,86 +728,85 @@
             <div class="stat-lbl">Total Registrations</div>
             <div class="stat-card-accent" style="background:#1849D6;"></div>
           </div>
-          <!-- Gold Loan -->
           <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#FFFBEB;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-gold">—</div>
-            <div class="stat-lbl">Gold Loan</div>
-            <div class="stat-card-accent" style="background:#D97706;"></div>
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#FFF7ED;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div></div>
+            <div class="stat-val" id="s-chennai">—</div><div class="stat-lbl">Chennai</div>
+            <div class="stat-card-accent" style="background:#EA580C;"></div>
           </div>
-          <!-- Micro Finance -->
           <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#ECFEFF;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-micro">—</div>
-            <div class="stat-lbl">Micro Finance</div>
-            <div class="stat-card-accent" style="background:#0891B2;"></div>
-          </div>
-          <!-- Data Analytics -->
-          <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#F0FDF4;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-data">—</div>
-            <div class="stat-lbl">Data Analytics</div>
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#F0FDF4;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div></div>
+            <div class="stat-val" id="s-bangalore">—</div><div class="stat-lbl">Bangalore</div>
             <div class="stat-card-accent" style="background:#16A34A;"></div>
           </div>
-          <!-- BFSI -->
           <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#EEF3FF;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-bfsi">—</div>
-            <div class="stat-lbl">BFSI</div>
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#FFFBEB;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
+            <div class="stat-val" id="s-today">—</div><div class="stat-lbl">Today</div>
+            <div class="stat-card-accent" style="background:#D97706;"></div>
+          </div>
+        </div>
+
+        <!-- Course stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#FFFBEB;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg></div></div>
+            <div class="stat-val" id="s-gold">—</div><div class="stat-lbl">Gold Loan</div>
+            <div class="stat-card-accent" style="background:#D97706;"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#ECFEFF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div></div>
+            <div class="stat-val" id="s-micro">—</div><div class="stat-lbl">Micro Finance</div>
+            <div class="stat-card-accent" style="background:#0891B2;"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#F0FDF4;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div></div>
+            <div class="stat-val" id="s-data">—</div><div class="stat-lbl">Data Analytics</div>
+            <div class="stat-card-accent" style="background:#16A34A;"></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#EEF3FF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></div></div>
+            <div class="stat-val" id="s-bfsi">—</div><div class="stat-lbl">BFSI</div>
             <div class="stat-card-accent" style="background:#4F46E5;"></div>
           </div>
-          <!-- AI -->
           <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#FDF2F8;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-ai">—</div>
-            <div class="stat-lbl">Artificial Intelligence</div>
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#FDF2F8;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#DB2777" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg></div></div>
+            <div class="stat-val" id="s-ai">—</div><div class="stat-lbl">Artificial Intelligence</div>
             <div class="stat-card-accent" style="background:#DB2777;"></div>
           </div>
-          <!-- Cyber -->
           <div class="stat-card">
-            <div class="stat-card-top">
-              <div class="stat-icon-wrap" style="background:#EEF2FF;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
-            </div>
-            <div class="stat-val" id="s-cyber">—</div>
-            <div class="stat-lbl">Cyber Security</div>
+            <div class="stat-card-top"><div class="stat-icon-wrap" style="background:#EEF2FF;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4338CA" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div></div>
+            <div class="stat-val" id="s-cyber">—</div><div class="stat-lbl">Cyber Security</div>
             <div class="stat-card-accent" style="background:#4338CA;"></div>
           </div>
         </div>
 
-        <!-- Location Breakdown -->
-        <div class="city-breakdown">
-          <div class="city-breakdown-title">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Registrations by Location
+        <!-- City breakdown + Bar chart -->
+        <div class="dash-mid-row">
+          <div class="city-panel">
+            <div class="city-panel-hdr">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Registrations by Location
+            </div>
+            <div class="city-panel-body" id="cityCardsWrap">
+              <div style="color:var(--muted);font-size:13px;padding:8px;">Loading…</div>
+            </div>
           </div>
-          <div class="city-cards-wrap" id="cityCardsWrap">
-            <div style="color:var(--muted);font-size:13px;">Loading…</div>
+          <div class="chart-panel">
+            <div class="chart-hdr">
+              <div class="chart-hdr-left">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Daily Registrations
+              </div>
+              <span class="chart-hdr-sub">Last 30 days — click a bar to filter</span>
+            </div>
+            <div class="chart-body">
+              <div class="bar-wrap" id="barChart">
+                <div style="color:var(--muted);font-size:13px;align-self:center;">Loading…</div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Quick Registrations Preview -->
+        <!-- Recent Registrations -->
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">
@@ -997,19 +814,15 @@
               Recent Registrations
               <span class="panel-count" id="dashCount">—</span>
             </div>
-            <button class="btn-clear" onclick="showView('registrations')" style="border-color:var(--blue);color:var(--blue);">
-              View All →
-            </button>
+            <button class="btn-clear" onclick="showView('registrations')" style="border-color:var(--blue);color:var(--blue);">View All →</button>
           </div>
           <div class="table-wrap">
             <table>
               <thead>
-                <tr>
-                  <th>#</th><th>Name</th><th>Email</th><th>Training</th><th>WhatsApp</th><th>Registered On</th>
-                </tr>
+                <tr><th>#</th><th>Name</th><th>Email</th><th>Training</th><th>City</th><th>Branch</th><th>Registered On</th></tr>
               </thead>
               <tbody id="dashTableBody">
-                <tr><td colspan="6"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>
+                <tr><td colspan="7"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>
               </tbody>
             </table>
           </div>
@@ -1048,12 +861,16 @@
             </select>
             <select id="filterCity" class="f-select">
               <option value="">All Locations</option>
-              <optgroup label="Chennai">
+              <optgroup label="── City ──">
+                <option value="city:Chennai">Chennai (All)</option>
+                <option value="city:Bangalore">Bangalore (All)</option>
+              </optgroup>
+              <optgroup label="── Chennai Branches ──">
                 <option value="branch:Egmore">Egmore</option>
                 <option value="branch:Kodambakkam">Kodambakkam</option>
                 <option value="branch:Anna Nagar">Anna Nagar</option>
               </optgroup>
-              <optgroup label="Bangalore">
+              <optgroup label="── Bangalore Branches ──">
                 <option value="branch:Chamrajpet">Chamrajpet</option>
                 <option value="branch:Yeshwanthpur">Yeshwanthpur</option>
               </optgroup>
@@ -1084,7 +901,6 @@
                   <th>City</th>
                   <th>Branch</th>
                   <th class="sortable" data-col="created_at">Registered On <span class="sort-icon">▲▼</span></th>
-                  <th style="width:48px;"></th>
                 </tr>
               </thead>
               <tbody id="regsTableBody">
@@ -1104,24 +920,6 @@
   </div><!-- /layout -->
 </div><!-- /dashScreen -->
 
-<!-- Delete Confirmation Modal -->
-<div class="del-overlay hidden" id="delOverlay">
-  <div class="del-modal">
-    <div class="del-modal-icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-    </div>
-    <h3 class="del-modal-title">Delete Registration</h3>
-    <p class="del-modal-name" id="delStudentName"></p>
-    <p class="del-modal-msg">Are you sure you want to delete this registration?<br/><strong>This action cannot be undone.</strong></p>
-    <div class="del-modal-btns">
-      <button class="del-cancel" id="delCancel">Cancel</button>
-      <button class="del-confirm" id="delConfirm">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-        Delete
-      </button>
-    </div>
-  </div>
-</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1129,6 +927,7 @@
 const CFG = {
   SUPABASE_URL:      'https://sybbmwncglqzwnruzyuf.supabase.co',
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
+
   TABLE:             'student_interest',
   PAGE_SIZE:         20,
 };
@@ -1139,59 +938,20 @@ const hdrs = () => ({
   'apikey': CFG.SUPABASE_ANON_KEY,
   'Authorization': `Bearer ${CFG.SUPABASE_ANON_KEY}`,
 });
-async function sbDelete(id) {
-  const token = sessionStorage.getItem('mafoi_token') || CFG.SUPABASE_ANON_KEY;
-
-  // Step 1: Delete the record
-  const res = await fetch(
-    `${CFG.SUPABASE_URL}/rest/v1/${CFG.TABLE}?id=eq.${id}`,
-    {
-      method: 'DELETE',
-      headers: {
-        'Content-Type':  'application/json',
-        'apikey':        CFG.SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${token}`,
-        'Prefer':        'return=minimal',
-      },
-    }
-  );
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.message || `Delete failed (${res.status})`);
-  }
-
-  // Step 2: Renumber all IDs sequentially after deletion
-  const rpcRes = await fetch(
-    `${CFG.SUPABASE_URL}/rest/v1/rpc/renumber_ids`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type':  'application/json',
-        'apikey':        CFG.SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({}),
-    }
-  );
-  if (!rpcRes.ok) {
-    const rpcErr = await rpcRes.json().catch(() => ({}));
-    console.error('Renumber failed:', rpcErr);
-    throw new Error('Renumber failed: ' + (rpcErr.message || rpcRes.status));
-  }
-}
 
 async function sbFetch(params = {}, paginate = true) {
   const q = new URLSearchParams();
   if (params.search) q.set('or', `(full_name.ilike.*${params.search}*,email.ilike.*${params.search}*,whatsapp_number.ilike.*${params.search}*)`);
   if (params.training)  q.set('training',         `eq.${params.training}`);
   if (params.education) q.set('current_education', `eq.${params.education}`);
+  if (params.dateFrom) q.append('created_at', `gte.${params.dateFrom}T00:00:00+05:30`);
+  if (params.dateTo)   q.append('created_at', `lte.${params.dateTo}T23:59:59+05:30`);
+  // city filter: "city:Chennai" filters by preferred_city, "branch:Egmore" filters by preferred_branch
   if (params.city) {
     const [type, val] = params.city.split(':');
     if (type === 'city')   q.set('preferred_city',   `eq.${val}`);
     if (type === 'branch') q.set('preferred_branch', `eq.${val}`);
   }
-  if (params.dateFrom) q.append('created_at', `gte.${params.dateFrom}T00:00:00+05:30`);
-  if (params.dateTo)   q.append('created_at', `lte.${params.dateTo}T23:59:59+05:30`);
   q.set('order', `${params.sortCol || 'id'}.${params.sortDir || 'asc'}`);
 
   const h = { ...hdrs(), 'Prefer': 'count=exact' };
@@ -1224,11 +984,7 @@ function toast(msg, type = 'info') {
 
 function fmtDate(iso) {
   if (!iso) return '—';
-  return new Date(iso).toLocaleString('en-IN', {
-    timeZone: 'Asia/Kolkata',
-    day:'2-digit', month:'short', year:'numeric',
-    hour:'2-digit', minute:'2-digit', hour12:true
-  });
+  return new Date(iso).toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit', hour12:true });
 }
 
 function tBadge(t) {
@@ -1238,23 +994,6 @@ function tBadge(t) {
 
 /* ── AUTH ── */
 const isLoggedIn = () => sessionStorage.getItem('mafoi_admin') === '1';
-
-// Clear session when tab/window closes
-window.addEventListener('beforeunload', () => {
-  sessionStorage.removeItem('mafoi_admin');
-});
-
-// Re-check auth when user comes back to the tab
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && !isLoggedIn()) {
-    if ($('dashScreen').style.display !== 'none') {
-      $('dashScreen').style.display = 'none';
-      $('loginScreen').style.display = 'block';
-      $('adminUser').value = '';
-      $('adminPass').value = '';
-    }
-  }
-});
 
 $('loginForm').addEventListener('submit', async e => {
   e.preventDefault();
@@ -1314,12 +1053,11 @@ $('togglePw').addEventListener('click', function() {
 });
 
 $('logoutBtn').addEventListener('click', () => {
+  clearInterval(autoRefreshTimer);
   sessionStorage.clear();
-  localStorage.removeItem('mafoi_admin');
   $('dashScreen').style.display = 'none';
   $('loginScreen').style.display = 'block';
-  $('adminUser').value = '';
-  $('adminPass').value = '';
+  $('adminUser').value = ''; $('adminPass').value = '';
   $('loginError').classList.remove('show');
   toast('Logged out successfully.', 'success');
 });
@@ -1357,67 +1095,111 @@ function startDash() {
   $('topbarDate').textContent = new Date().toLocaleDateString('en-IN', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
   loadStats();
   loadDashPreview();
+  // Auto-refresh stats every 60 seconds
+  clearInterval(autoRefreshTimer);
+  autoRefreshTimer = setInterval(() => {
+    loadStats();
+    if (currentView === 'registrations') loadRegs();
+    else loadDashPreview();
+  }, 60000);
 }
 
 /* ── STATS ── */
 async function loadStats() {
   try {
     const all = await sbFetch({}, false);
-    const count  = k => all.filter(r => r.training === k).length;
-    const cCity  = c => all.filter(r => r.preferred_city === c).length;
-    const cBranch= b => all.filter(r => r.preferred_branch === b).length;
+    const count   = k => all.filter(r => r.training === k).length;
+    const cCity   = c => all.filter(r => r.preferred_city === c).length;
+    const cBranch = b => all.filter(r => r.preferred_branch === b).length;
+    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
+    const todayCount = all.filter(r => new Date(r.created_at).toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' }) === todayStr).length;
 
-    $('s-total').textContent = all.length;
-    $('s-gold').textContent  = count('Gold Loan');
-    $('s-micro').textContent = count('Micro Finance');
-    $('s-data').textContent  = count('Data Analytics');
-    $('s-bfsi').textContent  = count('BFSI');
-    $('s-ai').textContent    = count('Artificial Intelligence');
-    $('s-cyber').textContent = count('Cyber Security');
-    $('navBadge').textContent  = all.length;
-    $('dashCount').textContent = all.length;
+    $('s-total').textContent    = all.length;
+    $('s-chennai').textContent  = cCity('Chennai');
+    $('s-bangalore').textContent= cCity('Bangalore');
+    $('s-today').textContent    = todayCount;
+    $('s-gold').textContent     = count('Gold Loan');
+    $('s-micro').textContent    = count('Micro Finance');
+    $('s-data').textContent     = count('Data Analytics');
+    $('s-bfsi').textContent     = count('BFSI');
+    $('s-ai').textContent       = count('Artificial Intelligence');
+    $('s-cyber').textContent    = count('Cyber Security');
+    $('navBadge').textContent   = all.length;
+    $('dashCount').textContent  = all.length;
 
-    // Build city breakdown cards
+    /* ── CITY CARDS ── */
     const CITIES = [
-      { name: 'Chennai',   branches: ['Egmore','Kodambakkam','Anna Nagar'] },
-      { name: 'Bangalore', branches: ['Chamrajpet','Yeshwanthpur'] },
+      { name:'Chennai',   color:'#EA580C', bg:'#FFF7ED', branches:[{name:'Egmore',color:'#EA580C'},{name:'Kodambakkam',color:'#DC2626'},{name:'Anna Nagar',color:'#9333EA'}] },
+      { name:'Bangalore', color:'#16A34A', bg:'#F0FDF4', branches:[{name:'Chamrajpet',color:'#16A34A'},{name:'Yeshwanthpur',color:'#0891B2'}] },
     ];
     const wrap = $('cityCardsWrap');
-    if (!wrap) return;
-    wrap.innerHTML = CITIES.map(city => {
-      const total = cCity(city.name);
-      const maxB  = Math.max(...city.branches.map(b => cBranch(b)), 1);
-      const rows  = city.branches.map(b => {
-        const n   = cBranch(b);
-        const pct = Math.round((n / maxB) * 100);
-        return `<div class="branch-item" onclick="filterByBranch('${b}')">
-          <div class="branch-item-name"><span class="branch-dot"></span>${b}</div>
-          <div class="branch-item-right">
-            <div class="branch-bar-bg"><div class="branch-bar-fill" style="width:${pct}%"></div></div>
-            <div class="branch-item-count">${n}</div>
+    if (wrap) {
+      wrap.innerHTML = CITIES.map(city => {
+        const total = cCity(city.name);
+        const maxB  = Math.max(...city.branches.map(b => cBranch(b.name)), 1);
+        const bRows = city.branches.map(b => {
+          const n   = cBranch(b.name);
+          const pct = Math.round((n / maxB) * 100);
+          return `<div class="branch-line" onclick="filterByBranch('${b.name}')">
+            <span class="branch-dot" style="background:${b.color};"></span>
+            <span class="branch-lbl">${b.name}</span>
+            <div class="branch-prog-bg"><div class="branch-prog" style="width:${pct}%;background:${b.color};"></div></div>
+            <span class="branch-num">${n}</span>
+          </div>`;
+        }).join('');
+        return `<div class="city-item" id="ci-${city.name}">
+          <div class="city-item-hdr" onclick="toggleCityItem('${city.name}')">
+            <div class="city-item-left">
+              <div class="city-item-icon" style="background:${city.bg};">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="${city.color}" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <span class="city-item-name">${city.name}</span>
+            </div>
+            <div class="city-item-right">
+              <span class="city-item-count" style="color:${city.color};">${total}</span>
+              <svg class="city-item-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
           </div>
+          <div class="city-item-branches">${bRows}</div>
         </div>`;
       }).join('');
-      return `<div class="city-card" id="cc-${city.name}">
-        <div class="city-card-hdr" onclick="toggleCityCard('${city.name}')">
-          <div class="city-card-left">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            ${city.name}
-          </div>
-          <div class="city-card-right">
-            <div class="city-card-count">${total}</div>
-            <svg class="city-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-        </div>
-        <div class="city-branches-list">${rows}</div>
-      </div>`;
-    }).join('');
+    }
+
+    /* ── BAR CHART (last 30 days) ── */
+    const barEl = $('barChart');
+    if (barEl) {
+      const now  = new Date();
+      const days = [];
+      for (let i = 29; i >= 0; i--) {
+        const d   = new Date(now);
+        d.setDate(d.getDate() - i);
+        const key = d.toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
+        const lbl = d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', timeZone:'Asia/Kolkata' });
+        days.push({ key, lbl, count: 0 });
+      }
+      all.forEach(r => {
+        const rDate = new Date(r.created_at).toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
+        const day   = days.find(d => d.key === rDate);
+        if (day) day.count++;
+      });
+      const maxC = Math.max(...days.map(d => d.count), 1);
+      barEl.innerHTML = days.map(d => {
+        const h   = Math.round((d.count / maxC) * 110);
+        const num = d.count > 0 ? `<div class="bar-num">${d.count}</div>` : '';
+        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count}">
+          ${num}
+          <div class="bar-rect${d.count===0?' empty':''}" style="height:${Math.max(h,3)}px;"></div>
+          <div class="bar-day">${d.lbl.split(' ')[0]}</div>
+        </div>`;
+      }).join('');
+    }
+
   } catch(e) { console.warn('Stats error', e.message); }
 }
 
-function toggleCityCard(name) {
-  const card = document.getElementById('cc-' + name);
-  if (card) card.classList.toggle('open');
+function toggleCityItem(name) {
+  const el = document.getElementById('ci-' + name);
+  if (el) el.classList.toggle('open');
 }
 
 function filterByBranch(branch) {
@@ -1428,31 +1210,42 @@ function filterByBranch(branch) {
   loadRegs();
 }
 
-/* ── DASHBOARD PREVIEW (last 5) ── */
+function filterByDate(dateStr) {
+  showView('registrations');
+  state.dateFrom = dateStr;
+  state.dateTo   = dateStr;
+  state.page     = 0;
+  if ($('filterDateSingle')) $('filterDateSingle').value = dateStr;
+  loadRegs();
+}
+
+/* ── DASHBOARD PREVIEW (latest 5) ── */
 async function loadDashPreview() {
   try {
     const { data } = await sbFetch({ page: 0, sortCol: 'id', sortDir: 'desc' });
     const rows = data.slice(0, 5);
     if (!rows.length) {
-      $('dashTableBody').innerHTML = `<tr><td colspan="6"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations yet</h4></div></td></tr>`;
+      $('dashTableBody').innerHTML = `<tr><td colspan="7"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations yet</h4></div></td></tr>`;
       return;
     }
     $('dashTableBody').innerHTML = rows.map((r, i) => `
       <tr>
-        <td class="td-num">${i + 1}</td>
+        <td class="td-num">${r.id}</td>
         <td class="td-name" data-label="Name">${r.full_name || '—'}</td>
         <td class="td-email" data-label="Email">${r.email || '—'}</td>
         <td data-label="Training"><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
-        <td data-label="WhatsApp" class="td-mono">${r.whatsapp_number || '—'}</td>
+        <td data-label="City" style="font-size:12.5px;">${r.preferred_city || '—'}</td>
+        <td data-label="Branch" style="font-size:12.5px;">${r.preferred_branch || '—'}</td>
         <td data-label="Registered" class="td-date">${fmtDate(r.created_at)}</td>
       </tr>`).join('');
   } catch(e) {
-    $('dashTableBody').innerHTML = `<tr><td colspan="6"><div class="tbl-msg"><p>Could not load data.</p></div></td></tr>`;
+    $('dashTableBody').innerHTML = `<tr><td colspan="7"><div class="tbl-msg"><p>Could not load data.</p></div></td></tr>`;
   }
 }
 
 /* ── REGISTRATIONS TABLE ── */
 let state = { page: 0, search: '', training: '', education: '', city: '', dateFrom: '', dateTo: '', sortCol: 'id', sortDir: 'asc', total: 0 };
+let autoRefreshTimer = null;
 
 async function loadRegs() {
   $('regsTableBody').innerHTML = `<tr><td colspan="9"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
@@ -1460,13 +1253,7 @@ async function loadRegs() {
   try {
     const { data, total } = await sbFetch({ ...state });
     state.total = total;
-    let countLabel = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} found`;
-    const singleDate = $('filterDateSingle').value;
-    if (singleDate) {
-      const d = new Date(singleDate).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric', timeZone:'Asia/Kolkata' });
-      countLabel = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} on ${d}`;
-    }
-    $('resultCount').textContent = countLabel;
+    $('resultCount').textContent = `${total.toLocaleString()} registration${total !== 1 ? 's' : ''} found`;
     renderRegs(data);
     renderPag(total);
   } catch(e) {
@@ -1496,11 +1283,6 @@ function renderRegs(rows) {
       <td data-label="City" style="font-size:12.5px;">${r.preferred_city || '—'}</td>
       <td data-label="Branch" style="font-size:12.5px;">${r.preferred_branch || '—'}</td>
       <td data-label="Registered" class="td-date">${fmtDate(r.created_at)}</td>
-      <td>
-        <button class="btn-delete-row" onclick="confirmDelete(${r.id}, '${(r.full_name||'').replace(/'/g,"\\'")}')">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-        </button>
-      </td>
     </tr>`).join('');
 }
 
@@ -1552,7 +1334,7 @@ const debouncedSearch = dbc(() => { state.search = $('searchInput').value.trim()
 $('searchInput').addEventListener('input', debouncedSearch);
 $('filterTraining').addEventListener('change', () => { state.training = $('filterTraining').value; state.page = 0; loadRegs(); });
 $('filterEducation').addEventListener('change', () => { state.education = $('filterEducation').value; state.page = 0; loadRegs(); });
-$('filterCity').addEventListener('change',      () => { state.city      = $('filterCity').value;      state.page = 0; loadRegs(); });
+$('filterCity').addEventListener('change',     () => { state.city     = $('filterCity').value;     state.page = 0; loadRegs(); });
 $('filterDateSingle').addEventListener('change', () => {
   const d = $('filterDateSingle').value;
   state.dateFrom = d;
@@ -1570,18 +1352,26 @@ $('clearBtn').addEventListener('click', () => {
   loadRegs();
 });
 
+/* ── CITY CARD HELPERS ── */
 /* ── EXCEL ── */
 async function doExport(btn) {
   btn.disabled = true;
   btn.innerHTML = `<div class="spin-btn" style="border-top-color:white;"></div> Exporting…`;
   try {
-    const rows = await sbFetch({ search: state.search, training: state.training, education: state.education, city: state.city, dateFrom: state.dateFrom, dateTo: state.dateTo }, false);
+    const rows = await sbFetch({
+      search:    state.search,
+      training:  state.training,
+      education: state.education,
+      city:      state.city,
+      dateFrom:  state.dateFrom,
+      dateTo:    state.dateTo,
+    }, false);
     if (!rows.length) { toast('No data to export.', 'error'); return; }
     const headers = ['ID','Full Name','Email','Education','Education Status','Preference','Training','WhatsApp','City','Branch','Registered On'];
     const wsData  = [headers, ...rows.map(r => [r.id, r.full_name||'', r.email||'', r.current_education||'', r.education_status||'', r.preference||'', r.training||'', r.whatsapp_number||'', r.preferred_city||'', r.preferred_branch||'', fmtDate(r.created_at)])];
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet(wsData);
-    ws['!cols'] = [6,22,28,22,10,30,20,16,22].map(w=>({wch:w}));
+    ws['!cols'] = [6,22,28,22,14,30,20,14,14,16,22].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb, ws, 'Student Registrations');
     XLSX.writeFile(wb, `MaFoi_Registrations_${new Date().toISOString().slice(0,10)}.xlsx`);
     toast(`Downloaded ${rows.length} records!`, 'success');
@@ -1593,52 +1383,10 @@ async function doExport(btn) {
 }
 $('exportBtnDash').addEventListener('click', function() { doExport(this); });
 $('exportBtnRegs').addEventListener('click', function() { doExport(this); });
-/* ── DELETE ── */
-let pendingDeleteId = null;
 
-function confirmDelete(id, name) {
-  pendingDeleteId = id;
-  $('delStudentName').textContent = name;
-  $('delOverlay').classList.remove('hidden');
-}
-
-$('delCancel').addEventListener('click', () => {
-  pendingDeleteId = null;
-  $('delOverlay').classList.add('hidden');
-});
-
-$('delOverlay').addEventListener('click', (e) => {
-  if (e.target === $('delOverlay')) {
-    pendingDeleteId = null;
-    $('delOverlay').classList.add('hidden');
-  }
-});
-
-$('delConfirm').addEventListener('click', async () => {
-  if (!pendingDeleteId) return;
-  const id = pendingDeleteId;
-  $('delConfirm').disabled = true;
-  $('delConfirm').textContent = 'Deleting…';
-  try {
-    await sbDelete(id);
-    $('delOverlay').classList.add('hidden');
-    pendingDeleteId = null;
-    toast('Registration deleted successfully.', 'success');
-    await loadStats();
-    await loadRegs();
-    await loadDashPreview();
-  } catch (err) {
-    toast('Delete failed: ' + err.message, 'error');
-  } finally {
-    $('delConfirm').disabled = false;
-    $('delConfirm').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Delete`;
-  }
-});
 /* ── INIT ── */
-// Always clear session on fresh page load — forces login every time
-sessionStorage.removeItem('mafoi_admin');
-$('loginScreen').style.display = 'block';
-$('dashScreen').style.display = 'none';
+if (isLoggedIn()) startDash();
+else { $('loginScreen').style.display = 'block'; $('dashScreen').style.display = 'none'; }
 </script>
 </body>
 </html>

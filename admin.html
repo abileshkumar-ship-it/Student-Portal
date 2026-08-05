@@ -361,37 +361,45 @@
     /* ══════════════════════════════
        LOGIN SCREEN
     ══════════════════════════════ */
+    /* ── LOGIN SCREEN ── */
     .login-screen {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0F2D96 0%, #1849D6 55%, #2563EB 100%);
-      display: flex; align-items: center; justify-content: center; padding: 20px;
+      min-height: 100vh; display: flex; background: #fff;
+    }
+    .login-left {
+      width: 48%; display: flex; flex-direction: column;
+      padding: 48px 56px; background: #fff;
+    }
+    .login-brand-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 56px;
+    }
+    .login-brand-icon {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: linear-gradient(135deg, #1849D6, #1338B0);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .login-brand-name { font-size: 15px; font-weight: 700; color: #0F172A; }
+    .login-form-area {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; max-width: 360px;
+    }
+    .login-illus {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: #EEF3FF; display: flex; align-items: center;
+      justify-content: center; margin-bottom: 24px;
       position: relative;
     }
-    .login-screen::before {
-      content: ''; position: absolute; inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.055) 1px, transparent 1px);
-      background-size: 26px 26px;
+    .login-illus::before {
+      content: '';
+      position: absolute; inset: -12px;
+      background-image:
+        linear-gradient(#DDE5F4 1px, transparent 1px),
+        linear-gradient(90deg, #DDE5F4 1px, transparent 1px);
+      background-size: 16px 16px;
+      border-radius: 24px;
+      z-index: -1;
     }
-    .login-card {
-      background: var(--white); border-radius: 18px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
-      width: 100%; max-width: 420px; overflow: hidden;
-      position: relative; z-index: 1;
-      animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1);
-    }
-    .login-top {
-      background: linear-gradient(135deg, #0F2D96, #1849D6 60%, #2563EB);
-      padding: 34px 28px 26px; text-align: center; color: #fff;
-    }
-    .login-icon {
-      width: 54px; height: 54px; border-radius: 14px;
-      background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.22);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px;
-    }
-    .login-top h1 { font-size: 21px; font-weight: 700; margin-bottom: 4px; }
-    .login-top p  { font-size: 13px; opacity: 0.70; }
-    .login-body   { padding: 28px; }
+    .login-heading { font-size: 26px; font-weight: 800; color: #0F172A; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .login-sub     { font-size: 13.5px; color: #64748B; margin-bottom: 32px; line-height: 1.5; }
     .login-error {
       background: #FEF2F2; border: 1px solid #FECACA;
       border-radius: 9px; padding: 10px 14px;
@@ -399,27 +407,90 @@
       margin-bottom: 16px; display: none; align-items: center; gap: 8px;
     }
     .login-error.show { display: flex; }
-    .l-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+    .l-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
     .l-label { font-size: 13px; font-weight: 600; color: #374151; }
-    .l-input {
-      padding: 11px 14px; border: 1.5px solid var(--border);
-      border-radius: 9px; font-size: 14px; color: var(--text);
-      background: #F9FAFB; outline: none;
-      transition: border-color 0.16s, box-shadow 0.16s, background 0.16s;
+    .l-input-wrap {
+      display: flex; align-items: center;
+      border: 1.5px solid #E2E8F0; border-radius: 10px;
+      background: #F8FAFC; overflow: hidden; transition: all 0.16s;
     }
-    .l-input:focus { border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(24,73,214,0.10); }
-    .pw-wrap { position: relative; }
-    .pw-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; color: var(--muted); padding: 2px; }
-    .pw-toggle:hover { color: var(--text); }
-    .l-input-pr { padding-right: 40px; }
+    .l-input-wrap:focus-within { border-color: #1849D6; background: #fff; box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
+    .l-input-icon { width: 42px; display: flex; align-items: center; justify-content: center; color: #94A3B8; flex-shrink: 0; }
+    .l-input {
+      flex: 1; padding: 13px 12px 13px 0;
+      border: none; background: transparent; outline: none;
+      font-size: 14px; color: #0F172A;
+    }
+    .l-input::placeholder { color: #BBC5D5; }
+    .pw-wrap { position: relative; display: flex; align-items: center; }
+    .pw-wrap .l-input-wrap { flex: 1; }
+    .pw-toggle { position: absolute; right: 12px; background: none; color: #BBC5D5; padding: 2px; transition: color 0.15s; }
+    .pw-toggle:hover { color: #1849D6; }
     .btn-signin {
-      width: 100%; padding: 12px;
-      background: linear-gradient(135deg, var(--blue), var(--blue-d));
-      color: #fff; font-size: 14px; font-weight: 700; border-radius: 9px;
-      box-shadow: 0 4px 14px rgba(24,73,214,0.30); margin-top: 4px;
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, #1849D6, #1338B0);
+      color: #fff; font-size: 14.5px; font-weight: 700; border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(24,73,214,0.28); margin-top: 6px;
       transition: all 0.18s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .btn-signin:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(24,73,214,0.38); }
+    .btn-signin:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(24,73,214,0.36); }
+    .btn-signin:active { transform: translateY(0); }
+    .login-footer-note {
+      margin-top: auto; padding-top: 40px;
+      font-size: 12px; color: #CBD5E1; line-height: 1.7;
+    }
+    /* ── LOGIN RIGHT ── */
+    .login-right {
+      flex: 1; background: linear-gradient(145deg, #EEF3FF 0%, #DBEAFE 60%, #C7D8FF 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 48px 40px; position: relative; overflow: hidden;
+    }
+    .login-right::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(24,73,214,0.07) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .login-right-content { position: relative; z-index: 1; text-align: center; max-width: 340px; }
+    .login-visual {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: linear-gradient(145deg, #DBEAFE, #C7D8FF);
+      border: 2px solid rgba(24,73,214,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 32px; position: relative;
+    }
+    .login-visual::before {
+      content: ''; position: absolute;
+      width: 160px; height: 160px; border-radius: 50%;
+      border: 1px solid rgba(24,73,214,0.15);
+    }
+    .login-visual::after {
+      content: ''; position: absolute;
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 1px solid rgba(24,73,214,0.12);
+    }
+    .login-visual-icon {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: linear-gradient(135deg, #1849D6, #2563EB);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(24,73,214,0.30);
+      z-index: 1;
+    }
+    .login-right-title { font-size: 20px; font-weight: 800; color: #1338B0; margin-bottom: 10px; letter-spacing: -0.3px; }
+    .login-right-sub   { font-size: 13.5px; color: #5478C0; line-height: 1.65; }
+    .login-pills { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .login-pill {
+      display: flex; align-items: center; gap: 6px;
+      background: white; border-radius: 50px; padding: 7px 14px;
+      font-size: 12px; font-weight: 600; color: #1849D6;
+      box-shadow: 0 2px 8px rgba(24,73,214,0.10);
+    }
+    /* Mobile */
+    @media(max-width: 700px) {
+      .login-screen { flex-direction: column; }
+      .login-left { width: 100%; padding: 32px 24px; min-height: 100vh; }
+      .login-right { display: none; }
+      .login-form-area { max-width: 100%; }
+    }
     /* ── LOCATION BREAKDOWN ── */
     /* ── DASHBOARD LAYOUT ── */
     .dash-top-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 20px; }
@@ -591,44 +662,92 @@
 <!-- LOGIN SCREEN -->
 <div id="loginScreen">
   <div class="login-screen">
-    <div class="login-card">
-      <div class="login-top">
-        <div class="login-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+
+    <!-- LEFT: Form -->
+    <div class="login-left">
+      <div class="login-brand-row">
+        <div class="login-brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <h1>Admin Portal</h1>
-        <p>The Ma Foi Foundation</p>
+        <span class="login-brand-name">Ma Foi Foundation</span>
       </div>
-      <div class="login-body">
+
+      <div class="login-form-area">
+        <div class="login-illus">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1849D6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h2 class="login-heading">Login to your account!</h2>
+        <p class="login-sub">Enter your registered email address and password to login.</p>
+
         <div class="login-error" id="loginError">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Invalid username or password.
+          Invalid email or password.
         </div>
+
         <form id="loginForm" novalidate>
           <div class="l-group">
-            <label class="l-label">Username</label>
-            <input type="email" id="adminUser" class="l-input" placeholder="Enter your email address" autocomplete="email" />
+            <label class="l-label">Email</label>
+            <div class="l-input-wrap">
+              <div class="l-input-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <input type="email" id="adminUser" class="l-input" placeholder="eg. admin@mafoi.com" autocomplete="email" />
+            </div>
           </div>
           <div class="l-group">
             <label class="l-label">Password</label>
             <div class="pw-wrap">
-              <input type="password" id="adminPass" class="l-input l-input-pr" placeholder="Enter password" autocomplete="current-password" />
+              <div class="l-input-wrap" style="width:100%;">
+                <div class="l-input-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <input type="password" id="adminPass" class="l-input" style="padding-right:40px;" placeholder="••••••••••••" autocomplete="current-password" />
+              </div>
               <button type="button" id="togglePw" class="pw-toggle">
                 <svg id="eyeIco" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
           <button type="submit" class="btn-signin" id="signinBtn">
-            <span id="signinTxt">Sign In</span>
+            <span id="signinTxt">Login</span>
             <div class="spin-btn" id="signinSpin" style="display:none;"></div>
           </button>
         </form>
-        <p style="text-align:center;margin-top:16px;font-size:12px;color:#94A3B8;display:flex;align-items:center;justify-content:center;gap:5px;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Authorised access only
-        </p>
+      </div>
+
+      <div class="login-footer-note">
+        The Ma Foi Foundation Admin Portal is restricted to authorised personnel only.<br/>
+        Unauthorised access attempts are monitored and logged.
       </div>
     </div>
+
+    <!-- RIGHT: Visual -->
+    <div class="login-right">
+      <div class="login-right-content">
+        <div class="login-visual">
+          <div class="login-visual-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+        </div>
+        <div class="login-right-title">Secure Admin Portal</div>
+        <div class="login-right-sub">Manage student registrations, track program analytics, and download reports — all in one place.</div>
+        <div class="login-pills">
+          <div class="login-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            Students
+          </div>
+          <div class="login-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Analytics
+          </div>
+          <div class="login-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+            Export
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

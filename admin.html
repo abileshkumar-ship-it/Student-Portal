@@ -226,10 +226,9 @@
     .filter-bar {
       padding: 10px 18px; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
-      background: #FAFBFF; overflow-x: auto;
+      background: #FAFBFF;
     }
-    .filter-bar::-webkit-scrollbar { height: 0; }
-    .search-wrap { position: relative; flex: 1; min-width: 140px; max-width: 200px; }
+    .search-wrap { position: relative; flex: 2; min-width: 140px; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-wrap input {
       width: 100%; padding: 9px 10px 9px 32px;
@@ -239,7 +238,7 @@
     }
     .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
     .f-select {
-      padding: 9px 26px 9px 10px; border: 1.5px solid var(--border);
+      flex: 1; padding: 9px 26px 9px 10px; border: 1.5px solid var(--border);
       border-radius: 9px; font-size: 12px; color: var(--text);
       background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
       -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
@@ -508,8 +507,8 @@
     .stat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
     .stat-icon-wrap { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
     .stat-trend { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; background: #EEF3FF; color: var(--blue); }
-    .stat-val { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.5px; }
-    .stat-lbl { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 5px; }
+    .stat-val { font-size: 32px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -1px; }
+    .stat-lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
 
     /* ── STAT GRID (course row) ── */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 14px; margin-bottom: 20px; }
@@ -545,15 +544,22 @@
     .chart-hdr-left { font-size: 13.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .chart-hdr-sub { font-size: 11.5px; color: var(--muted); }
     .chart-body { padding: 16px 18px 12px; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
-    .bar-wrap { display: flex; align-items: flex-end; gap: 3px; height: 140px; overflow-x: auto; padding-bottom: 6px; }
+    .bar-wrap { display: flex; align-items: flex-end; gap: 5px; height: 160px; overflow-x: auto; padding: 0 4px 8px; }
     .bar-wrap::-webkit-scrollbar { height: 4px; }
+    .bar-wrap::-webkit-scrollbar-track { background: transparent; }
     .bar-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; min-width: 26px; cursor: pointer; }
-    .bar-col:hover .bar-rect { opacity: 0.7; }
-    .bar-rect { width: 18px; border-radius: 4px 4px 0 0; background: var(--blue); min-height: 3px; transition: opacity 0.15s; }
-    .bar-rect.empty { background: #DDE5F4; }
-    .bar-day { font-size: 9px; color: var(--muted); font-weight: 600; white-space: nowrap; }
-    .bar-num { font-size: 9.5px; font-weight: 700; color: var(--blue); line-height: 1; }
+    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; min-width: 28px; cursor: pointer; }
+    .bar-col:hover .bar-rect { filter: brightness(1.15); transform: scaleY(1.03); transform-origin: bottom; }
+    .bar-rect {
+      width: 20px; border-radius: 5px 5px 0 0;
+      background: linear-gradient(180deg, #2563EB 0%, #1849D6 100%);
+      min-height: 4px; transition: filter 0.15s, transform 0.15s;
+      box-shadow: 0 2px 6px rgba(24,73,214,0.20);
+    }
+    .bar-rect.empty { background: #E8EFFF; box-shadow: none; }
+    .bar-rect.today { background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%); box-shadow: 0 2px 6px rgba(217,119,6,0.25); }
+    .bar-day { font-size: 8.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .bar-num { font-size: 9px; font-weight: 800; color: var(--blue); line-height: 1; background: var(--blue-l); padding: 1px 4px; border-radius: 4px; }
 
     /* ── SPIN BTN ── */
     .spin-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; animation: spin 0.8s linear infinite; }
@@ -912,10 +918,18 @@
           <div class="chart-panel">
             <div class="chart-hdr">
               <div class="chart-hdr-left">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                 Daily Registrations
               </div>
-              <span class="chart-hdr-sub">Last 30 days — click a bar to filter</span>
+              <div style="display:flex;align-items:center;gap:12px;">
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#2563EB,#1849D6);display:inline-block;"></span> Regular
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#F59E0B,#D97706);display:inline-block;"></span> Today
+                </div>
+                <span class="chart-hdr-sub">Click bar to filter</span>
+              </div>
             </div>
             <div class="chart-body">
               <div class="bar-wrap" id="barChart">
@@ -1048,7 +1062,7 @@ const CFG = {
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
 
   TABLE:             'student_interest',
-  PAGE_SIZE:         20,
+  PAGE_SIZE:         15,
 };
 
 /* ── SUPABASE ── */
@@ -1304,11 +1318,13 @@ async function loadStats() {
       const maxC = Math.max(...days.map(d => d.count), 1);
       barEl.innerHTML = days.map(d => {
         const h   = Math.round((d.count / maxC) * 110);
+        const isToday = d.key === todayStr;
         const num = d.count > 0 ? `<div class="bar-num">${d.count}</div>` : '';
-        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count}">
+        const cls = d.count === 0 ? ' empty' : isToday ? ' today' : '';
+        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count} registrations">
           ${num}
-          <div class="bar-rect${d.count===0?' empty':''}" style="height:${Math.max(h,3)}px;"></div>
-          <div class="bar-day">${d.lbl.split(' ')[0]}</div>
+          <div class="bar-rect${cls}" style="height:${Math.max(h,4)}px;"></div>
+          <div class="bar-day" style="${isToday ? 'color:var(--blue);font-weight:800;' : ''}">${d.lbl.split(' ')[0]}</div>
         </div>`;
       }).join('');
     }

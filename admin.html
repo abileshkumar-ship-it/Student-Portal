@@ -653,6 +653,53 @@
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .stat-card { padding: 15px 14px 12px; }
     }
+    /* ══════════════════════════════
+       DELETE CONFIRMATION MODAL
+    ══════════════════════════════ */
+    .del-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(15,23,42,0.55);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; animation: fadeIn 0.18s ease;
+    }
+    .del-overlay.hidden { display: none; }
+    .del-modal {
+      background: var(--white); border-radius: 16px;
+      padding: 32px 28px 24px; max-width: 380px; width: 100%;
+      text-align: center; box-shadow: var(--shadow-lg);
+      animation: slideUp 0.22s ease;
+    }
+    .del-modal-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #FEF2F2; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .del-modal-title { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .del-modal-name { font-size: 14px; font-weight: 700; color: var(--blue); margin-bottom: 10px; word-break: break-word; }
+    .del-modal-msg { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin-bottom: 22px; }
+    .del-modal-msg strong { color: var(--danger); }
+    .del-modal-btns { display: flex; gap: 10px; }
+    .del-cancel, .del-confirm {
+      flex: 1; padding: 11px 16px; border-radius: 10px;
+      font-size: 13.5px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.16s ease;
+    }
+    .del-cancel { background: var(--bg); color: var(--text-2); border: 1.5px solid var(--border); }
+    .del-cancel:hover { background: #E2E8F0; }
+    .del-confirm { background: linear-gradient(135deg, #DC2626, #B91C1C); color: white; box-shadow: 0 3px 10px rgba(220,38,38,0.28); }
+    .del-confirm:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(220,38,38,0.36); }
+    .del-confirm:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    /* ══════════════════════════════
+       DELETE ROW BUTTON
+    ══════════════════════════════ */
+    .btn-delete-row {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: #FEF2F2; color: var(--danger);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .btn-delete-row:hover { background: var(--danger); color: white; transform: scale(1.06); }
   </style>
 </head>
 <body>
@@ -1046,10 +1093,11 @@
                   <th class="sortable" data-col="training">Training <span class="sort-icon">▲▼</span></th>
                   <th>WhatsApp</th>
                   <th class="sortable sort-desc" data-col="created_at">Registered On <span class="sort-icon" style="color:var(--blue);opacity:1;">▼</span></th>
+                  <th style="width:48px;"></th>
                 </tr>
               </thead>
               <tbody id="regsTableBody">
-                <tr><td colspan="9"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading registrations…</p></div></td></tr>
+                <tr><td colspan="10"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading registrations…</p></div></td></tr>
               </tbody>
             </table>
           </div>
@@ -1121,6 +1169,24 @@
   </div><!-- /layout -->
 </div><!-- /dashScreen -->
 
+<!-- Registration Delete Modal -->
+<div class="del-overlay hidden" id="regDelOverlay">
+  <div class="del-modal">
+    <div class="del-modal-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+    </div>
+    <h3 class="del-modal-title">Delete Registration</h3>
+    <p class="del-modal-name" id="regDelName"></p>
+    <p class="del-modal-msg">Are you sure you want to delete this registration?<br/><strong>This action cannot be undone.</strong></p>
+    <div class="del-modal-btns">
+      <button class="del-cancel" id="regDelCancel">Cancel</button>
+      <button class="del-confirm" id="regDelConfirm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
 <!-- Trainer Delete Modal -->
 <div class="del-overlay hidden" id="trainerDelOverlay">
   <div class="del-modal">
@@ -1484,7 +1550,7 @@ let state = { page: 0, search: '', training: '', education: '', city: '', dateFr
 let autoRefreshTimer = null;
 
 async function loadRegs() {
-  $('regsTableBody').innerHTML = `<tr><td colspan="9"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
+  $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
   $('resultCount').textContent = 'Loading…';
   try {
     const { data, total } = await sbFetch({ ...state });
@@ -1493,14 +1559,14 @@ async function loadRegs() {
     renderRegs(data);
     renderPag(total);
   } catch(e) {
-    $('regsTableBody').innerHTML = `<tr><td colspan="9"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
+    $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
     toast('Load error: ' + e.message, 'error');
   }
 }
 
 function renderRegs(rows) {
   if (!rows.length) {
-    $('regsTableBody').innerHTML = `<tr><td colspan="9"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations found</h4><p>Try adjusting your filters.</p></div></td></tr>`;
+    $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations found</h4><p>Try adjusting your filters.</p></div></td></tr>`;
     $('pagInfo').textContent = '';
     $('pagBtns').innerHTML = '';
     return;
@@ -1517,6 +1583,11 @@ function renderRegs(rows) {
       <td><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
       <td class="td-mono">${r.whatsapp_number || '—'}</td>
       <td class="td-date">${fmtDate(r.created_at)}</td>
+      <td>
+        <button class="btn-delete-row" onclick="confirmDeleteReg(${r.id}, '${(r.full_name||'').replace(/'/g,"\\'")}')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </td>
     </tr>`).join('');
 }
 
@@ -1622,7 +1693,7 @@ async function fetchTrainers(paginate = true) {
   if (trainerState.search) {
     q.set('or', `(full_name.ilike.*${trainerState.search}*,email.ilike.*${trainerState.search}*,contact_number.ilike.*${trainerState.search}*)`);
   }
-  q.set('order', 'created_at.desc');
+  q.set('order', 'id.asc');
   const h = {
     'Content-Type': 'application/json',
     'apikey': CFG.SUPABASE_ANON_KEY,
@@ -1739,6 +1810,46 @@ $('exportBtnTrainers').addEventListener('click', async function() {
   }
 });
 
+/* ── REGISTRATION DELETE ── */
+let pendingDeleteRegId = null;
+function confirmDeleteReg(id, name) {
+  pendingDeleteRegId = id;
+  $('regDelName').textContent = name;
+  $('regDelOverlay').classList.remove('hidden');
+}
+$('regDelCancel').addEventListener('click', () => {
+  pendingDeleteRegId = null;
+  $('regDelOverlay').classList.add('hidden');
+});
+$('regDelOverlay').addEventListener('click', e => {
+  if (e.target === $('regDelOverlay')) {
+    pendingDeleteRegId = null;
+    $('regDelOverlay').classList.add('hidden');
+  }
+});
+$('regDelConfirm').addEventListener('click', async () => {
+  if (!pendingDeleteRegId) return;
+  const id = pendingDeleteRegId;
+  $('regDelConfirm').disabled = true;
+  $('regDelConfirm').textContent = 'Deleting…';
+  try {
+    const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/${CFG.TABLE}?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { ...hdrs(), 'Prefer': 'return=minimal' },
+    });
+    if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+    $('regDelOverlay').classList.add('hidden');
+    pendingDeleteRegId = null;
+    toast('Registration deleted successfully.', 'success');
+    loadRegs();
+    loadStats();
+  } catch(err) {
+    toast('Delete failed: ' + err.message, 'error');
+  } finally {
+    $('regDelConfirm').disabled = false;
+    $('regDelConfirm').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Delete`;
+  }
+});
 /* ── TRAINER DELETE ── */
 let pendingDeleteTrainerId = null;
 

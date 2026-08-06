@@ -23,6 +23,26 @@
     background: #F0FDF4; border: 1.5px solid #86EFAC;
     border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 8px;
   }
+  .trainer-hero-heading { font-size: clamp(26px, 4vw, 46px); margin-bottom: 16px; }
+  .trainer-hero-desc    { font-size: 16px; margin-bottom: 0; }
+  .trainer-hero-cta-group { margin-top: 28px; }
+  .trainer-form-left    { padding-top: 12px; }
+  @media(min-width: 768px){
+    .trainer-form-container { grid-template-columns: 1fr 1.4fr; gap: 48px; }
+  }
+  @media(max-width: 767px){
+    .hero-section { min-height: 46vh; }
+    .hero-content { padding: 40px 16px 36px; text-align: center; }
+    .hero-badge   { margin: 0 auto 18px; }
+    .trainer-hero-heading { font-size: 26px; margin-bottom: 12px; }
+    .trainer-hero-desc    { font-size: 14px; }
+    .trainer-form-left    { padding-top: 0; margin-bottom: 20px; }
+    .who-title    { font-size: 19px; }
+    .who-grid     { gap: 10px; }
+    .resume-drop-area { padding: 22px 14px; }
+    .trainer-hero-cta-group { justify-content: center; gap: 12px; margin-top: 4px; }
+  }
+</style>
 </style>
 </head>
 <body>
@@ -50,37 +70,47 @@
 </header>
 
 <!-- HERO -->
-<section class="hero-section" style="min-height:380px;">
+<section class="hero-section">
   <div class="hero-bg">
     <img src="heroimage.jpeg" alt="" class="hero-bg-img"
       onerror="this.style.display='none';" />
     <div class="hero-overlay"></div>
   </div>
-  <div class="container hero-content" style="padding:80px 24px 60px;">
+  <div class="container hero-content">
     <div class="hero-badge">
       <span class="badge-dot"></span>
       Trainer Applications Open 2026-27
     </div>
-    <h1 class="hero-heading" style="font-size:clamp(26px,4vw,46px);margin-bottom:16px;">
+    <h1 class="hero-heading trainer-hero-heading">
       Join as a <span class="hero-highlight">Certified Trainer</span>
     </h1>
-    <p class="hero-desc" style="font-size:16px;margin-bottom:0;">
+    <p class="hero-desc trainer-hero-desc">
       Share your expertise and help shape the next generation of professionals with The Ma Foi Foundation.
     </p>
+    <div class="hero-cta-group trainer-hero-cta-group">
+      <a href="#register" class="btn-primary">
+        <span>Register Now</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="index.html#register" class="btn-trainer">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        <span>Register as Student</span>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- FORM SECTION -->
-<section class="form-section" style="padding:60px 0 80px;">
-  <div class="container form-container" style="grid-template-columns:1fr 1.4fr;gap:48px;">
+<section class="form-section" id="register" style="padding:60px 0 80px;">
+  <div class="container form-container trainer-form-container">
 
     <!-- LEFT PANEL -->
-    <div class="form-left" style="padding-top:12px;">
+    <div class="form-left trainer-form-left">
       <div class="section-label">Be a Change Maker</div>
       <h2 class="form-heading">Train the Future<br/><span class="text-accent">Leaders of India</span></h2>
       <p class="form-intro">Join our growing network of experienced trainers and make a real impact. We look for passionate professionals in Microfinance, Gold Loan, BFSI and related fields.</p>
 
-      <div class="who-section" style="margin-top:8px;">
+      <div class="who-section">
         <div class="who-eyebrow">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           Who Should Apply?
@@ -538,6 +568,31 @@ $('trainerForm').addEventListener('submit', async function(e) {
     $('trSubmitSpinner').classList.add('hidden');
   }
 });
+</script>
+<script>
+  // Desktop: Shift+M
+  document.addEventListener('keydown', function(e) {
+    if (e.shiftKey && e.key === 'M') {
+      window.location.href = 'admin.html';
+    }
+  });
+  // Mobile + Desktop: click logo 5 times quickly
+  var _clicks = 0, _timer;
+  document.addEventListener('DOMContentLoaded', function() {
+    var logo = document.querySelector('.logo-wrap');
+    if (!logo) return;
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      _clicks++;
+      clearTimeout(_timer);
+      if (_clicks >= 5) {
+        _clicks = 0;
+        window.location.href = 'admin.html';
+        return;
+      }
+      _timer = setTimeout(function() { _clicks = 0; }, 2000);
+    });
+  });
 </script>
 </body>
 </html>

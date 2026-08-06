@@ -1022,8 +1022,7 @@
                 <option value="branch:Yeshwanthpur">Yeshwanthpur</option>
               </optgroup>
             </select>
-            <input type="date" id="filterDateFrom" class="f-select" style="padding-right:12px;" title="From date" />
-            <input type="date" id="filterDateTo"   class="f-select" style="padding-right:12px;" title="To date" />
+            <input type="date" id="filterDateSingle" class="f-select" style="padding-right:10px;font-size:12.5px;" title="Registration Date" />
             <button class="btn-clear" id="clearBtn">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Clear
@@ -1164,8 +1163,8 @@ async function sbFetch(params = {}, paginate = true) {
   if (params.search) q.set('or', `(full_name.ilike.*${params.search}*,email.ilike.*${params.search}*,whatsapp_number.ilike.*${params.search}*)`);
   if (params.training)  q.set('training',         `eq.${params.training}`);
   if (params.education) q.set('current_education', `eq.${params.education}`);
-  if (params.dateFrom)  q.set('created_at',        `gte.${params.dateFrom}T00:00:00`);
-  if (params.dateTo)    q.set('created_at',        `lte.${params.dateTo}T23:59:59`);
+  if (params.dateFrom) q.append('created_at', `gte.${params.dateFrom}T00:00:00+05:30`);
+  if (params.dateTo)   q.append('created_at', `lte.${params.dateTo}T23:59:59+05:30`);
   // city filter: "city:Chennai" filters by preferred_city, "branch:Egmore" filters by preferred_branch
   if (params.city) {
     const [type, val] = params.city.split(':');
@@ -1513,7 +1512,7 @@ function renderRegs(rows) {
       <td class="td-name">${r.full_name || '—'}</td>
       <td class="td-email">${r.email || '—'}</td>
       <td style="font-size:12.5px;">${r.current_education || '—'}</td>
-      <td style="font-size:12.5px;color:var(--muted);">${r.current_year || '—'}</td>
+      <td style="font-size:12.5px;color:var(--muted);">${r.education_status || '—'}</td>
       <td><span class="badge b-pref">${r.preference || '—'}</span></td>
       <td><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
       <td class="td-mono">${r.whatsapp_number || '—'}</td>
@@ -1570,15 +1569,13 @@ $('searchInput').addEventListener('input', debouncedSearch);
 $('filterTraining').addEventListener('change', () => { state.training = $('filterTraining').value; state.page = 0; loadRegs(); });
 $('filterEducation').addEventListener('change', () => { state.education = $('filterEducation').value; state.page = 0; loadRegs(); });
 $('filterCity').addEventListener('change',     () => { state.city     = $('filterCity').value;     state.page = 0; loadRegs(); });
-$('filterDateFrom').addEventListener('change', () => { state.dateFrom = $('filterDateFrom').value;  state.page = 0; loadRegs(); });
-$('filterDateTo').addEventListener('change',   () => { state.dateTo   = $('filterDateTo').value;    state.page = 0; loadRegs(); });
+$('filterDateSingle').addEventListener('change', () => { const d = $('filterDateSingle').value; state.dateFrom = d; state.dateTo = d; state.page = 0; loadRegs(); });
 $('clearBtn').addEventListener('click', () => {
   $('searchInput').value     = '';
   $('filterTraining').value  = '';
   $('filterEducation').value = '';
   $('filterCity').value      = '';
-  $('filterDateFrom').value  = '';
-  $('filterDateTo').value    = '';
+  $('filterDateSingle').value = '';
   Object.assign(state, { search:'', training:'', education:'', city:'', dateFrom:'', dateTo:'', page:0 });
   loadRegs();
 });

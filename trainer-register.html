@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trainer Registration | The Ma Foi Foundation</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230D6EFD'/><text x='16' y='23' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='18' fill='white'>M</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+<style>
+  .resume-upload-wrap { display: flex; flex-direction: column; gap: 0; }
+  .resume-drop-area {
+    border: 2px dashed var(--border); border-radius: var(--radius-sm);
+    padding: 28px 20px; text-align: center; cursor: pointer;
+    background: var(--bg-light); transition: all var(--t);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .resume-drop-area:hover { border-color: var(--primary); background: var(--primary-xlight); }
+  .resume-drop-area.drag-over { border-color: var(--primary); background: var(--primary-xlight); }
+  .resume-drop-text { font-size: 14px; font-weight: 600; color: var(--text-mid); margin: 0; }
+  .resume-drop-sub  { font-size: 12px; color: var(--text-muted); margin: 0; }
+  .resume-file-info {
+    display: flex; align-items: center; gap: 10px;
+    background: #F0FDF4; border: 1.5px solid #86EFAC;
+    border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="logo-wrap" aria-label="Ma Foi Foundation">
+      <img src="logo.png" alt="Ma Foi Foundation" class="logo-img"
+        onerror="this.style.display='none'; document.getElementById('logoFallback').style.display='flex';" />
+      <div class="logo-fallback" id="logoFallback">
+        <div class="logo-icon">M</div>
+        <div class="logo-text">
+          <span class="logo-brand">Ma Foi Foundation</span>
+          <span class="logo-sub">Trainer Registration</span>
+        </div>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html" class="btn-register-nav">
+        <span>Student Registration</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero-section" style="min-height:380px;">
+  <div class="hero-bg">
+    <img src="heroimage.jpeg" alt="" class="hero-bg-img"
+      onerror="this.style.display='none';" />
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container hero-content" style="padding:80px 24px 60px;">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Trainer Applications Open 2026-27
+    </div>
+    <h1 class="hero-heading" style="font-size:clamp(26px,4vw,46px);margin-bottom:16px;">
+      Join as a <span class="hero-highlight">Certified Trainer</span>
+    </h1>
+    <p class="hero-desc" style="font-size:16px;margin-bottom:0;">
+      Share your expertise and help shape the next generation of professionals with The Ma Foi Foundation.
+    </p>
+  </div>
+</section>
+
+<!-- FORM SECTION -->
+<section class="form-section" style="padding:60px 0 80px;">
+  <div class="container form-container" style="grid-template-columns:1fr 1.4fr;gap:48px;">
+
+    <!-- LEFT PANEL -->
+    <div class="form-left" style="padding-top:12px;">
+      <div class="section-label">Be a Change Maker</div>
+      <h2 class="form-heading">Train the Future<br/><span class="text-accent">Leaders of India</span></h2>
+      <p class="form-intro">Join our growing network of experienced trainers and make a real impact. We look for passionate professionals in Microfinance, Gold Loan, BFSI and related fields.</p>
+
+      <div class="who-section" style="margin-top:8px;">
+        <div class="who-eyebrow">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Who Should Apply?
+        </div>
+        <h3 class="who-title">We're looking for<br/>experienced professionals</h3>
+        <div class="who-grid">
+          <div class="who-tile">
+            <div class="who-tile-icon" style="background:#EEF3FF;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1849D6" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <strong>BFSI Experts</strong>
+            <span>Banking & Finance professionals</span>
+          </div>
+          <div class="who-tile">
+            <div class="who-tile-icon" style="background:#ECFEFF;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <strong>Gold Loan Pros</strong>
+            <span>Gold loan industry veterans</span>
+          </div>
+          <div class="who-tile">
+            <div class="who-tile-icon" style="background:#F0FDF4;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <strong>Microfinance</strong>
+            <span>MFI sector specialists</span>
+          </div>
+          <div class="who-tile">
+            <div class="who-tile-icon" style="background:#FEF9EC;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            </div>
+            <strong>Educators</strong>
+            <span>Training & L&D professionals</span>
+          </div>
+        </div>
+        <div class="who-footer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          Minimum 1 year of field experience required
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM CARD -->
+    <div class="form-card" id="formCard">
+      <div class="form-card-header">
+        <h3>Trainer Registration</h3>
+        <p>All fields are required</p>
+      </div>
+      <form id="trainerForm" novalidate style="padding:28px 32px;display:flex;flex-direction:column;gap:18px;">
+
+        <div class="form-group">
+          <label class="form-label" for="trFullName">Full Name <span class="req">*</span></label>
+          <input type="text" id="trFullName" class="form-input" placeholder="Enter your full name" autocomplete="name" />
+          <span class="field-error" id="errTrName">Name is required (min 2 characters).</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trContact">Contact Number <span class="req">*</span></label>
+          <div class="phone-wrap">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="trContact" class="form-input phone-input" placeholder="10-digit contact number" maxlength="10" />
+          </div>
+          <span class="field-error" id="errTrContact">Please enter a valid 10-digit contact number.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trWhatsapp">WhatsApp Number <span class="req">*</span></label>
+          <div class="phone-wrap">
+            <span class="phone-prefix">+91</span>
+            <input type="tel" id="trWhatsapp" class="form-input phone-input" placeholder="10-digit WhatsApp number" maxlength="10" />
+          </div>
+          <span class="field-error" id="errTrWhatsapp">Please enter a valid 10-digit WhatsApp number.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trEmail">Email ID <span class="req">*</span></label>
+          <input type="email" id="trEmail" class="form-input" placeholder="Enter your email address" autocomplete="email" />
+          <span class="field-error" id="errTrEmail">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trDob">Date of Birth <span class="req">*</span></label>
+          <input type="date" id="trDob" class="form-input" />
+          <span class="field-error" id="errTrDob">Please select your date of birth.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trQual">Highest Educational Qualification <span class="req">*</span></label>
+          <input type="text" id="trQual" class="form-input" placeholder="e.g. MBA, B.Com, B.Tech, PG - Engineering" autocomplete="off" />
+          <span class="field-error" id="errTrQual">Please enter your highest educational qualification.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trExpTrainer">Years of Experience as a Trainer <span class="req">*</span></label>
+          <select id="trExpTrainer" class="form-select">
+            <option value="">-- Select Years --</option>
+            <option value="0">Less than 1 year</option>
+            <option value="1">1 year</option>
+            <option value="2">2 years</option>
+            <option value="3">3 years</option>
+            <option value="4">4 years</option>
+            <option value="5">5 years</option>
+            <option value="6">6 years</option>
+            <option value="7">7 years</option>
+            <option value="8">8 years</option>
+            <option value="9">9 years</option>
+            <option value="10">10+ years</option>
+          </select>
+          <span class="field-error" id="errTrExpTrainer">Please select years of trainer experience.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trExpField">Years of Experience in Relevant Field <span class="req">*</span></label>
+          <label class="form-label" style="font-weight:400;font-size:12px;color:var(--text-muted);margin-top:-8px;">(Microfinance / Gold Loan / BFSI)</label>
+          <select id="trExpField" class="form-select">
+            <option value="">-- Select Years --</option>
+            <option value="0">Less than 1 year</option>
+            <option value="1">1 year</option>
+            <option value="2">2 years</option>
+            <option value="3">3 years</option>
+            <option value="4">4 years</option>
+            <option value="5">5 years</option>
+            <option value="6">6 years</option>
+            <option value="7">7 years</option>
+            <option value="8">8 years</option>
+            <option value="9">9 years</option>
+            <option value="10">10+ years</option>
+          </select>
+          <span class="field-error" id="errTrExpField">Please select years of field experience.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trCtc">Current CTC (Annual) <span class="req">*</span></label>
+          <select id="trCtc" class="form-select">
+            <option value="">-- Select CTC Range --</option>
+            <option value="Below 2 LPA">Below 2 LPA</option>
+            <option value="2 - 4 LPA">2 – 4 LPA</option>
+            <option value="4 - 6 LPA">4 – 6 LPA</option>
+            <option value="6 - 8 LPA">6 – 8 LPA</option>
+            <option value="8 - 10 LPA">8 – 10 LPA</option>
+            <option value="10 - 15 LPA">10 – 15 LPA</option>
+            <option value="Above 15 LPA">Above 15 LPA</option>
+          </select>
+          <span class="field-error" id="errTrCtc">Please select your current CTC.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="trResume">Upload Your Resume <span class="req">*</span></label>
+          <div class="resume-upload-wrap" id="resumeWrap">
+            <input type="file" id="trResume" accept=".pdf,.doc,.docx" style="display:none;" />
+            <div class="resume-drop-area" id="resumeDropArea" onclick="document.getElementById('trResume').click()">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <p class="resume-drop-text">Click to upload or drag & drop</p>
+              <p class="resume-drop-sub">PDF, DOC, DOCX • Max 5MB</p>
+            </div>
+            <div class="resume-file-info hidden" id="resumeFileInfo">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              <span id="resumeFileName" style="font-size:13px;font-weight:600;color:var(--text-dark);flex:1;"></span>
+              <button type="button" onclick="clearResume()" style="background:none;border:none;color:var(--danger);cursor:pointer;padding:2px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              </button>
+            </div>
+          </div>
+          <span class="field-error" id="errTrResume">Please upload your resume (PDF, DOC, or DOCX, max 5MB).</span>
+        </div>
+        <button type="submit" class="btn-submit" id="trSubmitBtn">
+          <span id="trSubmitTxt">Submit Registration</span>
+          <div class="btn-spinner hidden" id="trSubmitSpinner"></div>
+        </button>
+        <p class="form-privacy">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Your information is secure and will never be shared with third parties.
+        </p>
+      </form>
+    </div>
+
+    <!-- SUCCESS CARD -->
+    <div class="success-card hidden" id="successCard">
+      <div class="check-wrap">
+        <svg class="check-svg" viewBox="0 0 52 52">
+          <circle class="check-circle" cx="26" cy="26" r="25" fill="none"/>
+          <path class="check-tick" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+      </div>
+      <h2 class="success-title">Thank You!</h2>
+      <p class="success-msg">Your trainer application has been received!</p>
+      <p class="success-sub">The Ma Foi Foundation team will review your profile and reach out within 3–5 working days.</p>
+      <div class="success-summary">
+        <div class="success-summary-row">
+          <span class="success-summary-label">Name</span>
+          <span class="success-summary-value" id="trSummaryName">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Email</span>
+          <span class="success-summary-value" id="trSummaryEmail">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Trainer Exp.</span>
+          <span class="success-summary-value" id="trSummaryExp">—</span>
+        </div>
+        <div class="success-summary-row">
+          <span class="success-summary-label">Field Exp.</span>
+          <span class="success-summary-value" id="trSummaryField">—</span>
+        </div>
+      </div>
+      <a href="index.html" class="btn-secondary" style="display:inline-flex;margin-top:8px;">Back to Home</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-logo">The Ma Foi Foundation</div>
+      <p class="footer-tag">Empowering students with industry-ready skills since 2006.</p>
+    </div>
+    <div class="footer-copy">
+      <p>&copy; 2026 The Ma Foi Foundation. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const CFG = {
+  SUPABASE_URL:      'https://sybbmwncglqzwnruzyuf.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
+};
+
+const $ = id => document.getElementById(id);
+
+/* ── Header scroll ── */
+window.addEventListener('scroll', () => {
+  document.querySelector('.site-header')?.classList.toggle('scrolled', scrollY > 20);
+}, { passive: true });
+/* ── Resume upload ── */
+const resumeInput = document.getElementById('trResume');
+const dropArea    = document.getElementById('resumeDropArea');
+
+['dragenter','dragover'].forEach(ev => {
+  dropArea.addEventListener(ev, e => { e.preventDefault(); dropArea.classList.add('drag-over'); });
+});
+['dragleave','drop'].forEach(ev => {
+  dropArea.addEventListener(ev, e => { e.preventDefault(); dropArea.classList.remove('drag-over'); });
+});
+dropArea.addEventListener('drop', e => {
+  const file = e.dataTransfer.files[0];
+  if (file) handleResumeFile(file);
+});
+resumeInput.addEventListener('change', () => {
+  if (resumeInput.files[0]) handleResumeFile(resumeInput.files[0]);
+});
+
+function handleResumeFile(file) {
+  const allowed = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+  const ext = file.name.split('.').pop().toLowerCase();
+  if (!allowed.includes(file.type) && !['pdf','doc','docx'].includes(ext)) {
+    $('errTrResume').classList.add('show');
+    $('errTrResume').textContent = 'Only PDF, DOC, or DOCX files are allowed.';
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    $('errTrResume').classList.add('show');
+    $('errTrResume').textContent = 'File size must be under 5MB.';
+    return;
+  }
+  $('errTrResume').classList.remove('show');
+  $('resumeDropArea').classList.add('hidden');
+  $('resumeFileInfo').classList.remove('hidden');
+  $('resumeFileName').textContent = file.name;
+  // Store file on input for later upload
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  resumeInput.files = dt.files;
+}
+
+function clearResume() {
+  resumeInput.value = '';
+  $('resumeDropArea').classList.remove('hidden');
+  $('resumeFileInfo').classList.add('hidden');
+  $('resumeFileName').textContent = '';
+}
+
+/* ── Digits only for phone fields ── */
+['trContact','trWhatsapp'].forEach(id => {
+  $(id)?.addEventListener('input', function() {
+    this.value = this.value.replace(/\D/g,'').slice(0,10);
+  });
+});
+
+/* ── Validation helpers ── */
+function showErr(fieldId, errId) {
+  const f = $(fieldId); if (f) f.classList.add('error');
+  const e = $(errId);   if (e) e.classList.add('show');
+}
+function clearErr(fieldId, errId) {
+  const f = $(fieldId); if (f) f.classList.remove('error');
+  const e = $(errId);   if (e) e.classList.remove('show');
+}
+
+/* ── Toast ── */
+function showToast(msg, type = 'error') {
+  let t = document.querySelector('.toast');
+  if (!t) { t = document.createElement('div'); t.className = 'toast'; document.body.appendChild(t); }
+  t.className = `toast t-${type}`;
+  t.innerHTML = `<span>${type === 'success' ? '✓' : '✕'}</span><span>${msg}</span>`;
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('show')));
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 4500);
+}
+
+/* ── Validate ── */
+function validateForm() {
+  let ok = true;
+
+  const name = $('trFullName').value.trim();
+  if (!name || name.length < 2) { showErr('trFullName','errTrName'); ok=false; }
+  else clearErr('trFullName','errTrName');
+
+  const contact = $('trContact').value.trim();
+  if (!contact || !/^[6-9]\d{9}$/.test(contact)) { showErr('trContact','errTrContact'); ok=false; }
+  else clearErr('trContact','errTrContact');
+
+  const wa = $('trWhatsapp').value.trim();
+  if (!wa || !/^[6-9]\d{9}$/.test(wa)) { showErr('trWhatsapp','errTrWhatsapp'); ok=false; }
+  else clearErr('trWhatsapp','errTrWhatsapp');
+
+  const email = $('trEmail').value.replace(/\s+/g,'').toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { showErr('trEmail','errTrEmail'); ok=false; }
+  else { clearErr('trEmail','errTrEmail'); $('trEmail').value = email; }
+
+  if (!$('trDob').value) { showErr('trDob','errTrDob'); ok=false; }
+  else clearErr('trDob','errTrDob');
+
+  if (!$('trQual').value.trim()) { showErr('trQual','errTrQual'); ok=false; }
+  else clearErr('trQual','errTrQual');
+
+  if ($('trExpTrainer').value === '') { showErr('trExpTrainer','errTrExpTrainer'); ok=false; }
+  else clearErr('trExpTrainer','errTrExpTrainer');
+
+  if ($('trExpField').value === '') { showErr('trExpField','errTrExpField'); ok=false; }
+  else clearErr('trExpField','errTrExpField');
+
+  if (!$('trCtc').value) { showErr('trCtc','errTrCtc'); ok=false; }
+  else clearErr('trCtc','errTrCtc');
+
+  const resumeFile = $('trResume').files[0];
+  if (!resumeFile) {
+    $('errTrResume').textContent = 'Please upload your resume (PDF, DOC, or DOCX, max 5MB).';
+    $('errTrResume').classList.add('show');
+    ok = false;
+  } else {
+    $('errTrResume').classList.remove('show');
+  }
+
+  return ok;
+}
+
+/* ── Submit ── */
+$('trainerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  if (!validateForm()) {
+    const firstErr = this.querySelector('.error, .form-input.error, .form-select.error');
+    firstErr?.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  const btn = $('trSubmitBtn');
+  btn.disabled = true;
+  $('trSubmitTxt').textContent = 'Submitting…';
+  $('trSubmitSpinner').classList.remove('hidden');
+
+  const expTrainerLabel = $('trExpTrainer').options[$('trExpTrainer').selectedIndex].text;
+  const expFieldLabel   = $('trExpField').options[$('trExpField').selectedIndex].text;
+
+  // Upload resume to Supabase Storage first
+  let resumeUrl = '';
+  const resumeFile = $('trResume').files[0];
+  if (resumeFile) {
+    const ext      = resumeFile.name.split('.').pop();
+    const fileName = `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+    const uploadRes = await fetch(
+      `${CFG.SUPABASE_URL}/storage/v1/object/trainer-resumes/${fileName}`,
+      {
+        method: 'POST',
+        headers: {
+          'apikey':        CFG.SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${CFG.SUPABASE_ANON_KEY}`,
+          'Content-Type':  resumeFile.type || 'application/octet-stream',
+        },
+        body: resumeFile,
+      }
+    );
+    if (!uploadRes.ok) {
+      const err = await uploadRes.json().catch(() => ({}));
+      throw new Error('Resume upload failed: ' + (err.message || uploadRes.status));
+    }
+    resumeUrl = `${CFG.SUPABASE_URL}/storage/v1/object/public/trainer-resumes/${fileName}`;
+  }
+
+  const payload = {
+    full_name:          $('trFullName').value.trim(),
+    contact_number:     $('trContact').value.trim(),
+    whatsapp_number:    $('trWhatsapp').value.trim(),
+    email:              $('trEmail').value.trim().toLowerCase(),
+    date_of_birth:      $('trDob').value,
+    qualification:      $('trQual').value.trim(),
+    experience_trainer: parseInt($('trExpTrainer').value),
+    experience_field:   parseInt($('trExpField').value),
+    current_ctc:        $('trCtc').value,
+    trainer_resume:     resumeUrl,
+  };
+
+  try {
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const url = isLocal
+      ? `${CFG.SUPABASE_URL}/rest/v1/trainers_list`
+      : '/api/register-trainer';
+
+    const options = isLocal ? {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        CFG.SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${CFG.SUPABASE_ANON_KEY}`,
+        'Prefer':        'return=representation',
+      },
+      body: JSON.stringify(payload),
+    } : {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    };
+
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.message || err.error || `Submit failed (${res.status})`);
+    }
+
+    $('trSummaryName').textContent  = payload.full_name;
+    $('trSummaryEmail').textContent = payload.email;
+    $('trSummaryExp').textContent   = expTrainerLabel;
+    $('trSummaryField').textContent = expFieldLabel;
+
+    $('formCard').classList.add('hidden');
+    $('successCard').classList.remove('hidden');
+    $('successCard').scrollIntoView({ behavior:'smooth', block:'center' });
+
+  } catch(err) {
+    showToast(err.message || 'Registration failed. Please try again.');
+  } finally {
+    btn.disabled = false;
+    $('trSubmitTxt').textContent = 'Submit Registration';
+    $('trSubmitSpinner').classList.add('hidden');
+  }
+});
+</script>
+</body>
+</html>

@@ -150,6 +150,14 @@ select, input { font-family: var(--font); }
   box-shadow: 0 8px 24px rgba(0,0,0,0.18);
 }
 .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.26); background: #e8f0fe; }
+.btn-trainer {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.60);
+  color: white; font-weight: 700; border-radius: 50px;
+  padding: 14px 28px; font-size: 15px; transition: all var(--t);
+  backdrop-filter: blur(8px); text-decoration: none;
+}
+.btn-trainer:hover { background: rgba(255,255,255,0.25); border-color: white; transform: translateY(-2px); }
 .hero-trust { color: rgba(255,255,255,0.80); font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 .trust-icon { color: #2FE6A6; margin-right: 4px; }
 .hero-scroll { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); z-index: 2; }

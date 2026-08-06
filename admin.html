@@ -224,30 +224,29 @@
 
     /* ── FILTER BAR ── */
     .filter-bar {
-      padding: 10px 18px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 8px; flex-wrap: nowrap;
+      padding: 14px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
       background: #FAFBFF;
     }
-    .search-wrap { position: relative; flex: 2; min-width: 140px; }
+    .search-wrap { position: relative; flex: 1; min-width: 220px; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-wrap input {
-      width: 100%; padding: 9px 10px 9px 32px;
+      width: 100%; padding: 10px 12px 10px 36px;
       border: 1.5px solid var(--border); border-radius: 9px;
-      font-size: 12px; color: var(--text); outline: none; background: var(--white);
+      font-size: 13px; color: var(--text); outline: none; background: var(--white);
       transition: all 0.16s;
     }
     .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
     .f-select {
-      flex: 1; padding: 9px 26px 9px 10px; border: 1.5px solid var(--border);
-      border-radius: 9px; font-size: 12px; color: var(--text);
+      padding: 10px 34px 10px 12px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 13px; color: var(--text);
       background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
       -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
       transition: all 0.16s;
     }
     .f-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
     .btn-clear {
-      padding: 9px 12px; border-radius: 9px; font-size: 12px;
-      white-space: nowrap; flex-shrink: 0;
+      padding: 10px 15px; border-radius: 9px; font-size: 13px;
       font-weight: 600; color: var(--muted);
       background: var(--white); border: 1.5px solid var(--border);
       display: flex; align-items: center; gap: 6px; transition: all 0.16s;
@@ -360,76 +359,80 @@
     /* ══════════════════════════════
        LOGIN SCREEN
     ══════════════════════════════ */
-    /* ── LOGIN SCREEN ── */
+    /* ══════════════════════════════
+       LOGIN SCREEN — Split Layout
+    ══════════════════════════════ */
     .login-screen {
       min-height: 100vh; display: flex; background: #fff;
     }
+    /* LEFT PANEL */
     .login-left {
-      width: 48%; display: flex; flex-direction: column;
-      padding: 48px 56px; background: #fff;
+      width: 46%; display: flex; flex-direction: column;
+      padding: 48px 56px; background: #fff; position: relative;
     }
     .login-brand-row {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 56px;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 52px;
     }
     .login-brand-icon {
       width: 36px; height: 36px; border-radius: 9px;
       background: linear-gradient(135deg, #1849D6, #1338B0);
-      display: flex; align-items: center; justify-content: center;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .login-brand-name { font-size: 15px; font-weight: 700; color: #0F172A; }
     .login-form-area {
-      flex: 1; display: flex; flex-direction: column;
-      justify-content: center; max-width: 360px;
+      flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 360px;
     }
-    .login-illus {
-      width: 72px; height: 72px; border-radius: 18px;
-      background: #EEF3FF; display: flex; align-items: center;
-      justify-content: center; margin-bottom: 24px;
-      position: relative;
+    /* Icon with grid background */
+    .login-icon-wrap {
+      position: relative; width: 80px; height: 80px; margin-bottom: 24px;
     }
-    .login-illus::before {
-      content: '';
-      position: absolute; inset: -12px;
+    .login-icon-grid {
+      position: absolute; inset: -16px;
       background-image:
         linear-gradient(#DDE5F4 1px, transparent 1px),
         linear-gradient(90deg, #DDE5F4 1px, transparent 1px);
-      background-size: 16px 16px;
-      border-radius: 24px;
-      z-index: -1;
+      background-size: 18px 18px; border-radius: 20px; z-index: 0;
+    }
+    .login-icon-box {
+      position: relative; z-index: 1;
+      width: 80px; height: 80px; border-radius: 20px;
+      background: linear-gradient(135deg, #1849D6, #2563EB);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(24,73,214,0.28);
     }
     .login-heading { font-size: 26px; font-weight: 800; color: #0F172A; margin-bottom: 6px; letter-spacing: -0.3px; }
-    .login-sub     { font-size: 13.5px; color: #64748B; margin-bottom: 32px; line-height: 1.5; }
+    .login-sub     { font-size: 14px; color: #64748B; margin-bottom: 28px; line-height: 1.5; }
     .login-error {
-      background: #FEF2F2; border: 1px solid #FECACA;
-      border-radius: 9px; padding: 10px 14px;
-      font-size: 13px; color: var(--danger); font-weight: 500;
+      background: #FEF2F2; border: 1px solid #FECACA; border-radius: 9px;
+      padding: 10px 14px; font-size: 13px; color: var(--danger); font-weight: 500;
       margin-bottom: 16px; display: none; align-items: center; gap: 8px;
     }
     .login-error.show { display: flex; }
     .l-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-    .l-label { font-size: 13px; font-weight: 600; color: #374151; }
+    .l-label { font-size: 12.5px; font-weight: 700; color: #374151; text-transform: uppercase; letter-spacing: 0.4px; }
     .l-input-wrap {
       display: flex; align-items: center;
       border: 1.5px solid #E2E8F0; border-radius: 10px;
       background: #F8FAFC; overflow: hidden; transition: all 0.16s;
     }
     .l-input-wrap:focus-within { border-color: #1849D6; background: #fff; box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
-    .l-input-icon { width: 42px; display: flex; align-items: center; justify-content: center; color: #94A3B8; flex-shrink: 0; }
+    .l-input-icon { width: 44px; display: flex; align-items: center; justify-content: center; color: #94A3B8; flex-shrink: 0; }
     .l-input {
       flex: 1; padding: 13px 12px 13px 0;
       border: none; background: transparent; outline: none;
-      font-size: 14px; color: #0F172A;
+      font-size: 14px; color: #0F172A; font-family: inherit;
     }
     .l-input::placeholder { color: #BBC5D5; }
     .pw-wrap { position: relative; display: flex; align-items: center; }
     .pw-wrap .l-input-wrap { flex: 1; }
     .pw-toggle { position: absolute; right: 12px; background: none; color: #BBC5D5; padding: 2px; transition: color 0.15s; }
     .pw-toggle:hover { color: #1849D6; }
+    .l-input-pr { padding-right: 40px; }
     .btn-signin {
       width: 100%; padding: 14px;
       background: linear-gradient(135deg, #1849D6, #1338B0);
-      color: #fff; font-size: 14.5px; font-weight: 700; border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(24,73,214,0.28); margin-top: 6px;
+      color: #fff; font-size: 15px; font-weight: 700; border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(24,73,214,0.28); margin-top: 4px;
       transition: all 0.18s ease; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .btn-signin:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(24,73,214,0.36); }
@@ -438,9 +441,10 @@
       margin-top: auto; padding-top: 40px;
       font-size: 12px; color: #CBD5E1; line-height: 1.7;
     }
-    /* ── LOGIN RIGHT ── */
+    /* RIGHT PANEL */
     .login-right {
-      flex: 1; background: linear-gradient(145deg, #EEF3FF 0%, #DBEAFE 60%, #C7D8FF 100%);
+      flex: 1;
+      background: linear-gradient(145deg, #EEF3FF 0%, #DBEAFE 55%, #C7D8FF 100%);
       display: flex; align-items: center; justify-content: center;
       padding: 48px 40px; position: relative; overflow: hidden;
     }
@@ -449,34 +453,34 @@
       background-image: radial-gradient(rgba(24,73,214,0.07) 1px, transparent 1px);
       background-size: 22px 22px;
     }
-    .login-right-content { position: relative; z-index: 1; text-align: center; max-width: 340px; }
-    .login-visual {
-      width: 200px; height: 200px; border-radius: 50%;
-      background: linear-gradient(145deg, #DBEAFE, #C7D8FF);
-      border: 2px solid rgba(24,73,214,0.12);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 32px; position: relative;
+    .login-right-inner { position: relative; z-index: 1; text-align: center; max-width: 320px; }
+    /* Orbital visual */
+    .login-orbital {
+      position: relative; width: 220px; height: 220px; margin: 0 auto 32px;
     }
-    .login-visual::before {
-      content: ''; position: absolute;
-      width: 160px; height: 160px; border-radius: 50%;
+    .login-orbital-ring {
+      position: absolute; border-radius: 50%;
       border: 1px solid rgba(24,73,214,0.15);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
     }
-    .login-visual::after {
-      content: ''; position: absolute;
-      width: 120px; height: 120px; border-radius: 50%;
-      border: 1px solid rgba(24,73,214,0.12);
-    }
-    .login-visual-icon {
-      width: 72px; height: 72px; border-radius: 18px;
+    .login-orbital-ring:nth-child(1) { width: 220px; height: 220px; }
+    .login-orbital-ring:nth-child(2) { width: 160px; height: 160px; border-color: rgba(24,73,214,0.12); }
+    .login-orbital-ring:nth-child(3) { width: 100px; height: 100px; border-color: rgba(24,73,214,0.10); }
+    .login-orbital-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 64px; height: 64px; border-radius: 16px;
       background: linear-gradient(135deg, #1849D6, #2563EB);
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 24px rgba(24,73,214,0.30);
-      z-index: 1;
+      box-shadow: 0 8px 24px rgba(24,73,214,0.35); z-index: 2;
+    }
+    .login-orbital-dot {
+      position: absolute; width: 36px; height: 36px; border-radius: 50%;
+      background: white; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.10); top: 50%; left: 50%;
     }
     .login-right-title { font-size: 20px; font-weight: 800; color: #1338B0; margin-bottom: 10px; letter-spacing: -0.3px; }
     .login-right-sub   { font-size: 13.5px; color: #5478C0; line-height: 1.65; }
-    .login-pills { display: flex; gap: 8px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
+    .login-pills { display: flex; gap: 8px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
     .login-pill {
       display: flex; align-items: center; gap: 6px;
       background: white; border-radius: 50px; padding: 7px 14px;
@@ -484,7 +488,7 @@
       box-shadow: 0 2px 8px rgba(24,73,214,0.10);
     }
     /* Mobile */
-    @media(max-width: 700px) {
+    @media(max-width: 768px) {
       .login-screen { flex-direction: column; }
       .login-left { width: 100%; padding: 32px 24px; min-height: 100vh; }
       .login-right { display: none; }
@@ -507,8 +511,8 @@
     .stat-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
     .stat-icon-wrap { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
     .stat-trend { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 20px; background: #EEF3FF; color: var(--blue); }
-    .stat-val { font-size: 32px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -1px; }
-    .stat-lbl { font-size: 11.5px; font-weight: 600; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.4px; }
+    .stat-val { font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -0.5px; }
+    .stat-lbl { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 5px; }
 
     /* ── STAT GRID (course row) ── */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 14px; margin-bottom: 20px; }
@@ -544,22 +548,15 @@
     .chart-hdr-left { font-size: 13.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .chart-hdr-sub { font-size: 11.5px; color: var(--muted); }
     .chart-body { padding: 16px 18px 12px; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
-    .bar-wrap { display: flex; align-items: flex-end; gap: 5px; height: 160px; overflow-x: auto; padding: 0 4px 8px; }
+    .bar-wrap { display: flex; align-items: flex-end; gap: 3px; height: 140px; overflow-x: auto; padding-bottom: 6px; }
     .bar-wrap::-webkit-scrollbar { height: 4px; }
-    .bar-wrap::-webkit-scrollbar-track { background: transparent; }
     .bar-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; min-width: 28px; cursor: pointer; }
-    .bar-col:hover .bar-rect { filter: brightness(1.15); transform: scaleY(1.03); transform-origin: bottom; }
-    .bar-rect {
-      width: 20px; border-radius: 5px 5px 0 0;
-      background: linear-gradient(180deg, #2563EB 0%, #1849D6 100%);
-      min-height: 4px; transition: filter 0.15s, transform 0.15s;
-      box-shadow: 0 2px 6px rgba(24,73,214,0.20);
-    }
-    .bar-rect.empty { background: #E8EFFF; box-shadow: none; }
-    .bar-rect.today { background: linear-gradient(180deg, #F59E0B 0%, #D97706 100%); box-shadow: 0 2px 6px rgba(217,119,6,0.25); }
-    .bar-day { font-size: 8.5px; color: var(--muted); font-weight: 600; white-space: nowrap; }
-    .bar-num { font-size: 9px; font-weight: 800; color: var(--blue); line-height: 1; background: var(--blue-l); padding: 1px 4px; border-radius: 4px; }
+    .bar-col { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; min-width: 26px; cursor: pointer; }
+    .bar-col:hover .bar-rect { opacity: 0.7; }
+    .bar-rect { width: 18px; border-radius: 4px 4px 0 0; background: var(--blue); min-height: 3px; transition: opacity 0.15s; }
+    .bar-rect.empty { background: #DDE5F4; }
+    .bar-day { font-size: 9px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .bar-num { font-size: 9.5px; font-weight: 700; color: var(--blue); line-height: 1; }
 
     /* ── SPIN BTN ── */
     .spin-btn { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; animation: spin 0.8s linear infinite; }
@@ -650,12 +647,7 @@
         border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 6px;
       }
       tbody td:first-child::before { content: '#'; }
-      /* Login responsive */
-      .login-screen { flex-direction: column; }
-      .login-left { width: 100%; padding: 32px 24px; min-height: 100vh; }
-      .login-right { display: none; }
-      .login-form-area { max-width: 100%; }
-      .login-welcome { font-size: 24px; }
+      /* Login responsive handled in login CSS block above */
     }
     @media(max-width: 480px) {
       .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -679,9 +671,14 @@
       </div>
 
       <div class="login-form-area">
-        <div class="login-illus">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1849D6" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <!-- Icon with grid -->
+        <div class="login-icon-wrap">
+          <div class="login-icon-grid"></div>
+          <div class="login-icon-box">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
         </div>
+
         <h2 class="login-heading">Login to your account!</h2>
         <p class="login-sub">Enter your registered email address and password to login.</p>
 
@@ -707,7 +704,7 @@
                 <div class="l-input-icon">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </div>
-                <input type="password" id="adminPass" class="l-input" style="padding-right:40px;" placeholder="••••••••••••" autocomplete="current-password" />
+                <input type="password" id="adminPass" class="l-input" style="padding-right:44px;" placeholder="••••••••••••" autocomplete="current-password" />
               </div>
               <button type="button" id="togglePw" class="pw-toggle">
                 <svg id="eyeIco" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -729,14 +726,30 @@
 
     <!-- RIGHT: Visual -->
     <div class="login-right">
-      <div class="login-right-content">
-        <div class="login-visual">
-          <div class="login-visual-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="login-right-inner">
+        <div class="login-orbital">
+          <div class="login-orbital-ring"></div>
+          <div class="login-orbital-ring"></div>
+          <div class="login-orbital-ring"></div>
+          <!-- Orbital dots -->
+          <div class="login-orbital-dot" style="transform:translate(-50%,-50%) translate(110px, -10px);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1849D6" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          </div>
+          <div class="login-orbital-dot" style="transform:translate(-50%,-50%) translate(-110px, 10px);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0891B2" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <div class="login-orbital-dot" style="transform:translate(-50%,-50%) translate(20px, 100px);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+          </div>
+          <div class="login-orbital-dot" style="transform:translate(-50%,-50%) translate(-30px, -100px);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="login-orbital-center">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
         </div>
         <div class="login-right-title">Secure Admin Portal</div>
-        <div class="login-right-sub">Manage student registrations, track program analytics, and download reports — all in one place.</div>
+        <div class="login-right-sub">Manage student &amp; trainer registrations, track analytics, and download reports — all in one place.</div>
         <div class="login-pills">
           <div class="login-pill">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
@@ -749,6 +762,10 @@
           <div class="login-pill">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
             Export
+          </div>
+          <div class="login-pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Trainers
           </div>
         </div>
       </div>
@@ -785,6 +802,11 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Registrations
           <span class="nav-badge" id="navBadge">—</span>
+        </div>
+        <div class="nav-item" id="navTrainers" onclick="showView('trainers')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Trainers
+          <span class="nav-badge" id="navTrainerBadge">—</span>
         </div>
 
         <div class="sidebar-section-label">Other</div>
@@ -918,20 +940,10 @@
           <div class="chart-panel">
             <div class="chart-hdr">
               <div class="chart-hdr-left">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                 Daily Registrations
               </div>
-              <div style="display:flex;align-items:center;gap:10px;">
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
-                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#22C55E,#16A34A);display:inline-block;"></span> Today
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
-                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#F97316,#EA580C);display:inline-block;"></span> Yesterday
-                </div>
-                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
-                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#2563EB,#1849D6);display:inline-block;"></span> Previous
-                </div>
-              </div>
+              <span class="chart-hdr-sub">Last 30 days — click a bar to filter</span>
             </div>
             <div class="chart-body">
               <div class="bar-wrap" id="barChart">
@@ -1010,7 +1022,8 @@
                 <option value="branch:Yeshwanthpur">Yeshwanthpur</option>
               </optgroup>
             </select>
-            <input type="date" id="filterDateSingle" class="f-select" style="padding-right:10px;font-size:12.5px;" title="Registration Date" />
+            <input type="date" id="filterDateFrom" class="f-select" style="padding-right:12px;" title="From date" />
+            <input type="date" id="filterDateTo"   class="f-select" style="padding-right:12px;" title="To date" />
             <button class="btn-clear" id="clearBtn">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               Clear
@@ -1029,13 +1042,11 @@
                   <th class="sortable" data-col="full_name">Name <span class="sort-icon">▲▼</span></th>
                   <th>Email</th>
                   <th>Education</th>
-                  <th>Edu. Status</th>
+                  <th>Year</th>
                   <th>Preference</th>
                   <th class="sortable" data-col="training">Training <span class="sort-icon">▲▼</span></th>
                   <th>WhatsApp</th>
-                  <th>City</th>
-                  <th>Branch</th>
-                  <th class="sortable" data-col="created_at">Registered On <span class="sort-icon">▲▼</span></th>
+                  <th class="sortable sort-desc" data-col="created_at">Registered On <span class="sort-icon" style="color:var(--blue);opacity:1;">▼</span></th>
                 </tr>
               </thead>
               <tbody id="regsTableBody">
@@ -1051,10 +1062,84 @@
         </div>
       </div>
 
+      <!-- TRAINERS VIEW -->
+      <div class="page" id="viewTrainers" style="display:none;">
+        <div class="page-header">
+          <div>
+            <h1>All Trainers</h1>
+            <p>Search and manage all trainer registrations</p>
+          </div>
+          <button class="btn-excel" id="exportBtnTrainers">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Excel
+          </button>
+        </div>
+        <div class="panel">
+          <div class="filter-bar">
+            <div class="search-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="trainerSearch" placeholder="Search by name, email or contact…" />
+            </div>
+            <button class="btn-clear" id="trainerClearBtn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Clear
+            </button>
+          </div>
+          <div class="panel-header" style="padding:12px 22px;">
+            <span class="panel-count" id="trainerCount" style="background:var(--blue-l);color:var(--blue);">Loading…</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Contact</th>
+                  <th>WhatsApp</th>
+                  <th>Email</th>
+                  <th>DOB</th>
+                  <th>Qualification</th>
+                  <th>Exp. Trainer</th>
+                  <th>Exp. Field</th>
+                  <th>Current CTC</th>
+                  <th>Registered On</th>
+                  <th style="width:48px;"></th>
+                </tr>
+              </thead>
+              <tbody id="trainersTableBody">
+                <tr><td colspan="12"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading trainers…</p></div></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pagination">
+            <span class="pag-info" id="trainerPagInfo"></span>
+            <div class="pag-btns" id="trainerPagBtns"></div>
+          </div>
+        </div>
+      </div>
+
     </div><!-- /main -->
   </div><!-- /layout -->
 </div><!-- /dashScreen -->
 
+<!-- Trainer Delete Modal -->
+<div class="del-overlay hidden" id="trainerDelOverlay">
+  <div class="del-modal">
+    <div class="del-modal-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+    </div>
+    <h3 class="del-modal-title">Delete Trainer</h3>
+    <p class="del-modal-name" id="trainerDelName"></p>
+    <p class="del-modal-msg">Are you sure you want to delete this trainer?<br/><strong>This action cannot be undone.</strong></p>
+    <div class="del-modal-btns">
+      <button class="del-cancel" id="trainerDelCancel">Cancel</button>
+      <button class="del-confirm" id="trainerDelConfirm">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1064,7 +1149,7 @@ const CFG = {
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN5YmJtd25jZ2xxenducnV6eXVmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUzOTQ4MTgsImV4cCI6MjEwMDk3MDgxOH0.QSSKWVf_w0VFwl0FKvK8UWWWMVhPYdzdxGWeLoS2AjY',
 
   TABLE:             'student_interest',
-  PAGE_SIZE:         15,
+  PAGE_SIZE:         20,
 };
 
 /* ── SUPABASE ── */
@@ -1079,8 +1164,8 @@ async function sbFetch(params = {}, paginate = true) {
   if (params.search) q.set('or', `(full_name.ilike.*${params.search}*,email.ilike.*${params.search}*,whatsapp_number.ilike.*${params.search}*)`);
   if (params.training)  q.set('training',         `eq.${params.training}`);
   if (params.education) q.set('current_education', `eq.${params.education}`);
-  if (params.dateFrom) q.append('created_at', `gte.${params.dateFrom}T00:00:00+05:30`);
-  if (params.dateTo)   q.append('created_at', `lte.${params.dateTo}T23:59:59+05:30`);
+  if (params.dateFrom)  q.set('created_at',        `gte.${params.dateFrom}T00:00:00`);
+  if (params.dateTo)    q.set('created_at',        `lte.${params.dateTo}T23:59:59`);
   // city filter: "city:Chennai" filters by preferred_city, "branch:Egmore" filters by preferred_branch
   if (params.city) {
     const [type, val] = params.city.split(':');
@@ -1210,17 +1295,21 @@ function showView(view) {
 
   $('viewDashboard').style.display     = view === 'dashboard'     ? 'block' : 'none';
   $('viewRegistrations').style.display = view === 'registrations' ? 'block' : 'none';
+  $('viewTrainers').style.display      = view === 'trainers'      ? 'block' : 'none';
 
-  $('navDash').classList.toggle('active', view === 'dashboard');
-  $('navRegs').classList.toggle('active', view === 'registrations');
+  $('navDash').classList.toggle('active',     view === 'dashboard');
+  $('navRegs').classList.toggle('active',     view === 'registrations');
+  $('navTrainers').classList.toggle('active', view === 'trainers');
 
   const icons = {
-    dashboard: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span>`,
+    dashboard:     `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg><span>Dashboard</span>`,
     registrations: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><span>Registrations</span>`,
+    trainers:      `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Trainers</span>`,
   };
   $('topbarBreadcrumb').innerHTML = icons[view] || icons.dashboard;
 
   if (view === 'registrations') loadRegs();
+  if (view === 'trainers')      loadTrainers();
 }
 
 /* ── INIT DASH ── */
@@ -1261,6 +1350,19 @@ async function loadStats() {
     $('s-cyber').textContent    = count('Cyber Security');
     $('navBadge').textContent   = all.length;
     $('dashCount').textContent  = all.length;
+
+    // Set trainer badge count
+    fetch(`${CFG.SUPABASE_URL}/rest/v1/trainers_list?select=id`, {
+      headers: {
+        'apikey': CFG.SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${sessionStorage.getItem('mafoi_token') || CFG.SUPABASE_ANON_KEY}`,
+        'Prefer': 'count=exact',
+        'Range': '0-0',
+      }
+    }).then(r => {
+      const n = parseInt(r.headers.get('Content-Range')?.split('/')[1] || '0');
+      $('navTrainerBadge').textContent = n;
+    }).catch(() => { $('navTrainerBadge').textContent = '0'; });
 
     /* ── CITY CARDS ── */
     const CITIES = [
@@ -1305,12 +1407,12 @@ async function loadStats() {
     if (barEl) {
       const now  = new Date();
       const days = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 29; i >= 0; i--) {
         const d   = new Date(now);
         d.setDate(d.getDate() - i);
         const key = d.toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
         const lbl = d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', timeZone:'Asia/Kolkata' });
-        days.push({ key, lbl, count: 0, daysAgo: i });
+        days.push({ key, lbl, count: 0 });
       }
       all.forEach(r => {
         const rDate = new Date(r.created_at).toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
@@ -1321,25 +1423,10 @@ async function loadStats() {
       barEl.innerHTML = days.map(d => {
         const h   = Math.round((d.count / maxC) * 110);
         const num = d.count > 0 ? `<div class="bar-num">${d.count}</div>` : '';
-        let barColor, lblStyle, dayLabel;
-        if (d.daysAgo === 0) {
-          barColor = 'linear-gradient(180deg,#22C55E,#16A34A)';
-          lblStyle = 'color:#16A34A;font-weight:800;';
-          dayLabel = 'Today';
-        } else if (d.daysAgo === 1) {
-          barColor = 'linear-gradient(180deg,#F97316,#EA580C)';
-          lblStyle = 'color:#EA580C;font-weight:700;';
-          dayLabel = 'Yest.';
-        } else {
-          barColor = 'linear-gradient(180deg,#2563EB,#1849D6)';
-          lblStyle = '';
-          dayLabel = d.lbl.split(' ')[0];
-        }
-        const emptyStyle = d.count === 0 ? 'background:#E8EFFF;box-shadow:none;' : '';
-        return `<div class="bar-col" title="${d.lbl}: ${d.count} registrations">
+        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count}">
           ${num}
-          <div class="bar-rect" style="height:${Math.max(h,4)}px;background:${d.count===0?'#E8EFFF':barColor};box-shadow:${d.count===0?'none':'0 2px 6px rgba(0,0,0,0.12)'};"></div>
-          <div class="bar-day" style="${lblStyle}">${dayLabel}</div>
+          <div class="bar-rect${d.count===0?' empty':''}" style="height:${Math.max(h,3)}px;"></div>
+          <div class="bar-day">${d.lbl.split(' ')[0]}</div>
         </div>`;
       }).join('');
     }
@@ -1361,7 +1448,12 @@ function filterByBranch(branch) {
 }
 
 function filterByDate(dateStr) {
-  // Click to filter removed
+  showView('registrations');
+  state.dateFrom = dateStr;
+  state.dateTo   = dateStr;
+  state.page     = 0;
+  if ($('filterDateSingle')) $('filterDateSingle').value = dateStr;
+  loadRegs();
 }
 
 /* ── DASHBOARD PREVIEW (latest 5) ── */
@@ -1418,16 +1510,14 @@ function renderRegs(rows) {
   $('regsTableBody').innerHTML = rows.map((r, i) => `
     <tr>
       <td class="td-num">${offset + i + 1}</td>
-      <td class="td-name" data-label="Name">${r.full_name || '—'}</td>
-      <td class="td-email" data-label="Email">${r.email || '—'}</td>
-      <td data-label="Education" style="font-size:12.5px;">${r.current_education || '—'}</td>
-      <td data-label="Edu. Status" style="font-size:12.5px;color:var(--muted);">${r.education_status || '—'}</td>
-      <td data-label="Preference"><span class="badge b-pref">${r.preference || '—'}</span></td>
-      <td data-label="Training"><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
-      <td data-label="WhatsApp" class="td-mono">${r.whatsapp_number || '—'}</td>
-      <td data-label="City" style="font-size:12.5px;">${r.preferred_city || '—'}</td>
-      <td data-label="Branch" style="font-size:12.5px;">${r.preferred_branch || '—'}</td>
-      <td data-label="Registered" class="td-date">${fmtDate(r.created_at)}</td>
+      <td class="td-name">${r.full_name || '—'}</td>
+      <td class="td-email">${r.email || '—'}</td>
+      <td style="font-size:12.5px;">${r.current_education || '—'}</td>
+      <td style="font-size:12.5px;color:var(--muted);">${r.current_year || '—'}</td>
+      <td><span class="badge b-pref">${r.preference || '—'}</span></td>
+      <td><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
+      <td class="td-mono">${r.whatsapp_number || '—'}</td>
+      <td class="td-date">${fmtDate(r.created_at)}</td>
     </tr>`).join('');
 }
 
@@ -1480,19 +1570,15 @@ $('searchInput').addEventListener('input', debouncedSearch);
 $('filterTraining').addEventListener('change', () => { state.training = $('filterTraining').value; state.page = 0; loadRegs(); });
 $('filterEducation').addEventListener('change', () => { state.education = $('filterEducation').value; state.page = 0; loadRegs(); });
 $('filterCity').addEventListener('change',     () => { state.city     = $('filterCity').value;     state.page = 0; loadRegs(); });
-$('filterDateSingle').addEventListener('change', () => {
-  const d = $('filterDateSingle').value;
-  state.dateFrom = d;
-  state.dateTo   = d;
-  state.page = 0;
-  loadRegs();
-});
+$('filterDateFrom').addEventListener('change', () => { state.dateFrom = $('filterDateFrom').value;  state.page = 0; loadRegs(); });
+$('filterDateTo').addEventListener('change',   () => { state.dateTo   = $('filterDateTo').value;    state.page = 0; loadRegs(); });
 $('clearBtn').addEventListener('click', () => {
   $('searchInput').value     = '';
   $('filterTraining').value  = '';
   $('filterEducation').value = '';
   $('filterCity').value      = '';
-  $('filterDateSingle').value = '';
+  $('filterDateFrom').value  = '';
+  $('filterDateTo').value    = '';
   Object.assign(state, { search:'', training:'', education:'', city:'', dateFrom:'', dateTo:'', page:0 });
   loadRegs();
 });
@@ -1528,6 +1614,197 @@ async function doExport(btn) {
 }
 $('exportBtnDash').addEventListener('click', function() { doExport(this); });
 $('exportBtnRegs').addEventListener('click', function() { doExport(this); });
+
+/* ── TRAINERS ── */
+const TRAINER_PAGE_SIZE = 15;
+let trainerState = { page: 0, search: '', total: 0 };
+
+async function fetchTrainers(paginate = true) {
+  const token = sessionStorage.getItem('mafoi_token') || CFG.SUPABASE_ANON_KEY;
+  const q = new URLSearchParams();
+  if (trainerState.search) {
+    q.set('or', `(full_name.ilike.*${trainerState.search}*,email.ilike.*${trainerState.search}*,contact_number.ilike.*${trainerState.search}*)`);
+  }
+  q.set('order', 'created_at.desc');
+  const h = {
+    'Content-Type': 'application/json',
+    'apikey': CFG.SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${token}`,
+    'Prefer': 'count=exact',
+  };
+  if (paginate) {
+    const from = trainerState.page * TRAINER_PAGE_SIZE;
+    h['Range'] = `${from}-${from + TRAINER_PAGE_SIZE - 1}`;
+  } else {
+    h['Range'] = '0-9999';
+  }
+  const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/trainers_list?${q}`, { headers: h });
+  if (!res.ok) throw new Error(`Error ${res.status}`);
+  const total = parseInt(res.headers.get('Content-Range')?.split('/')[1] || '0');
+  const data  = await res.json();
+  return paginate ? { data, total } : data;
+}
+
+async function loadTrainers() {
+  $('trainersTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
+  $('trainerCount').textContent = 'Loading…';
+  try {
+    const { data, total } = await fetchTrainers();
+    trainerState.total = total;
+    $('navTrainerBadge').textContent = total;
+    $('trainerCount').textContent = `${total} trainer${total !== 1 ? 's' : ''} found`;
+    if (!data.length) {
+      $('trainersTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No trainers found</h4></div></td></tr>`;
+      $('trainerPagInfo').textContent = '';
+      $('trainerPagBtns').innerHTML = '';
+      return;
+    }
+    $('trainersTableBody').innerHTML = data.map((r, i) => `
+      <tr>
+        <td class="td-num">${r.id}</td>
+        <td class="td-name">${r.full_name || '—'}</td>
+        <td class="td-mono">${r.contact_number || '—'}</td>
+        <td class="td-mono">${r.whatsapp_number || '—'}</td>
+        <td class="td-email">${r.email || '—'}</td>
+        <td style="font-size:12.5px;">${r.date_of_birth ? new Date(r.date_of_birth).toLocaleDateString('en-IN') : '—'}</td>
+        <td style="font-size:12px;">${r.qualification || '—'}</td>
+        <td style="font-size:12.5px;text-align:center;">${r.experience_trainer !== null ? (r.experience_trainer === 0 ? '<1 yr' : r.experience_trainer + ' yr') : '—'}</td>
+        <td style="font-size:12.5px;text-align:center;">${r.experience_field !== null ? (r.experience_field === 0 ? '<1 yr' : r.experience_field + ' yr') : '—'}</td>
+        <td style="font-size:12.5px;">${r.current_ctc || '—'}</td>
+        <td class="td-date">${fmtDate(r.created_at)}</td>
+        <td>
+          <button class="btn-delete-row" onclick="confirmDeleteTrainer(${r.id}, '${(r.full_name||'').replace(/'/g,"\\'")}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+          </button>
+        </td>
+      </tr>`).join('');
+
+    // Pagination
+    const pages = Math.ceil(total / TRAINER_PAGE_SIZE);
+    const p = trainerState.page;
+    const start = p * TRAINER_PAGE_SIZE + 1;
+    const end   = Math.min((p + 1) * TRAINER_PAGE_SIZE, total);
+    $('trainerPagInfo').textContent = total ? `Showing ${start}–${end} of ${total}` : '';
+    const c = $('trainerPagBtns');
+    c.innerHTML = '';
+    const mk = (label, pg, disabled, active) => {
+      const b = document.createElement('button');
+      b.className = 'pag-btn' + (active ? ' active' : '');
+      b.textContent = label; b.disabled = disabled;
+      if (!disabled && !active) b.onclick = () => { trainerState.page = pg; loadTrainers(); };
+      return b;
+    };
+    c.appendChild(mk('‹', p-1, p===0));
+    Array.from({length: Math.min(pages,7)}, (_,i) => i)
+      .forEach(n => c.appendChild(mk(n+1, n, false, n===p)));
+    c.appendChild(mk('›', p+1, p>=pages-1));
+
+  } catch(e) {
+    $('trainersTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
+    toast('Load error: ' + e.message, 'error');
+  }
+}
+
+const debouncedTrainerSearch = dbc(() => { trainerState.search = $('trainerSearch').value.trim(); trainerState.page = 0; loadTrainers(); });
+$('trainerSearch').addEventListener('input', debouncedTrainerSearch);
+$('trainerClearBtn').addEventListener('click', () => {
+  $('trainerSearch').value = '';
+  trainerState.search = '';
+  trainerState.page = 0;
+  loadTrainers();
+});
+
+$('exportBtnTrainers').addEventListener('click', async function() {
+  this.disabled = true;
+  this.innerHTML = `<div class="spin-btn" style="border-top-color:white;"></div> Exporting…`;
+  try {
+    const rows = await fetchTrainers(false);
+    if (!rows.length) { toast('No data to export.', 'error'); return; }
+    const headers = ['ID','Full Name','Contact','WhatsApp','Email','Date of Birth','Qualification','Exp. Trainer (yrs)','Exp. Field (yrs)','Current CTC','Registered On'];
+    const wsData = [headers, ...rows.map(r => [
+      r.id, r.full_name||'', r.contact_number||'', r.whatsapp_number||'', r.email||'',
+      r.date_of_birth ? new Date(r.date_of_birth).toLocaleDateString('en-IN') : '',
+      r.qualification||'',
+      r.experience_trainer === 0 ? 'Less than 1 yr' : (r.experience_trainer + ' yr'),
+      r.experience_field   === 0 ? 'Less than 1 yr' : (r.experience_field   + ' yr'),
+      r.current_ctc||'', fmtDate(r.created_at)
+    ])];
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.aoa_to_sheet(wsData);
+    ws['!cols'] = [5,22,14,14,28,14,24,14,14,14,22].map(w=>({wch:w}));
+    XLSX.utils.book_append_sheet(wb, ws, 'Trainers');
+    XLSX.writeFile(wb, `MaFoi_Trainers_${new Date().toISOString().slice(0,10)}.xlsx`);
+    toast(`Downloaded ${rows.length} trainer records!`, 'success');
+  } catch(e) { toast('Export failed: ' + e.message, 'error'); }
+  finally {
+    this.disabled = false;
+    this.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download Excel`;
+  }
+});
+
+/* ── TRAINER DELETE ── */
+let pendingDeleteTrainerId = null;
+
+function confirmDeleteTrainer(id, name) {
+  pendingDeleteTrainerId = id;
+  $('trainerDelName').textContent = name;
+  $('trainerDelOverlay').classList.remove('hidden');
+}
+
+$('trainerDelCancel').addEventListener('click', () => {
+  pendingDeleteTrainerId = null;
+  $('trainerDelOverlay').classList.add('hidden');
+});
+
+$('trainerDelOverlay').addEventListener('click', e => {
+  if (e.target === $('trainerDelOverlay')) {
+    pendingDeleteTrainerId = null;
+    $('trainerDelOverlay').classList.add('hidden');
+  }
+});
+
+$('trainerDelConfirm').addEventListener('click', async () => {
+  if (!pendingDeleteTrainerId) return;
+  const id = pendingDeleteTrainerId;
+  const token = sessionStorage.getItem('mafoi_token') || CFG.SUPABASE_ANON_KEY;
+  $('trainerDelConfirm').disabled = true;
+  $('trainerDelConfirm').textContent = 'Deleting…';
+  try {
+    // Step 1: Delete
+    const res = await fetch(`${CFG.SUPABASE_URL}/rest/v1/trainers_list?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        CFG.SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${token}`,
+        'Prefer':        'return=minimal',
+      },
+    });
+    if (!res.ok) throw new Error(`Delete failed (${res.status})`);
+
+    // Step 2: Renumber
+    const rpcRes = await fetch(`${CFG.SUPABASE_URL}/rest/v1/rpc/renumber_trainers`, {
+      method: 'POST',
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        CFG.SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({}),
+    });
+    if (!rpcRes.ok) console.warn('Renumber trainers failed');
+
+    $('trainerDelOverlay').classList.add('hidden');
+    pendingDeleteTrainerId = null;
+    toast('Trainer deleted successfully.', 'success');
+    loadTrainers();
+  } catch(err) {
+    toast('Delete failed: ' + err.message, 'error');
+  } finally {
+    $('trainerDelConfirm').disabled = false;
+    $('trainerDelConfirm').innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> Delete`;
+  }
+});
 
 /* ── INIT ── */
 if (isLoggedIn()) startDash();

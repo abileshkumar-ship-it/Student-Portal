@@ -335,7 +335,7 @@
 <script>
   // Desktop: Shift+M
   document.addEventListener('keydown', function(e) {
-    if (e.shiftKey && e.key === 'M') {
+    if (e.ctrlKey && e.shiftKey && e.key === 'M') {
       window.location.href = 'admin.html';
     }
   });

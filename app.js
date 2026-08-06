@@ -19,11 +19,20 @@ const sbHeaders = () => ({
 });
 
 async function sbInsert(row) {
-  const res = await fetch('/api/register', {
+  const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const url = isLocal
+    ? `${CFG.SUPABASE_URL}/rest/v1/${CFG.TABLE}`
+    : '/api/register';
+  const options = isLocal ? {
+    method: 'POST',
+    headers: sbHeaders(),
+    body: JSON.stringify(row),
+  } : {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(row),
-  });
+  };
+  const res = await fetch(url, options);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
     throw new Error(err.message || `Insert failed (${res.status})`);

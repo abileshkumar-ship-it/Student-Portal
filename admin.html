@@ -921,14 +921,16 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                 Daily Registrations
               </div>
-              <div style="display:flex;align-items:center;gap:12px;">
+              <div style="display:flex;align-items:center;gap:10px;">
                 <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
-                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#2563EB,#1849D6);display:inline-block;"></span> Regular
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#22C55E,#16A34A);display:inline-block;"></span> Today
                 </div>
                 <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
-                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#F59E0B,#D97706);display:inline-block;"></span> Today
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#F97316,#EA580C);display:inline-block;"></span> Yesterday
                 </div>
-                <span class="chart-hdr-sub">Click bar to filter</span>
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#2563EB,#1849D6);display:inline-block;"></span> Previous
+                </div>
               </div>
             </div>
             <div class="chart-body">
@@ -1303,12 +1305,12 @@ async function loadStats() {
     if (barEl) {
       const now  = new Date();
       const days = [];
-      for (let i = 29; i >= 0; i--) {
+      for (let i = 0; i < 30; i++) {
         const d   = new Date(now);
         d.setDate(d.getDate() - i);
         const key = d.toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
         const lbl = d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', timeZone:'Asia/Kolkata' });
-        days.push({ key, lbl, count: 0 });
+        days.push({ key, lbl, count: 0, daysAgo: i });
       }
       all.forEach(r => {
         const rDate = new Date(r.created_at).toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
@@ -1318,13 +1320,26 @@ async function loadStats() {
       const maxC = Math.max(...days.map(d => d.count), 1);
       barEl.innerHTML = days.map(d => {
         const h   = Math.round((d.count / maxC) * 110);
-        const isToday = d.key === todayStr;
         const num = d.count > 0 ? `<div class="bar-num">${d.count}</div>` : '';
-        const cls = d.count === 0 ? ' empty' : isToday ? ' today' : '';
-        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count} registrations">
+        let barColor, lblStyle, dayLabel;
+        if (d.daysAgo === 0) {
+          barColor = 'linear-gradient(180deg,#22C55E,#16A34A)';
+          lblStyle = 'color:#16A34A;font-weight:800;';
+          dayLabel = 'Today';
+        } else if (d.daysAgo === 1) {
+          barColor = 'linear-gradient(180deg,#F97316,#EA580C)';
+          lblStyle = 'color:#EA580C;font-weight:700;';
+          dayLabel = 'Yest.';
+        } else {
+          barColor = 'linear-gradient(180deg,#2563EB,#1849D6)';
+          lblStyle = '';
+          dayLabel = d.lbl.split(' ')[0];
+        }
+        const emptyStyle = d.count === 0 ? 'background:#E8EFFF;box-shadow:none;' : '';
+        return `<div class="bar-col" title="${d.lbl}: ${d.count} registrations">
           ${num}
-          <div class="bar-rect${cls}" style="height:${Math.max(h,4)}px;"></div>
-          <div class="bar-day" style="${isToday ? 'color:var(--blue);font-weight:800;' : ''}">${d.lbl.split(' ')[0]}</div>
+          <div class="bar-rect" style="height:${Math.max(h,4)}px;background:${d.count===0?'#E8EFFF':barColor};box-shadow:${d.count===0?'none':'0 2px 6px rgba(0,0,0,0.12)'};"></div>
+          <div class="bar-day" style="${lblStyle}">${dayLabel}</div>
         </div>`;
       }).join('');
     }
@@ -1346,12 +1361,7 @@ function filterByBranch(branch) {
 }
 
 function filterByDate(dateStr) {
-  showView('registrations');
-  state.dateFrom = dateStr;
-  state.dateTo   = dateStr;
-  state.page     = 0;
-  if ($('filterDateSingle')) $('filterDateSingle').value = dateStr;
-  loadRegs();
+  // Click to filter removed
 }
 
 /* ── DASHBOARD PREVIEW (latest 5) ── */

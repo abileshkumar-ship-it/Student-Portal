@@ -224,29 +224,32 @@
 
     /* ── FILTER BAR ── */
     .filter-bar {
-      padding: 14px 24px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-      background: #FAFBFF;
+      padding: 10px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 7px; flex-wrap: nowrap;
+      background: #FAFBFF; overflow-x: auto;
     }
-    .search-wrap { position: relative; flex: 1; min-width: 220px; }
+    .filter-bar::-webkit-scrollbar { height: 0; }
+    .search-wrap { position: relative; flex: 1; min-width: 130px; }
     .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-wrap input {
-      width: 100%; padding: 10px 12px 10px 36px;
+      width: 100%; padding: 9px 10px 9px 32px;
       border: 1.5px solid var(--border); border-radius: 9px;
-      font-size: 13px; color: var(--text); outline: none; background: var(--white);
+      font-size: 12px; color: var(--text); outline: none; background: var(--white);
       transition: all 0.16s;
     }
     .search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
     .f-select {
-      padding: 10px 34px 10px 12px; border: 1.5px solid var(--border);
-      border-radius: 9px; font-size: 13px; color: var(--text);
+      padding: 9px 26px 9px 10px; border: 1.5px solid var(--border);
+      border-radius: 9px; font-size: 12px; color: var(--text);
+      flex-shrink: 0;
       background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
       -webkit-appearance: none; appearance: none; outline: none; cursor: pointer;
       transition: all 0.16s;
     }
     .f-select:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(24,73,214,0.09); }
     .btn-clear {
-      padding: 10px 15px; border-radius: 9px; font-size: 13px;
+      padding: 9px 12px; border-radius: 9px; font-size: 12px;
+      white-space: nowrap; flex-shrink: 0;
       font-weight: 600; color: var(--muted);
       background: var(--white); border: 1.5px solid var(--border);
       display: flex; align-items: center; gap: 6px; transition: all 0.16s;
@@ -515,7 +518,7 @@
     .stat-lbl { font-size: 12px; font-weight: 600; color: var(--muted); margin-top: 5px; }
 
     /* ── STAT GRID (course row) ── */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); gap: 14px; margin-bottom: 20px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 14px; margin-bottom: 20px; }
 
     /* ── CITY PANEL ── */
     .city-panel { background: var(--white); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; }
@@ -548,7 +551,7 @@
     .chart-hdr-left { font-size: 13.5px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; }
     .chart-hdr-sub { font-size: 11.5px; color: var(--muted); }
     .chart-body { padding: 16px 18px 12px; flex: 1; display: flex; flex-direction: column; justify-content: flex-end; }
-    .bar-wrap { display: flex; align-items: flex-end; gap: 3px; height: 140px; overflow-x: auto; padding-bottom: 6px; }
+    .bar-wrap { display: flex; align-items: flex-end; gap: 3px; height: 160px; overflow-x: auto; padding: 20px 4px 6px; }
     .bar-wrap::-webkit-scrollbar { height: 4px; }
     .bar-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
     .bar-col { display: flex; flex-direction: column; align-items: center; gap: 3px; flex-shrink: 0; min-width: 26px; cursor: pointer; }
@@ -599,7 +602,7 @@
       .nav-item:hover svg, .nav-item.active svg { opacity: 1; }
       .btn-logout { justify-content: center; padding: 12px 0; }
       .dash-top-row { grid-template-columns: repeat(2,1fr); }
-      .stats-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .stats-grid { grid-template-columns: repeat(3,1fr); }
       .dash-mid-row { grid-template-columns: 1fr; }
       .page { padding: 20px; }
       .filter-bar { flex-wrap: wrap; gap: 8px; }
@@ -997,7 +1000,17 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
                 Daily Registrations
               </div>
-              <span class="chart-hdr-sub">Last 30 days — click a bar to filter</span>
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#22C55E,#16A34A);display:inline-block;"></span> Today
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#F97316,#EA580C);display:inline-block;"></span> Yesterday
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);">
+                  <span style="width:10px;height:10px;border-radius:3px;background:linear-gradient(180deg,#2563EB,#1849D6);display:inline-block;"></span> Previous
+                </div>
+              </div>
             </div>
             <div class="chart-body">
               <div class="bar-wrap" id="barChart">
@@ -1099,12 +1112,14 @@
                   <th>Preference</th>
                   <th class="sortable" data-col="training">Training <span class="sort-icon">▲▼</span></th>
                   <th>WhatsApp</th>
+                  <th>City</th>
+                  <th>Branch</th>
                   <th class="sortable sort-desc" data-col="created_at">Registered On <span class="sort-icon" style="color:var(--blue);opacity:1;">▼</span></th>
                   <th style="width:48px;"></th>
                 </tr>
               </thead>
               <tbody id="regsTableBody">
-                <tr><td colspan="10"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading registrations…</p></div></td></tr>
+                <tr><td colspan="12"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading registrations…</p></div></td></tr>
               </tbody>
             </table>
           </div>
@@ -1480,12 +1495,12 @@ async function loadStats() {
     if (barEl) {
       const now  = new Date();
       const days = [];
-      for (let i = 29; i >= 0; i--) {
+      for (let i = 0; i < 30; i++) {
         const d   = new Date(now);
         d.setDate(d.getDate() - i);
         const key = d.toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
         const lbl = d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', timeZone:'Asia/Kolkata' });
-        days.push({ key, lbl, count: 0 });
+        days.push({ key, lbl, count: 0, daysAgo: i });
       }
       all.forEach(r => {
         const rDate = new Date(r.created_at).toLocaleDateString('en-CA', { timeZone:'Asia/Kolkata' });
@@ -1494,12 +1509,26 @@ async function loadStats() {
       });
       const maxC = Math.max(...days.map(d => d.count), 1);
       barEl.innerHTML = days.map(d => {
-        const h   = Math.round((d.count / maxC) * 110);
+        const h   = Math.round((d.count / maxC) * 100);
         const num = d.count > 0 ? `<div class="bar-num">${d.count}</div>` : '';
-        return `<div class="bar-col" onclick="filterByDate('${d.key}')" title="${d.lbl}: ${d.count}">
+        let barColor, lblStyle, dayLabel;
+        if (d.daysAgo === 0) {
+          barColor = d.count === 0 ? '#E8EFFF' : 'linear-gradient(180deg,#22C55E,#16A34A)';
+          lblStyle = 'color:#16A34A;font-weight:800;';
+          dayLabel = 'Today';
+        } else if (d.daysAgo === 1) {
+          barColor = d.count === 0 ? '#E8EFFF' : 'linear-gradient(180deg,#F97316,#EA580C)';
+          lblStyle = 'color:#EA580C;font-weight:700;';
+          dayLabel = 'Yest.';
+        } else {
+          barColor = d.count === 0 ? '#E8EFFF' : 'linear-gradient(180deg,#2563EB,#1849D6)';
+          lblStyle = '';
+          dayLabel = d.lbl.split(' ')[0];
+        }
+        return `<div class="bar-col" title="${d.lbl}: ${d.count} registrations">
           ${num}
-          <div class="bar-rect${d.count===0?' empty':''}" style="height:${Math.max(h,3)}px;"></div>
-          <div class="bar-day">${d.lbl.split(' ')[0]}</div>
+          <div class="bar-rect" style="height:${Math.max(h,3)}px;background:${barColor};box-shadow:${d.count===0?'none':'0 2px 6px rgba(0,0,0,0.12)'};"></div>
+          <div class="bar-day" style="${lblStyle}">${dayLabel}</div>
         </div>`;
       }).join('');
     }
@@ -1558,7 +1587,7 @@ let state = { page: 0, search: '', training: '', education: '', city: '', dateFr
 let autoRefreshTimer = null;
 
 async function loadRegs() {
-  $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
+  $('regsTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
   $('resultCount').textContent = 'Loading…';
   try {
     const { data, total } = await sbFetch({ ...state });
@@ -1567,14 +1596,14 @@ async function loadRegs() {
     renderRegs(data);
     renderPag(total);
   } catch(e) {
-    $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
+    $('regsTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
     toast('Load error: ' + e.message, 'error');
   }
 }
 
 function renderRegs(rows) {
   if (!rows.length) {
-    $('regsTableBody').innerHTML = `<tr><td colspan="10"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations found</h4><p>Try adjusting your filters.</p></div></td></tr>`;
+    $('regsTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No registrations found</h4><p>Try adjusting your filters.</p></div></td></tr>`;
     $('pagInfo').textContent = '';
     $('pagBtns').innerHTML = '';
     return;
@@ -1590,6 +1619,8 @@ function renderRegs(rows) {
       <td><span class="badge b-pref">${r.preference || '—'}</span></td>
       <td><span class="badge ${tBadge(r.training)}">${r.training || '—'}</span></td>
       <td class="td-mono">${r.whatsapp_number || '—'}</td>
+      <td style="font-size:12.5px;">${r.preferred_city || '—'}</td>
+      <td style="font-size:12.5px;">${r.preferred_branch || '—'}</td>
       <td class="td-date">${fmtDate(r.created_at)}</td>
       <td>
         <button class="btn-delete-row" onclick="confirmDeleteReg(${r.id}, '${(r.full_name||'').replace(/'/g,"\\'")}')">

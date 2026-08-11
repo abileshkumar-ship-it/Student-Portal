@@ -73,11 +73,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 /* ── LOCATION & BRANCH MAPPINGS ── */
-const CITY_BRANCHES = {
-  'Chennai':   ['Egmore', 'Kodambakkam', 'Anna Nagar'],
-  'Bangalore': ['Chamrajpet', 'Yeshwanthpur'],
-};
-
 const COURSE_CITIES = {
   'Gold Loan':               ['Chennai'],
   'Artificial Intelligence': ['Chennai'],
@@ -85,6 +80,15 @@ const COURSE_CITIES = {
   'BFSI':                    ['Bangalore'],
   'Micro Finance':           ['Bangalore'],
   'Data Analytics':          ['Chennai', 'Bangalore'],
+};
+// Branches now depend on BOTH the course and the city (not city alone)
+const COURSE_CITY_BRANCHES = {
+  'Gold Loan':               { 'Chennai':   ['Broadway', 'Egmore'] },
+  'Micro Finance':           { 'Bangalore': ['Chamrajpet', 'Yeshwanthpur'] },
+  'Data Analytics':          { 'Chennai': ['Egmore'], 'Bangalore': ['Chamrajpet'] },
+  'BFSI':                    { 'Bangalore': ['Chamrajpet'] },
+  'Artificial Intelligence': { 'Chennai':   ['Egmore'] },
+  'Cyber Security':          { 'Chennai':   [] }, // no branch for this course
 };
 
 /* ── RESET LOCATION & BRANCH ── */
@@ -97,9 +101,16 @@ function resetLocationBranch() {
   clearErr('preferredBranch', 'errBranch');
 }
 
-/* ── POPULATE BRANCHES BASED ON CITY ── */
-function populateBranches(city) {
-  const branches = CITY_BRANCHES[city] || [];
+/* ── POPULATE BRANCHES BASED ON COURSE + CITY ── */
+function populateBranches(course, city) {
+  const branches = (COURSE_CITY_BRANCHES[course] && COURSE_CITY_BRANCHES[course][city]) || [];
+  if (!branches.length) {
+    // e.g. Cyber Security → no branch field at all
+    $('branchGroup').classList.add('hidden');
+    $('preferredBranch').innerHTML = '<option value="">-- Select Branch --</option>';
+    clearErr('preferredBranch', 'errBranch');
+    return;
+  }
   $('preferredBranch').innerHTML = '<option value="">-- Select Branch --</option>' +
     branches.map(b => `<option value="${b}">${b}</option>`).join('');
   $('branchGroup').classList.remove('hidden');
@@ -110,28 +121,25 @@ $('training')?.addEventListener('change', function () {
   resetLocationBranch();
   const course = this.value;
   if (!course) return;
-
   const cities = COURSE_CITIES[course] || [];
   const citySelect = $('preferredLocation');
-
   if (cities.length === 1) {
     citySelect.innerHTML = `<option value="${cities[0]}">${cities[0]}</option>`;
     $('cityGroup').classList.remove('hidden');
-    populateBranches(cities[0]);
+    populateBranches(course, cities[0]);
   } else {
     citySelect.innerHTML = '<option value="">-- Select City --</option>' +
       cities.map(c => `<option value="${c}">${c}</option>`).join('');
     $('cityGroup').classList.remove('hidden');
   }
 });
-
 /* ── CITY CHANGE → UPDATE BRANCHES ── */
 $('preferredLocation')?.addEventListener('change', function () {
   $('branchGroup').classList.add('hidden');
   $('preferredBranch').innerHTML = '<option value="">-- Select Branch --</option>';
   clearErr('preferredBranch', 'errBranch');
   if (!this.value) return;
-  populateBranches(this.value);
+  populateBranches($('training').value, this.value);
 });
 
 /* ── VALIDATION ── */
@@ -172,8 +180,9 @@ function validateForm() {
   if (!$('training').value) { showErr('training', 'errTraining'); ok = false; } else clearErr('training', 'errTraining');
 
   if (!$('preferredLocation').value) { showErr('preferredLocation', 'errLocation'); ok = false; } else clearErr('preferredLocation', 'errLocation');
-
-  if (!$('preferredBranch').value) { showErr('preferredBranch', 'errBranch'); ok = false; } else clearErr('preferredBranch', 'errBranch');
+  // Branch is only required when the branch field is actually shown (e.g. not for Cyber Security)
+  const branchRequired = !$('branchGroup').classList.contains('hidden');
+  if (branchRequired && !$('preferredBranch').value) { showErr('preferredBranch', 'errBranch'); ok = false; } else clearErr('preferredBranch', 'errBranch');
 
   const wa = $('whatsappNumber').value.trim();
   const pw = document.querySelector('.phone-wrap');
@@ -214,7 +223,7 @@ $('registrationForm')?.addEventListener('submit', async function (e) {
     preference:        $('higherStudies').value,
     training:          $('training').value,
     preferred_city:    $('preferredLocation').value,
-    preferred_branch:  $('preferredBranch').value,
+    preferred_branch:  $('preferredBranch').value || null,
     whatsapp_number:   $('whatsappNumber').value.trim(),
   };
 

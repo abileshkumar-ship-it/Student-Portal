@@ -198,7 +198,19 @@
         <div class="form-group">
           <label class="form-label" for="trQual">Highest Educational Qualification <span class="req">*</span></label>
           <input type="text" id="trQual" class="form-input" placeholder="e.g. MBA, B.Com, B.Tech, PG - Engineering" autocomplete="off" />
-          <span class="field-error" id="errTrQual">Please enter your highest educational qualification.</span>
+                    <span class="field-error" id="errTrQual">Please enter your highest educational qualification.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="trCourse">Course Applying For <span class="req">*</span></label>
+          <select id="trCourse" class="form-select">
+            <option value="">-- Select Course --</option>
+            <option value="BFSI">BFSI</option>
+            <option value="Data Analytics">Data Analytics</option>
+            <option value="Artificial Intelligence">Artificial Intelligence</option>
+            <option value="CyberSecurity">CyberSecurity</option>
+          </select>
+          <span class="field-error" id="errTrCourse">Please select the course you are applying for.</span>
         </div>
 
         <div class="form-group">
@@ -443,8 +455,11 @@ function validateForm() {
   if (!$('trDob').value) { showErr('trDob','errTrDob'); ok=false; }
   else clearErr('trDob','errTrDob');
 
-  if (!$('trQual').value.trim()) { showErr('trQual','errTrQual'); ok=false; }
+    if (!$('trQual').value.trim()) { showErr('trQual','errTrQual'); ok=false; }
   else clearErr('trQual','errTrQual');
+
+  if ($('trCourse').value === '') { showErr('trCourse','errTrCourse'); ok=false; }
+  else clearErr('trCourse','errTrCourse');
 
   if ($('trExpTrainer').value === '') { showErr('trExpTrainer','errTrExpTrainer'); ok=false; }
   else clearErr('trExpTrainer','errTrExpTrainer');
@@ -516,6 +531,7 @@ $('trainerForm').addEventListener('submit', async function(e) {
     email:              $('trEmail').value.trim().toLowerCase(),
     date_of_birth:      $('trDob').value,
     qualification:      $('trQual').value.trim(),
+    course_applying_for: $('trCourse').value,
     experience_trainer: parseInt($('trExpTrainer').value),
     experience_field:   parseInt($('trExpField').value),
     current_ctc:        $('trCtc').value,

@@ -1169,6 +1169,7 @@
                   <th>Email</th>
                   <th>DOB</th>
                   <th>Qualification</th>
+                  <th>Course Applying For</th>
                   <th>Exp. Trainer</th>
                   <th>Exp. Field</th>
                   <th>Current CTC</th>
@@ -1178,7 +1179,7 @@
                 </tr>
               </thead>
               <tbody id="trainersTableBody">
-                <tr><td colspan="13"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading trainers…</p></div></td></tr>
+                <tr><td colspan="14"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading trainers…</p></div></td></tr>
               </tbody>
             </table>
           </div>
@@ -1754,7 +1755,7 @@ async function fetchTrainers(paginate = true) {
 }
 
 async function loadTrainers() {
-  $('trainersTableBody').innerHTML = `<tr><td colspan="12"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
+  $('trainersTableBody').innerHTML = `<tr><td colspan="14"><div class="tbl-msg"><div class="tbl-spinner"></div><p>Loading…</p></div></td></tr>`;
   $('trainerCount').textContent = 'Loading…';
   try {
     const { data, total } = await fetchTrainers();
@@ -1762,7 +1763,7 @@ async function loadTrainers() {
     $('navTrainerBadge').textContent = total;
     $('trainerCount').textContent = `${total} trainer${total !== 1 ? 's' : ''} found`;
     if (!data.length) {
-      $('trainersTableBody').innerHTML = `<tr><td colspan="13"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No trainers found</h4></div></td></tr>`;
+      $('trainersTableBody').innerHTML = `<tr><td colspan="14"><div class="tbl-msg"><div class="tbl-empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><h4>No trainers found</h4></div></td></tr>`;
       $('trainerPagInfo').textContent = '';
       $('trainerPagBtns').innerHTML = '';
       return;
@@ -1775,7 +1776,8 @@ async function loadTrainers() {
         <td class="td-mono">${r.whatsapp_number || '—'}</td>
         <td class="td-email">${r.email || '—'}</td>
         <td style="font-size:12.5px;">${r.date_of_birth ? new Date(r.date_of_birth).toLocaleDateString('en-IN') : '—'}</td>
-        <td style="font-size:12px;">${r.qualification || '—'}</td>
+                <td style="font-size:12px;">${r.qualification || '—'}</td>
+        <td style="font-size:12px;">${r.course_applying_for || '—'}</td>
         <td style="font-size:12.5px;text-align:center;">${r.experience_trainer !== null ? (r.experience_trainer === 0 ? '<1 yr' : r.experience_trainer + ' yr') : '—'}</td>
         <td style="font-size:12.5px;text-align:center;">${r.experience_field !== null ? (r.experience_field === 0 ? '<1 yr' : r.experience_field + ' yr') : '—'}</td>
         <td style="font-size:12.5px;">${r.current_ctc || '—'}</td>
@@ -1809,7 +1811,7 @@ async function loadTrainers() {
     c.appendChild(mk('›', p+1, p>=pages-1));
 
   } catch(e) {
-    $('trainersTableBody').innerHTML = `<tr><td colspan="13"><div class="tbl-msg"><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
+    $('trainersTableBody').innerHTML = `<tr><td colspan="14"><div class="tbl-msg"><h4>Failed to load</h4><p>${e.message}</p></div></td></tr>`;
     toast('Load error: ' + e.message, 'error');
   }
 }
@@ -1829,18 +1831,19 @@ $('exportBtnTrainers').addEventListener('click', async function() {
   try {
     const rows = await fetchTrainers(false);
     if (!rows.length) { toast('No data to export.', 'error'); return; }
-    const headers = ['ID','Full Name','Contact','WhatsApp','Email','Date of Birth','Qualification','Exp. Trainer (yrs)','Exp. Field (yrs)','Current CTC','Resume Link','Registered On'];
+        const headers = ['ID','Full Name','Contact','WhatsApp','Email','Date of Birth','Qualification','Course Applying For','Exp. Trainer (yrs)','Exp. Field (yrs)','Current CTC','Resume Link','Registered On'];
     const wsData = [headers, ...rows.map(r => [
       r.id, r.full_name||'', r.contact_number||'', r.whatsapp_number||'', r.email||'',
       r.date_of_birth ? new Date(r.date_of_birth).toLocaleDateString('en-IN') : '',
-      r.qualification||'',
+            r.qualification||'',
+      r.course_applying_for||'',
       r.experience_trainer === 0 ? 'Less than 1 yr' : (r.experience_trainer + ' yr'),
       r.experience_field   === 0 ? 'Less than 1 yr' : (r.experience_field   + ' yr'),
       r.current_ctc||'', r.trainer_resume||'', fmtDate(r.created_at)
     ])];
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet(wsData);
-    ws['!cols'] = [5,22,14,14,28,14,24,14,14,14,40,22].map(w=>({wch:w}));
+        ws['!cols'] = [5,22,14,14,28,14,24,22,14,14,14,40,22].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb, ws, 'Trainers');
     XLSX.writeFile(wb, `MaFoi_Trainers_${new Date().toISOString().slice(0,10)}.xlsx`);
     toast(`Downloaded ${rows.length} trainer records!`, 'success');

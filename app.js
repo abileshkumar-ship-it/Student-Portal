@@ -75,7 +75,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 /* ── LOCATION & BRANCH MAPPINGS ── */
 const COURSE_CITIES = {
   'Gold Loan':               ['Chennai'],
-  'Artificial Intelligence': ['Chennai'],
+  'Artificial Intelligence': ['Chennai', 'Bangalore'],
   'Cyber Security':          ['Chennai'],
   'BFSI':                    ['Bangalore'],
   'Micro Finance':           ['Bangalore'],
@@ -87,7 +87,7 @@ const COURSE_CITY_BRANCHES = {
   'Micro Finance':           { 'Bangalore': ['Chamrajpet', 'Yeshwanthpur'] },
   'Data Analytics':          { 'Chennai': ['Egmore'], 'Bangalore': ['Chamrajpet'] },
   'BFSI':                    { 'Bangalore': ['Chamrajpet'] },
-  'Artificial Intelligence': { 'Chennai':   ['Egmore'] },
+  'Artificial Intelligence': { 'Chennai': ['Egmore'], 'Bangalore': [] },
   'Cyber Security':          { 'Chennai':   [] }, // no branch for this course
 };
 

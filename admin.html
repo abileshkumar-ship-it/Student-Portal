@@ -1831,8 +1831,22 @@ $('exportBtnTrainers').addEventListener('click', async function() {
   try {
     const rows = await fetchTrainers(false);
     if (!rows.length) { toast('No data to export.', 'error'); return; }
+
+    // Safety net: drop any duplicate email/mobile rows so the export never
+    // contains duplicate registrations (the DB unique constraints prevent
+    // new ones; this also cleans up any rows that predate that constraint).
+    const seenEmail = new Set(), seenContact = new Set(), dedupedRows = [];
+    for (const r of rows) {
+      const em = (r.email || '').trim().toLowerCase();
+      const ct = (r.contact_number || '').trim();
+      if ((em && seenEmail.has(em)) || (ct && seenContact.has(ct))) continue;
+      if (em) seenEmail.add(em);
+      if (ct) seenContact.add(ct);
+      dedupedRows.push(r);
+    }
+
         const headers = ['ID','Full Name','Contact','WhatsApp','Email','Date of Birth','Qualification','Course Applying For','Exp. Trainer (yrs)','Exp. Field (yrs)','Current CTC','Resume Link','Registered On'];
-    const wsData = [headers, ...rows.map(r => [
+    const wsData = [headers, ...dedupedRows.map(r => [
       r.id, r.full_name||'', r.contact_number||'', r.whatsapp_number||'', r.email||'',
       r.date_of_birth ? new Date(r.date_of_birth).toLocaleDateString('en-IN') : '',
             r.qualification||'',
@@ -1846,7 +1860,7 @@ $('exportBtnTrainers').addEventListener('click', async function() {
         ws['!cols'] = [5,22,14,14,28,14,24,22,14,14,14,40,22].map(w=>({wch:w}));
     XLSX.utils.book_append_sheet(wb, ws, 'Trainers');
     XLSX.writeFile(wb, `MaFoi_Trainers_${new Date().toISOString().slice(0,10)}.xlsx`);
-    toast(`Downloaded ${rows.length} trainer records!`, 'success');
+    toast(`Downloaded ${dedupedRows.length} trainer records!`, 'success');
   } catch(e) { toast('Export failed: ' + e.message, 'error'); }
   finally {
     this.disabled = false;

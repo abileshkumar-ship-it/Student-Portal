@@ -496,6 +496,37 @@ $('trainerForm').addEventListener('submit', async function(e) {
   $('trSubmitTxt').textContent = 'Submitting…';
   $('trSubmitSpinner').classList.remove('hidden');
 
+  /* ── Duplicate check: email ID and mobile number must each be unique ── */
+  const emailToCheck   = $('trEmail').value.trim().toLowerCase();
+  const contactToCheck = $('trContact').value.trim();
+  try {
+    const dupRes = await fetch(
+      `${CFG.SUPABASE_URL}/rest/v1/trainers_list?select=email,contact_number&or=(email.eq.${encodeURIComponent(emailToCheck)},contact_number.eq.${encodeURIComponent(contactToCheck)})`,
+      { headers: { 'apikey': CFG.SUPABASE_ANON_KEY, 'Authorization': `Bearer ${CFG.SUPABASE_ANON_KEY}` } }
+    );
+    if (dupRes.ok) {
+      const existing = await dupRes.json();
+      const emailTaken   = existing.some(r => (r.email || '').toLowerCase() === emailToCheck);
+      const contactTaken = existing.some(r => r.contact_number === contactToCheck);
+      if (emailTaken || contactTaken) {
+        showToast(
+          emailTaken && contactTaken
+            ? 'This email ID and mobile number are already registered.'
+            : emailTaken
+              ? 'This email ID is already registered.'
+              : 'This mobile number is already registered.'
+        );
+        btn.disabled = false;
+        $('trSubmitTxt').textContent = 'Submit Registration';
+        $('trSubmitSpinner').classList.add('hidden');
+        return;
+      }
+    }
+  } catch (dupErr) {
+    // If the check itself fails (e.g. network issue), fall through —
+    // the database unique constraint will still block a duplicate insert.
+  }
+
   const expTrainerLabel = $('trExpTrainer').options[$('trExpTrainer').selectedIndex].text;
   const expFieldLabel   = $('trExpField').options[$('trExpField').selectedIndex].text;
 
@@ -575,7 +606,12 @@ $('trainerForm').addEventListener('submit', async function(e) {
     $('successCard').scrollIntoView({ behavior:'smooth', block:'center' });
 
   } catch(err) {
-    showToast(err.message || 'Registration failed. Please try again.');
+    const msg = err.message || '';
+    if (/duplicate key value/i.test(msg)) {
+      showToast('This email ID or mobile number is already registered.');
+    } else {
+      showToast(msg || 'Registration failed. Please try again.');
+    }
   } finally {
     btn.disabled = false;
     $('trSubmitTxt').textContent = 'Submit Registration';
